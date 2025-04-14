@@ -1,4 +1,6 @@
-import medLogo from "./assets/medLogo.jpg"
+import doctorsBgc from "./assets/ilustracja-lekarzy.png"
+import NavBar from "./components/NavBar.jsx";
+import MenuPanel from "./components/MenuPanel.jsx";
 
 function App() {
 
@@ -6,19 +8,11 @@ function App() {
   return (
     <>
       <div className="wrapper">
-        <aside>
-          <h2>MedCare</h2>
-          <ul>
-            <li><button><i className="fa-solid fa-house"></i></button></li>
-            <li><button><i className="fa-solid fa-user"></i></button></li>
-            <li><button><i className="fa-solid fa-comment"></i></button></li>
-            <li><button><i className="fa-solid fa-calendar-days"></i></button></li>
-          </ul>
-          <button>
-            <i className="fa-solid fa-arrow-right-from-bracket"></i>
-          </button>
-        </aside>
-        <main></main>
+        <NavBar></NavBar>
+        <main>
+          <MenuPanel></MenuPanel>
+          <div className="patientSidebar"></div>
+        </main>
         <footer></footer>
       </div>
     </>
