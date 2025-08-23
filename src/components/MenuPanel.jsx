@@ -43,7 +43,7 @@ export default function MenuPanel() {
                         {formattedDate}
                     </div>
                     <h1>Witaj w MedCare!</h1>
-                    <p>Miłego dnia, Łucja</p>
+                    <p>Miłego dnia, Łucja!</p>
                     <img src={doctorsBgc} alt="lekarze"/>
                 </div>
             </div>
