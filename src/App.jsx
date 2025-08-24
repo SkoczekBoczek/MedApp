@@ -1,22 +1,22 @@
-import doctorsBgc from "./assets/ilustracja-lekarzy.png"
-import NavBar from "./components/NavBar.jsx";
-import MenuPanel from "./components/MenuPanel.jsx";
+import CalendarCard from "./components/CalendarCard.jsx";
+import SideBar from "./components/SideBar.jsx";
+import WelcomeCard from "./components/WelcomeCard.jsx";
+import ContactCard from "./components/ContactCard.jsx";
 
 function App() {
+	return (
+		<>
+			<SideBar />
+			<main className="main">
+				<WelcomeCard />
+				<CalendarCard />
+				<ContactCard />
 
-
-  return (
-    <>
-      <div className="wrapper">
-        <NavBar></NavBar>
-        <main>
-          <MenuPanel></MenuPanel>
-          <div className="patientSidebar"></div>
-        </main>
-        <footer></footer>
-      </div>
-    </>
-  )
+				<section className="big-box card"></section>
+				<section className="small-box card"></section>
+			</main>
+		</>
+	);
 }
 
-export default App
+export default App;
