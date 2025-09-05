@@ -84,7 +84,7 @@ export default function ContactCard() {
 							<p className="doctorName">{doctor.name}</p>
 							<p className="doctorSpecialty">{doctor.specialty}</p>
 							<button className="messageBtn">
-								<i className="fas fa-comment-dots"></i> Wiadomość
+								<i className="fas fa-comment-dots">Wiadomość</i>
 							</button>
 						</div>
 					</div>
