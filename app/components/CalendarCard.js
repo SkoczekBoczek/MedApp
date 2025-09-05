@@ -1,4 +1,4 @@
-import "../components/CalendarCard.css";
+import "./CalendarCard.css";
 
 export default function CalendarCard() {
 	return (

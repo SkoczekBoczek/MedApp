@@ -1,7 +1,10 @@
+"use client";
+
 import React from "react";
 import { useState } from "react";
+import Image from "next/image";
 
-import "../components/ContactCard.css";
+import "./ContactCard.css";
 
 export default function ContactCard() {
 	const doctors = [
@@ -9,25 +12,25 @@ export default function ContactCard() {
 			id: 1,
 			name: "Dr. Nick Jonas",
 			specialty: "Stomatolog",
-			image: "",
+			image: "https://images.pexels.com/photos/5215024/pexels-photo-5215024.jpeg?auto=compress&cs=tinysrgb&w=400",
 		},
 		{
 			id: 2,
 			name: "Dr. Miles Teller",
 			specialty: "Kardiolog",
-			image: "",
+			image: "https://images.pexels.com/photos/6129967/pexels-photo-6129967.jpeg?auto=compress&cs=tinysrgb&w=400",
 		},
 		{
 			id: 3,
 			name: "Dr. Frank Ocean",
 			specialty: "Pediatra",
-			image: "",
+			image: "https://images.pexels.com/photos/5452293/pexels-photo-5452293.jpeg?auto=compress&cs=tinysrgb&w=400",
 		},
 		{
 			id: 4,
 			name: "Dr. Cristiano Ronaldo",
 			specialty: "Ortopeda",
-			image: "",
+			image: "https://images.pexels.com/photos/5407206/pexels-photo-5407206.jpeg?auto=compress&cs=tinysrgb&w=400",
 		},
 	];
 
@@ -70,7 +73,12 @@ export default function ContactCard() {
 				{currentDoctors.map((doctor) => (
 					<div className="doctorCard" key={doctor.id}>
 						<div className="doctorImg">
-							<img src="" alt="Dr" />
+							<Image 
+								src={doctor.image} 
+								alt={doctor.name}
+								width={80}
+								height={80}
+							/>
 						</div>
 						<div className="doctorInfo">
 							<p className="doctorName">{doctor.name}</p>

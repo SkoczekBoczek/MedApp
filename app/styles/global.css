@@ -4,7 +4,8 @@
 	box-sizing: border-box;
 	font-family: Arial, sans-serif;
 }
-#root {
+
+#__next {
 	display: flex;
 	min-height: 100vh;
 	background-color: #111;

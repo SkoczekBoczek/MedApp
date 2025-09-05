@@ -1,6 +1,8 @@
-import "../components/SideBar.css";
+"use client";
 
-export default function NavBar() {
+import "./SideBar.css";
+
+export default function SideBar() {
 	return (
 		<aside className="sidebar">
 			<div className="sidebar-header">
@@ -10,9 +12,6 @@ export default function NavBar() {
 				</button>
 			</div>
 			<nav className="menu">
-				{/* <a href="#">
-					<i className="fas fa-home"></i> Dom
-				</a> */}
 				<a href="#">
 					<i className="fas fa-user"></i> Profil
 				</a>
@@ -22,9 +21,6 @@ export default function NavBar() {
 				<a href="#">
 					<i className="fas fa-calendar-alt"></i> Kalendarz
 				</a>
-				{/* <a href="#">
-					<i className="fas fa-star"></i> Podsumowanie
-				</a> */}
 				<a href="#">
 					<i className="fas fa-pills"></i> Leki
 				</a>

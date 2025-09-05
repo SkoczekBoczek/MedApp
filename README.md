@@ -1,12 +1,55 @@
-# React + Vite
+# MedCare - Next.js Medical Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern medical dashboard application built with Next.js, featuring a responsive design and intuitive user interface for healthcare management.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Dashboard Overview**: Welcome screen with real-time date and time
+- **Calendar Integration**: View upcoming medical appointments
+- **Doctor Directory**: Browse and contact healthcare providers
+- **Responsive Design**: Optimized for desktop, tablet, and mobile devices
+- **Modern UI**: Clean, professional interface with smooth animations
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+First, install the dependencies:
+
+```bash
+npm install
+```
+
+Then, run the development server:
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Project Structure
+
+```
+app/
+├── components/          # Reusable UI components
+│   ├── SideBar.js      # Navigation sidebar
+│   ├── WelcomeCard.js  # Welcome dashboard card
+│   ├── CalendarCard.js # Calendar widget
+│   └── ContactCard.js  # Doctor contact cards
+├── styles/             # Global styles and CSS variables
+├── layout.js           # Root layout component
+└── page.js            # Home page component
+```
+
+## Technologies Used
+
+- **Next.js 15** - React framework with App Router
+- **React 19** - UI library
+- **CSS Modules** - Component-scoped styling
+- **Font Awesome** - Icon library
+- **Next.js Image** - Optimized image loading
+
+## Deployment
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new) from the creators of Next.js.
+
+Check out the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

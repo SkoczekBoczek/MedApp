@@ -59,7 +59,7 @@
 }
 
 @media (max-width: 768px) {
-	#root {
+	#__next {
 		flex-direction: column;
 	}
 

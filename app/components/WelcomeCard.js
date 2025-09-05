@@ -1,10 +1,11 @@
+"use client";
+
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
-import doctorsBgc from "../assets/ilustracja-lekarzy.png";
+import "./WelcomeCard.css";
 
-import "../components/WelcomeCard.css";
-
-export default function MenuPanel() {
+export default function WelcomeCard() {
 	const [formattedDate, setFormattedDate] = useState("");
 	const months = [
 		"Styczeń",
@@ -43,30 +44,34 @@ export default function MenuPanel() {
 	}, []);
 
 	return (
-		<>
-			<section className="welcome card">
-				<div className="welcomeBtns">
-					<button>
-						<i className="fa-solid fa-gear"></i>
-					</button>
-					<button>
-						<i className="fa-solid fa-bell"></i>
-					</button>
-				</div>
+		<section className="welcome card">
+			<div className="welcomeBtns">
+				<button>
+					<i className="fa-solid fa-gear"></i>
+				</button>
+				<button>
+					<i className="fa-solid fa-bell"></i>
+				</button>
+			</div>
 
-				<div className="welcomeText">
-					<div className="currentDate">
-						<i className="fa-solid fa-calendar"></i>
-						<p className="date">{formattedDate}</p>
-					</div>
-					<h2>Witaj w MedCare!</h2>
-					<p>Miłego dnia, Łucja!</p>
+			<div className="welcomeText">
+				<div className="currentDate">
+					<i className="fa-solid fa-calendar"></i>
+					<p className="date">{formattedDate}</p>
 				</div>
+				<h2>Witaj w MedCare!</h2>
+				<p>Miłego dnia, Łucja!</p>
+			</div>
 
-				<div className="welcomeImg">
-					<img src={doctorsBgc} alt="lekarze" />
-				</div>
-			</section>
-		</>
+			<div className="welcomeImg">
+				<Image 
+					src="/ilustracja-lekarzy.png" 
+					alt="lekarze" 
+					width={600}
+					height={400}
+					priority
+				/>
+			</div>
+		</section>
 	);
 }
