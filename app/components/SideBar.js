@@ -1,31 +1,37 @@
 "use client";
 
-"use client";
-
-import "./SideBar.css";
+import Link from "next/link";
+import { useState } from "react";
+import styles from "./SideBar.module.css";
 
 export default function SideBar() {
+	const [menuActive, setMenuActive] = useState(false);
+
 	return (
-		<aside className="sidebar">
-			<div className="sidebar-header">
-				<h1 className="logo">MedCare</h1>
-				<button className="burger">
+		<aside className={styles.sidebar}>
+			<div className={styles.sidebarHeader}>
+				<h1 className={styles.logo}>MedCare</h1>
+				<button
+					className={styles.burger}
+					onClick={() => setMenuActive(!menuActive)}
+				>
 					<i className="fas fa-bars"></i>
 				</button>
 			</div>
-			<nav className="menu">
-				<a href="#">
+
+			<nav className={`${styles.menu} ${menuActive ? styles.active : ""}`}>
+				<Link href="#">
 					<i className="fas fa-user"></i> Profil
-				</a>
-				<a href="#">
+				</Link>
+				<Link href="#">
 					<i className="fas fa-comment-dots"></i> Wiadomość
-				</a>
-				<a href="#">
+				</Link>
+				<Link href="#">
 					<i className="fas fa-calendar-alt"></i> Kalendarz
-				</a>
-				<a href="#">
+				</Link>
+				<Link href="#">
 					<i className="fas fa-pills"></i> Leki
-				</a>
+				</Link>
 			</nav>
 		</aside>
 	);

@@ -1,96 +1,108 @@
 "use client";
 
-"use client";
-
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
-
-import "./ContactCard.css";
+import styles from "./ContactCard.module.css";
 
 export default function ContactCard() {
-	const doctors = [
-		{
-			id: 1,
-			name: "Dr. Nick Jonas",
-			specialty: "Stomatolog",
-			image: "https://images.pexels.com/photos/5215024/pexels-photo-5215024.jpeg?auto=compress&cs=tinysrgb&w=400",
-		},
-		{
-			id: 2,
-			name: "Dr. Miles Teller",
-			specialty: "Kardiolog",
-			image: "https://images.pexels.com/photos/6129967/pexels-photo-6129967.jpeg?auto=compress&cs=tinysrgb&w=400",
-		},
-		{
-			id: 3,
-			name: "Dr. Frank Ocean",
-			specialty: "Pediatra",
-			image: "https://images.pexels.com/photos/5452293/pexels-photo-5452293.jpeg?auto=compress&cs=tinysrgb&w=400",
-		},
-		{
-			id: 4,
-			name: "Dr. Cristiano Ronaldo",
-			specialty: "Ortopeda",
-			image: "https://images.pexels.com/photos/5407206/pexels-photo-5407206.jpeg?auto=compress&cs=tinysrgb&w=400",
-		},
+	const [doctors, setDoctors] = useState([]);
+	const [loading, setLoading] = useState(true);
+	const [currentPage, setCurrentPage] = useState(1);
+
+	useEffect(() => {
+		fetch("api/doctors")
+			.then((res) => res.json())
+			.then((data) => {
+				setDoctors(data);
+				setLoading(false);
+			});
+	}, []);
+
+	const specialities = [
+		"All",
+		"Kardiolog",
+		"Stomatolog",
+		"Pediatra",
+		"Ortopeda",
 	];
 
-	const [currentPage, setCurrentPage] = useState(1);
+	const [selectedSpeciality, setSelectedSpeciality] = useState("All");
+
+	function handleSpecialityChange(speciality) {
+		setSelectedSpeciality(speciality);
+	}
+
+	const filteredDoctors =
+		selectedSpeciality === "All"
+			? doctors
+			: doctors.filter((doctor) => doctor.speciality === selectedSpeciality);
 
 	const doctorsPerPage = 3;
 
 	const indexOfLastDoctor = currentPage * doctorsPerPage;
 	const indexOfFirstDoctor = indexOfLastDoctor - doctorsPerPage;
-	const currentDoctors = doctors.slice(indexOfFirstDoctor, indexOfLastDoctor);
+	const currentDoctors = filteredDoctors.slice(
+		indexOfFirstDoctor,
+		indexOfLastDoctor
+	);
 
-	const totalPages = Math.ceil(doctors.length / doctorsPerPage);
+	const totalPages = Math.ceil(filteredDoctors.length / doctorsPerPage);
 
 	return (
-		<section className="contact card">
-			<div className="contactHeader">
+		<section className={`${styles.contact} ${styles.card}`}>
+			<div className={styles.contactHeader}>
 				<h3>Skontaktuj się z lekarzem</h3>
-				<div className="arrows">
+				<div className={styles.categories}>
+					<ul className={styles.categoriesList}>
+						{specialities.map((spec) => (
+							<li key={spec}>
+								<button onClick={() => handleSpecialityChange(spec)}>
+									{spec}
+								</button>
+							</li>
+						))}
+					</ul>
+				</div>
+				<div className={styles.arrows}>
 					<button
-						onClick={() => {
-							if (currentPage > 1) {
-								setCurrentPage(currentPage - 1);
-							}
-						}}
+						onClick={() => currentPage > 1 && setCurrentPage(currentPage - 1)}
 					>
 						<i className="fas fa-arrow-left"></i>
 					</button>
 					<button
-						onClick={() => {
-							if (currentPage < totalPages) {
-								setCurrentPage(currentPage + 1);
-							}
-						}}
+						onClick={() =>
+							currentPage < totalPages && setCurrentPage(currentPage + 1)
+						}
 					>
 						<i className="fas fa-arrow-right"></i>
 					</button>
 				</div>
 			</div>
-			<div className="contactInfo">
-				{currentDoctors.map((doctor) => (
-					<div className="doctorCard" key={doctor.id}>
-						<div className="doctorImg">
-							<Image 
-								src={doctor.image} 
-								alt={doctor.name}
-								width={80}
-								height={80}
-							/>
+
+			<div className={styles.contactInfo}>
+				{loading ? (
+					<div>Ładowanie...</div>
+				) : (
+					currentDoctors.map((doctor) => (
+						<div className={styles.doctorCard} key={doctor._id}>
+							<div className={styles.doctorImg}>
+								<Image
+									src={doctor.image}
+									alt={doctor.name}
+									width={80}
+									height={80}
+								/>
+							</div>
+							<div className={styles.doctorInfo}>
+								<p className={styles.doctorName}>{doctor.name}</p>
+								<p className={styles.doctorSpeciality}>{doctor.speciality}</p>
+								<button className={styles.messageBtn}>
+									<i className="fas fa-comment-dots"></i> Wiadomość
+								</button>
+							</div>
 						</div>
-						<div className="doctorInfo">
-							<p className="doctorName">{doctor.name}</p>
-							<p className="doctorSpecialty">{doctor.specialty}</p>
-							<button className="messageBtn">
-								<i className="fas fa-comment-dots">Wiadomość</i>
-							</button>
-						</div>
-					</div>
-				))}
+					))
+				)}
 			</div>
 		</section>
 	);

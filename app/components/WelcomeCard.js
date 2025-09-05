@@ -1,11 +1,8 @@
 "use client";
 
-"use client";
-
 import { useState, useEffect } from "react";
 import Image from "next/image";
-
-import "./WelcomeCard.css";
+import styles from "./WelcomeCard.module.css";
 
 export default function WelcomeCard() {
 	const [formattedDate, setFormattedDate] = useState("");
@@ -32,22 +29,17 @@ export default function WelcomeCard() {
 			const year = date.getFullYear();
 			const hour = String(date.getHours()).padStart(2, "0");
 			const minutes = String(date.getMinutes()).padStart(2, "0");
-
-			const newformattedDate = `${month} ${day}, ${year} ${hour}:${minutes}`;
-			setFormattedDate(newformattedDate);
+			setFormattedDate(`${month} ${day}, ${year} ${hour}:${minutes}`);
 		}
 
 		updateDate();
-		const runningTime = setInterval(updateDate, 1000);
-
-		return () => {
-			clearInterval(runningTime);
-		};
+		const interval = setInterval(updateDate, 1000);
+		return () => clearInterval(interval);
 	}, []);
 
 	return (
-		<section className="welcome card">
-			<div className="welcomeBtns">
+		<section className={`${styles.welcome} ${styles.card}`}>
+			<div className={styles.welcomeBtns}>
 				<button>
 					<i className="fa-solid fa-gear"></i>
 				</button>
@@ -56,19 +48,19 @@ export default function WelcomeCard() {
 				</button>
 			</div>
 
-			<div className="welcomeText">
-				<div className="currentDate">
+			<div className={styles.welcomeText}>
+				<div className={styles.currentDate}>
 					<i className="fa-solid fa-calendar"></i>
-					<p className="date">{formattedDate}</p>
+					<p className={styles.date}>{formattedDate}</p>
 				</div>
 				<h2>Witaj w MedCare!</h2>
 				<p>Miłego dnia, Łucja!</p>
 			</div>
 
-			<div className="welcomeImg">
-				<Image 
-					src="/ilustracja-lekarzy.png" 
-					alt="lekarze" 
+			<div className={styles.welcomeImg}>
+				<Image
+					src="/ilustracja-lekarzy.png"
+					alt="lekarze"
 					width={600}
 					height={400}
 					priority

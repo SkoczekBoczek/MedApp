@@ -1,9 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-  images: {
-    domains: ['images.pexels.com'],
-  },
-}
+	images: {
+		remotePatterns: [
+			{
+				protocol: "https",
+				hostname: "med-app-doctors-images.s3.eu-north-1.amazonaws.com",
+				port: "",
+				pathname: "/**",
+			},
+		],
+	},
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

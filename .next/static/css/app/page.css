@@ -1,0 +1,454 @@
+/*!**********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[3]!./app/components/CalendarCard.module.css ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************/
+.CalendarCard_calendar__JrpiW {
+	background-color: white;
+	color: black;
+	grid-column: 2 / 3;
+	grid-row: 1 / 3;
+	border-radius: 16px;
+	padding: 20px;
+}
+
+.CalendarCard_calendar__JrpiW h3 {
+	font-size: 18px;
+	margin-bottom: 10px;
+}
+
+.CalendarCard_month__XUMhg {
+	font-weight: bold;
+	margin-bottom: 15px;
+}
+
+.CalendarCard_appointment__K0s94 {
+	font-size: 14px;
+	color: #444;
+}
+
+/*!*********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[3]!./app/components/ContactCard.module.css ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************/
+.ContactCard_contact__TYjAB {
+	grid-column: 1 / 2;
+	min-height: 170px;
+	background-color: var(--color-primary);
+	border-radius: 16px;
+	padding: 20px;
+}
+
+.ContactCard_contactHeader__zA7ra {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 15px;
+	gap: 20px;
+}
+
+.ContactCard_categories__61tHW .ContactCard_categoriesList___11lQ {
+	display: flex;
+	gap: 20px;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.ContactCard_categories__61tHW .ContactCard_categoriesList___11lQ button {
+	padding: 5px;
+	cursor: pointer;
+}
+
+.ContactCard_arrows__2e4IV button {
+	color: black;
+	background-color: var(--color-light);
+	border: none;
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	margin-left: 10px;
+	font-size: 18px;
+	cursor: pointer;
+	transition: all 0.2s ease-in-out;
+}
+
+.ContactCard_arrows__2e4IV button:hover {
+	background-color: var(--color-primary-hover);
+	color: var(--color-light);
+	transform: scale(1.1);
+}
+
+.ContactCard_contactInfo__xyQqX {
+	display: flex;
+	gap: 20px;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+}
+
+.ContactCard_doctorInfo__Otzf1 p {
+	font-size: 14px;
+	color: black;
+}
+
+.ContactCard_doctorCard__sg_7C {
+	display: flex;
+	align-items: center;
+	background-color: var(--color-light);
+	padding: 15px;
+	border-radius: 12px;
+	width: calc(33.333% - 20px);
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	transition: transform 0.2s ease-in-out;
+	flex-shrink: 0;
+}
+
+.ContactCard_doctorCard__sg_7C:hover {
+	transform: scale(1.02);
+}
+
+.ContactCard_doctorImg__I5RHP {
+	flex-shrink: 0;
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	overflow: hidden;
+	margin-right: 15px;
+}
+
+.ContactCard_doctorImg__I5RHP img {
+	width: 100%;
+	height: 100%;
+	-o-object-fit: cover;
+	   object-fit: cover;
+}
+
+.ContactCard_doctorInfo__Otzf1 {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+.ContactCard_doctorName__8yDPs {
+	font-weight: 600;
+	font-size: 16px;
+}
+
+.ContactCard_doctorSpecialty__P5xiC {
+	font-size: 14px;
+}
+
+.ContactCard_messageBtn__w1vbe {
+	margin-top: 8px;
+	background-color: var(--color-primary);
+	color: var(--color-light);
+	border: none;
+	border-radius: 8px;
+	padding: 6px 12px;
+	cursor: pointer;
+	font-size: 14px;
+	display: flex;
+	justify-content: center;
+	max-width: 110px;
+	justify-content: center;
+	align-items: center;
+	gap: 6px;
+	transition: background-color 0.2s ease-in-out;
+}
+
+.ContactCard_messageBtn__w1vbe:hover {
+	background-color: var(--color-primary-hover);
+}
+
+@media (min-width: 768px) and (max-width: 1550px),
+	(min-width: 480px) and (max-width: 600px) {
+	.ContactCard_doctorCard__sg_7C {
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+	}
+
+	.ContactCard_doctorImg__I5RHP {
+		margin-right: 0;
+		margin-bottom: 10px;
+	}
+}
+
+@media (max-width: 768px) {
+	.ContactCard_doctorCard__sg_7C {
+		width: calc(50% - 20px);
+	}
+
+	.ContactCard_arrows__2e4IV button {
+		width: 36px;
+		height: 36px;
+		font-size: 16px;
+	}
+}
+
+@media (max-width: 480px) {
+	.ContactCard_doctorCard__sg_7C {
+		width: 100%;
+	}
+
+	.ContactCard_arrows__2e4IV button {
+		width: 32px;
+		height: 32px;
+		font-size: 14px;
+		margin-left: 5px;
+	}
+}
+
+/*!*****************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[3]!./app/components/SideBar.module.css ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************/
+.SideBar_sidebar__XeGCt {
+	width: 220px;
+	background-color: var(--color-primary);
+	border-radius: 16px;
+	margin: 20px 0 20px 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 20px;
+	flex-shrink: 0;
+	position: relative;
+}
+
+.SideBar_sidebar-header___0T_8 {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.SideBar_burger__hRzEB {
+	display: none;
+	background: none;
+	border: none;
+	color: white;
+	font-size: 24px;
+	cursor: pointer;
+}
+
+.SideBar_logo__70k47 {
+	font-size: 24px;
+	font-weight: bold;
+	margin-bottom: 40px;
+}
+
+.SideBar_menu__BeEuB {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	width: 100%;
+}
+
+.SideBar_menu__BeEuB a {
+	text-decoration: none;
+	color: white;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	font-size: 16px;
+	padding: 8px 12px;
+	border-radius: 8px;
+	transition: 0.3s;
+}
+
+.SideBar_menu__BeEuB a:hover {
+	background-color: var(--color-primary-hover);
+	color: #fff;
+}
+
+@media (max-width: 768px) {
+	.SideBar_sidebar__XeGCt {
+		width: 100%;
+		margin: 0;
+		border-radius: 0;
+		padding: 15px;
+	}
+
+	.SideBar_sidebar-header___0T_8 {
+		justify-content: space-between;
+	}
+
+	.SideBar_burger__hRzEB {
+		display: block;
+	}
+
+	.SideBar_menu__BeEuB {
+		display: none;
+		flex-direction: column;
+		background-color: var(--color-primary);
+		width: 100%;
+		padding: 10px 0;
+		position: absolute;
+		top: 60px;
+		left: 0;
+		z-index: 10;
+		border-radius: 0 0 10px 10px;
+	}
+
+	.SideBar_menu__BeEuB.SideBar_active__FOxtk {
+		display: flex;
+	}
+}
+
+/*!*********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[3]!./app/components/WelcomeCard.module.css ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************/
+.WelcomeCard_welcome__T_egw {
+	position: relative;
+	background-color: var(--color-primary);
+	border-radius: 16px;
+	min-height: 200px;
+	overflow: hidden;
+}
+
+.WelcomeCard_welcomeBtns__zGySx {
+	display: flex;
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	gap: 10px;
+}
+
+.WelcomeCard_welcomeBtns__zGySx button {
+	background-color: var(--color-light);
+	border: none;
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 18px;
+	cursor: pointer;
+	transition: all 0.2s ease-in-out;
+}
+
+.WelcomeCard_welcomeBtns__zGySx button:hover {
+	background-color: var(--color-primary-hover);
+	color: white;
+	transform: scale(1.1);
+}
+
+.WelcomeCard_welcomeText__9YfWJ {
+	position: absolute;
+	bottom: 30px;
+	left: 20px;
+}
+
+.WelcomeCard_currentDate__Gz8L9 {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba(171, 174, 255, 0.96);
+	color: black;
+	gap: 10px;
+	border-radius: 10px;
+	padding: 10px;
+}
+
+.WelcomeCard_currentDate__Gz8L9 .WelcomeCard_date__jDm25 {
+	font-size: 16px;
+}
+
+.WelcomeCard_welcomeText__9YfWJ h2 {
+	font-size: 38px;
+	font-weight: bold;
+	margin: 5px 0;
+}
+
+.WelcomeCard_welcomeText__9YfWJ p {
+	font-size: 20px;
+	margin: 5px 0;
+}
+
+.WelcomeCard_welcomeImg__j76x8 {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	width: 60%;
+	max-width: 600px;
+	height: auto;
+}
+
+.WelcomeCard_welcomeImg__j76x8 img {
+	width: 100%;
+	border-radius: 12px;
+	display: block;
+}
+
+@media (min-width: 1024px) and (max-width: 1400px) {
+	.WelcomeCard_welcomeImg__j76x8 {
+		display: none;
+	}
+}
+
+@media (max-width: 1024px) {
+	.WelcomeCard_welcomeImg__j76x8 {
+		width: 55%;
+		max-width: 500px;
+	}
+	.WelcomeCard_welcomeText__9YfWJ {
+		bottom: 10px;
+	}
+	.WelcomeCard_welcomeText__9YfWJ h2 {
+		font-size: 28px;
+	}
+	.WelcomeCard_welcomeText__9YfWJ p {
+		font-size: 18px;
+	}
+	.WelcomeCard_currentDate__Gz8L9 .WelcomeCard_date__jDm25 {
+		font-size: 14px;
+	}
+}
+
+@media (max-width: 768px) {
+	.WelcomeCard_welcomeText__9YfWJ {
+		left: 15px;
+		bottom: 20px;
+	}
+
+	.WelcomeCard_currentDate__Gz8L9 {
+		font-size: 12px;
+		padding: 8px;
+	}
+
+	.WelcomeCard_welcomeText__9YfWJ h2 {
+		font-size: 22px;
+	}
+	.WelcomeCard_welcomeText__9YfWJ p {
+		font-size: 16px;
+	}
+
+	.WelcomeCard_welcomeBtns__zGySx button {
+		width: 36px;
+		height: 36px;
+		font-size: 16px;
+	}
+}
+
+@media (max-width: 480px) {
+	.WelcomeCard_welcomeImg__j76x8 {
+		display: none;
+	}
+	.WelcomeCard_currentDate__Gz8L9 {
+		padding: 7px;
+		font-size: 10px;
+	}
+
+	.WelcomeCard_welcomeText__9YfWJ h2 {
+		font-size: 22px;
+	}
+	.WelcomeCard_welcomeText__9YfWJ p,
+	.WelcomeCard_date__jDm25 {
+		font-size: 16px;
+	}
+
+	.WelcomeCard_welcomeBtns__zGySx button {
+		width: 32px;
+		height: 32px;
+		font-size: 14px;
+	}
+}
+
