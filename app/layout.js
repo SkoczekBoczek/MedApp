@@ -1,11 +1,8 @@
 import './globals.css'
 
 export const metadata = {
-  title: 'MeddApp',
+  title: 'MedCare',
   description: 'Medical dashboard application',
-  icons: {
-    icon: '/medIcon.jpg',
-  },
 }
 
 export default function RootLayout({ children }) {

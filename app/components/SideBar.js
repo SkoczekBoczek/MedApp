@@ -1,5 +1,7 @@
 "use client";
 
+"use client";
+
 import "./SideBar.css";
 
 export default function SideBar() {
