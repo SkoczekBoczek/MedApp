@@ -58,7 +58,7 @@
 }
 
 @media (max-width: 768px) {
-	#__next {
+	body {
 		flex-direction: column;
 	}
 

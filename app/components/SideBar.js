@@ -15,7 +15,11 @@ export default function SideBar() {
 					className={styles.burger}
 					onClick={() => setMenuActive(!menuActive)}
 				>
-					<i className="fas fa-bars"></i>
+					{menuActive ? (
+						<i className="fas fa-xmark"></i>
+					) : (
+						<i className="fas fa-bars"></i>
+					)}
 				</button>
 			</div>
 

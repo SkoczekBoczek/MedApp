@@ -11,26 +11,28 @@
 	position: relative;
 }
 
-.sidebar-header {
+.sidebarHeader {
 	width: 100%;
 	display: flex;
-	justify-content: center;
 	align-items: center;
+	justify-content: space-between;
 }
 
 .burger {
 	display: none;
+	position: relative;
 	background: none;
 	border: none;
 	color: white;
 	font-size: 24px;
 	cursor: pointer;
+	z-index: 20;
 }
 
 .logo {
 	font-size: 24px;
 	font-weight: bold;
-	margin-bottom: 40px;
+	margin: 2px;
 }
 
 .menu {

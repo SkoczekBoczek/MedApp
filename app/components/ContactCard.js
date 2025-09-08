@@ -30,6 +30,7 @@ export default function ContactCard() {
 
 	function handleSpecialityChange(speciality) {
 		setSelectedSpeciality(speciality);
+		setCurrentPage(1);
 	}
 
 	const filteredDoctors =
@@ -52,17 +53,7 @@ export default function ContactCard() {
 		<section className={`${styles.contact} ${styles.card}`}>
 			<div className={styles.contactHeader}>
 				<h3>Skontaktuj się z lekarzem</h3>
-				<div className={styles.categories}>
-					<ul className={styles.categoriesList}>
-						{specialities.map((spec) => (
-							<li key={spec}>
-								<button onClick={() => handleSpecialityChange(spec)}>
-									{spec}
-								</button>
-							</li>
-						))}
-					</ul>
-				</div>
+
 				<div className={styles.arrows}>
 					<button
 						onClick={() => currentPage > 1 && setCurrentPage(currentPage - 1)}
@@ -77,6 +68,29 @@ export default function ContactCard() {
 						<i className="fas fa-arrow-right"></i>
 					</button>
 				</div>
+			</div>
+			<div className={styles.categories}>
+				<ul className={`${styles.categoriesList} ${styles.desktopOnly}`}>
+					{specialities.map((spec) => (
+						<li key={spec}>
+							<button onClick={() => handleSpecialityChange(spec)}>
+								{spec}
+							</button>
+						</li>
+					))}
+				</ul>
+
+				<select
+					className={`${styles.mobileOnly}`}
+					value={selectedSpeciality}
+					onChange={(e) => handleSpecialityChange(e.target.value)}
+				>
+					{specialities.map((spec) => (
+						<option key={spec} value={spec}>
+							{spec}
+						</option>
+					))}
+				</select>
 			</div>
 
 			<div className={styles.contactInfo}>

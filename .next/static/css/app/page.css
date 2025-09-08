@@ -40,13 +40,16 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin-bottom: 15px;
+	margin-bottom: 10px;
 	gap: 20px;
 }
 
+.ContactCard_categories__61tHW {
+	margin-bottom: 10px;
+}
+
 .ContactCard_categories__61tHW .ContactCard_categoriesList___11lQ {
-	display: flex;
-	gap: 20px;
+	gap: 10px;
 	list-style: none;
 	padding: 0;
 	margin: 0;
@@ -54,7 +57,28 @@
 
 .ContactCard_categories__61tHW .ContactCard_categoriesList___11lQ button {
 	padding: 5px;
+	color: black;
+	background-color: var(--color-light);
+	border: none;
+	border-radius: 5px;
+	font-size: 12px;
 	cursor: pointer;
+	transition: all 0.2s ease-in-out;
+	white-space: nowrap;
+}
+
+.ContactCard_categories__61tHW .ContactCard_categoriesList___11lQ button:hover {
+	background-color: var(--color-primary-hover);
+	color: var(--color-light);
+	transform: scale(1.1);
+}
+
+.ContactCard_desktopOnly__6PQ6G {
+	display: flex;
+}
+
+.ContactCard_mobileOnly__42a8S {
+	display: none;
 }
 
 .ContactCard_arrows__2e4IV button {
@@ -181,6 +205,15 @@
 		height: 36px;
 		font-size: 16px;
 	}
+	.ContactCard_categories__61tHW .ContactCard_categoriesList___11lQ {
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+
+	.ContactCard_categories__61tHW .ContactCard_categoriesList___11lQ button {
+		font-size: 12px;
+		padding: 5px 10px;
+	}
 }
 
 @media (max-width: 480px) {
@@ -193,6 +226,25 @@
 		height: 32px;
 		font-size: 14px;
 		margin-left: 5px;
+	}
+	.ContactCard_categories__61tHW .ContactCard_categoriesList___11lQ {
+		gap: 6px;
+	}
+
+	.ContactCard_categories__61tHW .ContactCard_categoriesList___11lQ button {
+		font-size: 11px;
+		padding: 4px 8px;
+	}
+	.ContactCard_desktopOnly__6PQ6G {
+		display: none;
+	}
+	.ContactCard_mobileOnly__42a8S {
+		display: block;
+		width: 100%;
+		padding: 8px;
+		border-radius: 8px;
+		border: 1px solid #ccc;
+		font-size: 14px;
 	}
 }
 
@@ -212,26 +264,28 @@
 	position: relative;
 }
 
-.SideBar_sidebar-header___0T_8 {
+.SideBar_sidebarHeader__kxk9B {
 	width: 100%;
 	display: flex;
-	justify-content: center;
 	align-items: center;
+	justify-content: space-between;
 }
 
 .SideBar_burger__hRzEB {
 	display: none;
+	position: relative;
 	background: none;
 	border: none;
 	color: white;
 	font-size: 24px;
 	cursor: pointer;
+	z-index: 20;
 }
 
 .SideBar_logo__70k47 {
 	font-size: 24px;
 	font-weight: bold;
-	margin-bottom: 40px;
+	margin: 2px;
 }
 
 .SideBar_menu__BeEuB {
