@@ -1,8 +1,8 @@
 import { MongoClient } from "mongodb";
 
+const client = await MongoClient.connect(process.env.MONGODB_URI);
 export async function GET() {
 	try {
-		const client = await MongoClient.connect(process.env.MONGODB_URI);
 		const db = client.db("clinicDB");
 		const doctors = await db.collection("doctors").find().toArray();
 

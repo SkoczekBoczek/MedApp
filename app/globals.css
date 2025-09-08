@@ -1,6 +1,10 @@
 @import "./styles/variables.css";
 @import "./styles/main.css";
 
+dialog::backdrop {
+	background: rgba(0, 0, 0, 0.6);
+}
+
 .main {
 	flex: 1;
 	display: grid;
@@ -16,10 +20,7 @@
 	padding: 20px;
 }
 
-.big-box {
-	grid-column: 1 / 2;
-}
-.small-box {
+.smallBox {
 	grid-column: 2 / 3;
 }
 
@@ -42,16 +43,16 @@
 		order: 3;
 	}
 
-	.big-box {
+	.bigBox {
 		order: 4;
 	}
 
-	.small-box {
+	.smallBox {
 		order: 5;
 	}
 
-	.big-box,
-	.small-box {
+	.bigBox,
+	.smallBox {
 		min-height: 200px;
 		width: 100%;
 	}

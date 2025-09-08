@@ -9,10 +9,27 @@ export default function ContactCard() {
 	const [loading, setLoading] = useState(true);
 	const [currentPage, setCurrentPage] = useState(1);
 
+	const [startPositionX, setStartPositionX] = useState(0);
+
+	function handleTouchStart(e) {
+		setStartPositionX(e.touches[0].clientX);
+	}
+
+	function handleTouchEnd(e) {
+		const endPosiotionX = e.changedTouches[0].clientX;
+		const movedPosition = endPosiotionX - startPositionX;
+
+		if (movedPosition > 50 && currentPage > 1) {
+			setCurrentPage(currentPage - 1);
+		} else if (movedPosition < -50 && currentPage < totalPages) {
+			setCurrentPage(currentPage + 1);
+		}
+	}
 	useEffect(() => {
 		fetch("api/doctors")
 			.then((res) => res.json())
 			.then((data) => {
+				console.log("Fetched doctors:", data);
 				setDoctors(data);
 				setLoading(false);
 			});
@@ -93,7 +110,11 @@ export default function ContactCard() {
 				</select>
 			</div>
 
-			<div className={styles.contactInfo}>
+			<div
+				className={styles.contactInfo}
+				onTouchStart={handleTouchStart}
+				onTouchEnd={handleTouchEnd}
+			>
 				{loading ? (
 					<div>Ładowanie...</div>
 				) : (

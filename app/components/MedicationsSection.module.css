@@ -1,0 +1,23 @@
+.bigBox {
+	grid-column: 1 / 2;
+}
+
+.bigBox .showModaBtn {
+	background-color: var(--color-light);
+	border: none;
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 18px;
+	cursor: pointer;
+	transition: all 0.2s ease-in-out;
+}
+
+.bigBox .showModaBtn:hover {
+	background-color: var(--color-primary-hover);
+	color: white;
+	transform: scale(1.1);
+}
