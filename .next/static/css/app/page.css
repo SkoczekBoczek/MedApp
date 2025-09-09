@@ -294,10 +294,16 @@
 	background-color: var(--color-light);
 	border-radius: 12px;
 	padding: 1.5rem;
+	height: 400px;
 	width: 400px;
+	max-height: 90%;
 	max-width: 90%;
 	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 	animation: MedicationsList_fadeIn__CGTu0 0.3s ease;
+	overflow-y: auto;
+	overflow-x: hidden;
+	scrollbar-width: thin;
+	scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
 }
 
 .MedicationsList_header__qnvJ9 {
@@ -307,12 +313,32 @@
 	margin-bottom: 1rem;
 }
 
+.MedicationsList_header__qnvJ9 h2 {
+	color: black;
+}
+
 .MedicationsList_closeBtn__Rf_Ka {
 	background: transparent;
 	border: none;
 	font-size: 1.5rem;
 	cursor: pointer;
 	line-height: 1;
+}
+
+.MedicationsList_modalContent__xJ10G input {
+	width: 100%;
+	padding: 0.6rem 0.8rem;
+	margin-bottom: 1rem;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	font-size: 1rem;
+	outline: none;
+	transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.MedicationsList_modalContent__xJ10G input:focus {
+	border-color: var(--color-primary);
+	box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.2);
 }
 
 .MedicationsList_content___f4AN {
@@ -330,6 +356,12 @@
 	border-radius: 8px;
 }
 
+.MedicationsList_buttons__BKInd {
+	display: flex;
+	gap: 0.5rem;
+	align-items: center;
+}
+
 .MedicationsList_addBtn__iWOVJ {
 	background-color: var(--color-primary);
 	color: white;
@@ -345,6 +377,27 @@
 	transform: scale(1.05);
 }
 
+.MedicationsList_infoBtn__X_eg7 {
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.3rem;
+	border-radius: 50%;
+	transition: background-color 0.2s, transform 0.1s;
+}
+
+.MedicationsList_infoBtn__X_eg7:hover {
+	background-color: rgba(0, 112, 243, 0.1);
+	transform: scale(1.1);
+}
+
+.MedicationsList_infoBtn__X_eg7 svg {
+	color: var(--color-primary);
+}
+
 @keyframes MedicationsList_fadeIn__CGTu0 {
 	from {
 		opacity: 0;
@@ -354,6 +407,52 @@
 		opacity: 1;
 		transform: scale(1);
 	}
+}
+
+/* DRUG DETAILS */
+
+.MedicationsList_detailsPanel__vWhpe {
+	position: fixed;
+	top: 0;
+	right: 0;
+	height: 100vh;
+	width: 300px;
+	background-color: var(--color-light);
+	box-shadow: -4px 0 12px rgba(0, 0, 0, 0.2);
+	border-top-left-radius: 12px;
+	border-bottom-left-radius: 12px;
+	padding: 1rem;
+	z-index: 1100;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+
+	transform: translateX(100%);
+	animation: MedicationsList_slideIn__hYC2k 0.3s forwards;
+}
+
+@keyframes MedicationsList_slideIn__hYC2k {
+	from {
+		transform: translateX(100%);
+	}
+	to {
+		transform: translateX(0);
+	}
+}
+
+.MedicationsList_detailsHeader__MJuwi {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.MedicationsList_detailsHeader__MJuwi h3 {
+	color: black;
+}
+
+.MedicationsList_detailsContent__Y_epO {
+	overflow-y: auto;
+	flex-grow: 1;
 }
 
 /*!*****************************************************************************************************************************************************************************************************************************************************************************!*\
