@@ -1,29 +1,34 @@
 .dialogBackdrop {
-	width: 100vw;
-	height: 100vh;
-	margin: 0;
-	padding: 0;
-	border: none;
-	background: none;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	margin: 0;
+	padding: 0;
+	width: 100vw;
+	height: 100vh;
+	border: none;
+	background: none;
+}
+
+.modalWrapper {
+	position: relative;
+	display: flex;
+	align-items: center;
 }
 
 .modalContent {
 	background-color: var(--color-light);
 	border-radius: 12px;
 	padding: 1.5rem;
-	height: 400px;
+	height: 600px;
 	width: 400px;
 	max-height: 90%;
 	max-width: 90%;
-	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-	animation: fadeIn 0.3s ease;
 	overflow-y: auto;
-	overflow-x: hidden;
 	scrollbar-width: thin;
 	scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+	animation: fadeIn 0.3s ease;
+	z-index: 30;
 }
 
 .header {
@@ -38,11 +43,21 @@
 }
 
 .closeBtn {
-	background: transparent;
+	color: black;
+	background-color: #f5f5f5;
 	border: none;
-	font-size: 1.5rem;
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	font-size: 24px;
 	cursor: pointer;
-	line-height: 1;
+	transition: all 0.2s ease-in-out;
+}
+
+.closeBtn:hover {
+	background-color: var(--color-primary-hover);
+	color: var(--color-light);
+	transform: scale(1.1);
 }
 
 .modalContent input {
@@ -98,19 +113,17 @@
 }
 
 .infoBtn {
-	background: transparent;
-	border: none;
-	cursor: pointer;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	padding: 0.3rem;
-	border-radius: 50%;
+	background: transparent;
+	border: none;
+	cursor: pointer;
 	transition: background-color 0.2s, transform 0.1s;
 }
 
 .infoBtn:hover {
-	background-color: rgba(0, 112, 243, 0.1);
 	transform: scale(1.1);
 }
 
@@ -132,31 +145,37 @@
 /* DRUG DETAILS */
 
 .detailsPanel {
-	position: fixed;
-	top: 0;
-	right: 0;
-	height: 100vh;
+	position: absolute;
+	top: 10px;
+	left: calc(100% - 40px);
+	height: auto;
 	width: 300px;
 	background-color: var(--color-light);
-	box-shadow: -4px 0 12px rgba(0, 0, 0, 0.2);
-	border-top-left-radius: 12px;
-	border-bottom-left-radius: 12px;
 	padding: 1rem;
-	z-index: 1100;
-	display: flex;
-	flex-direction: column;
-	gap: 1rem;
-
-	transform: translateX(100%);
-	animation: slideIn 0.3s forwards;
+	border-top-right-radius: 12px;
+	border-bottom-right-radius: 12px;
+	animation: slideIn 0.3s ease forwards;
+	z-index: 10;
 }
 
 @keyframes slideIn {
 	from {
-		transform: translateX(100%);
+		transform: translateX(-100px);
+		opacity: 0;
 	}
 	to {
 		transform: translateX(0);
+		opacity: 1;
+	}
+}
+@keyframes slideInPhone {
+	from {
+		transform: translateY(-100px);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0);
+		opacity: 1;
 	}
 }
 
@@ -172,5 +191,4 @@
 
 .detailsContent {
 	overflow-y: auto;
-	flex-grow: 1;
 }

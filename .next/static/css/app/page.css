@@ -279,31 +279,36 @@
   !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[3]!./app/components/MedicationsList.module.css ***!
   \*************************************************************************************************************************************************************************************************************************************************************************************/
 .MedicationsList_dialogBackdrop__M8PY_ {
-	width: 100vw;
-	height: 100vh;
-	margin: 0;
-	padding: 0;
-	border: none;
-	background: none;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	margin: 0;
+	padding: 0;
+	width: 100vw;
+	height: 100vh;
+	border: none;
+	background: none;
+}
+
+.MedicationsList_modalWrapper__6l6v0 {
+	position: relative;
+	display: flex;
+	align-items: center;
 }
 
 .MedicationsList_modalContent__xJ10G {
 	background-color: var(--color-light);
 	border-radius: 12px;
 	padding: 1.5rem;
-	height: 400px;
+	height: 600px;
 	width: 400px;
 	max-height: 90%;
 	max-width: 90%;
-	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-	animation: MedicationsList_fadeIn__CGTu0 0.3s ease;
 	overflow-y: auto;
-	overflow-x: hidden;
 	scrollbar-width: thin;
 	scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+	animation: MedicationsList_fadeIn__CGTu0 0.3s ease;
+	z-index: 30;
 }
 
 .MedicationsList_header__qnvJ9 {
@@ -318,11 +323,21 @@
 }
 
 .MedicationsList_closeBtn__Rf_Ka {
-	background: transparent;
+	color: black;
+	background-color: #f5f5f5;
 	border: none;
-	font-size: 1.5rem;
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	font-size: 24px;
 	cursor: pointer;
-	line-height: 1;
+	transition: all 0.2s ease-in-out;
+}
+
+.MedicationsList_closeBtn__Rf_Ka:hover {
+	background-color: var(--color-primary-hover);
+	color: var(--color-light);
+	transform: scale(1.1);
 }
 
 .MedicationsList_modalContent__xJ10G input {
@@ -378,19 +393,17 @@
 }
 
 .MedicationsList_infoBtn__X_eg7 {
-	background: transparent;
-	border: none;
-	cursor: pointer;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	padding: 0.3rem;
-	border-radius: 50%;
+	background: transparent;
+	border: none;
+	cursor: pointer;
 	transition: background-color 0.2s, transform 0.1s;
 }
 
 .MedicationsList_infoBtn__X_eg7:hover {
-	background-color: rgba(0, 112, 243, 0.1);
 	transform: scale(1.1);
 }
 
@@ -412,31 +425,37 @@
 /* DRUG DETAILS */
 
 .MedicationsList_detailsPanel__vWhpe {
-	position: fixed;
-	top: 0;
-	right: 0;
-	height: 100vh;
+	position: absolute;
+	top: 10px;
+	left: calc(100% - 40px);
+	height: auto;
 	width: 300px;
 	background-color: var(--color-light);
-	box-shadow: -4px 0 12px rgba(0, 0, 0, 0.2);
-	border-top-left-radius: 12px;
-	border-bottom-left-radius: 12px;
 	padding: 1rem;
-	z-index: 1100;
-	display: flex;
-	flex-direction: column;
-	gap: 1rem;
-
-	transform: translateX(100%);
-	animation: MedicationsList_slideIn__hYC2k 0.3s forwards;
+	border-top-right-radius: 12px;
+	border-bottom-right-radius: 12px;
+	animation: MedicationsList_slideIn__hYC2k 0.3s ease forwards;
+	z-index: 10;
 }
 
 @keyframes MedicationsList_slideIn__hYC2k {
 	from {
-		transform: translateX(100%);
+		transform: translateX(-100px);
+		opacity: 0;
 	}
 	to {
 		transform: translateX(0);
+		opacity: 1;
+	}
+}
+@keyframes MedicationsList_slideInPhone__cTxQl {
+	from {
+		transform: translateY(-100px);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0);
+		opacity: 1;
 	}
 }
 
@@ -452,7 +471,6 @@
 
 .MedicationsList_detailsContent__Y_epO {
 	overflow-y: auto;
-	flex-grow: 1;
 }
 
 /*!*****************************************************************************************************************************************************************************************************************************************************************************!*\

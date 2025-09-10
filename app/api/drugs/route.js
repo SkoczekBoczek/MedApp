@@ -5,7 +5,7 @@ const client = await MongoClient.connect(process.env.MONGODB_URI);
 export async function GET() {
 	try {
 		const db = client.db("clinicDB");
-		const drugs = await db.collection("drugs").find().toArray();
+		const drugs = await db.collection("drugs").find().limit(20).toArray();
 
 		return new Response(JSON.stringify(drugs), {
 			status: 200,
