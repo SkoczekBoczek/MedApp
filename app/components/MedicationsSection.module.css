@@ -2,7 +2,7 @@
 	grid-column: 1 / 2;
 }
 
-.bigBox .showModaBtn {
+.bigBox .showModalBtn {
 	background-color: var(--color-light);
 	border: none;
 	border-radius: 50%;
@@ -16,7 +16,7 @@
 	transition: all 0.2s ease-in-out;
 }
 
-.bigBox .showModaBtn:hover {
+.bigBox .showModalBtn:hover {
 	background-color: var(--color-primary-hover);
 	color: white;
 	transform: scale(1.1);

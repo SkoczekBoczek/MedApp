@@ -14,7 +14,7 @@ export default function MedicationsSection() {
 	return (
 		<section className={`${styles.bigBox} card`}>
 			<MedicationsModal ref={modal}></MedicationsModal>
-			<button className={styles.showModaBtn} onClick={showModal}>
+			<button className={styles.showModalBtn} onClick={showModal}>
 				<i className="fa-solid fa-circle-plus"></i>
 			</button>
 		</section>
