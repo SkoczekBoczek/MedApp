@@ -48,16 +48,6 @@ export default function MedicationsSection() {
 		},
 	]);
 
-	const days = [
-		"Poniedziałek",
-		"Wtorek",
-		"Środa",
-		"Czwartek",
-		"Piątek",
-		"Sobota",
-		"Niedziela",
-	];
-
 	const modal = useRef();
 
 	function showModal() {
@@ -65,8 +55,45 @@ export default function MedicationsSection() {
 	}
 
 	function handleAddMedication(medication) {
-		console.log("Medication to add:", medication);
+		setWeeklyPlan((prevPlan) => {
+			return prevPlan.map((dayPlan) => {
+				if (dayPlan.day === medication.day) {
+					return {
+						...dayPlan,
+						medications: [
+							...dayPlan.medications,
+							{
+								drugId: medication.drugId,
+								productName: medication.productName,
+								time: medication.time,
+								taken: false,
+							},
+						],
+					};
+				}
+				return dayPlan;
+			});
+		});p
 	}
+
+	const toggleMedicationTaken = (day, id) => {
+		setWeeklyPlan((prevPlan) => {
+			return prevPlan.map((dayPlan) => {
+				if (dayPlan.day === day) {
+					return {
+						...dayPlan,
+						medications: dayPlan.medications.map((med) => {
+							if (med.drugId === id) {
+								return { ...med, taken: !med.taken };
+							}
+							return med;
+						}),
+					};
+				}
+				return dayPlan;
+			});
+		});
+	};
 
 	return (
 		<section className={`${styles.bigBox} card`}>
@@ -99,7 +126,12 @@ export default function MedicationsSection() {
 									</p>
 								) : (
 									dayPlan.medications.map((med) => (
-										<div key={med.drugId} className={styles.medicationItem}>
+										<div
+											key={med.drugId}
+											className={`${styles.medicationItem} ${
+												med.taken ? styles.medicationTaken : ""
+											}`}
+										>
 											<div className={styles.medicationContent}>
 												<div className={styles.medicationInfo}>
 													<div className={styles.timeRow}>
@@ -114,7 +146,20 @@ export default function MedicationsSection() {
 													</div>
 												</div>
 
-												<div className={styles.checkbox}></div>
+												<div
+													className={`${styles.checkbox} ${
+														med.taken ? styles.checkboxChecked : ""
+													}`}
+													onClick={() => {
+														toggleMedicationTaken(dayPlan.day, med.drugId);
+													}}
+												>
+													{med.taken && (
+														<div className={styles.checkboxInner}>
+															<div className={styles.checkboxDot}></div>
+														</div>
+													)}
+												</div>
 											</div>
 										</div>
 									))
