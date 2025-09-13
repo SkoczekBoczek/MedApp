@@ -2,11 +2,11 @@
 	width: 220px;
 	background-color: var(--color-primary);
 	border-radius: 16px;
+	padding: 20px;
 	margin: 20px 0 20px 20px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	padding: 20px;
 	flex-shrink: 0;
 	position: relative;
 }
@@ -32,7 +32,7 @@
 .logo {
 	font-size: 24px;
 	font-weight: bold;
-	margin: 2px;
+	margin: 2px auto 10px;
 }
 
 .menu {

@@ -12,7 +12,10 @@ import {
 import { createPortal } from "react-dom";
 import SelectedDrugInfo from "./SelectedDrugInfo";
 
-const Modal = forwardRef(function MedicationsModal({}, ref) {
+const Modal = forwardRef(function MedicationsModal(
+	{ onAddMedication /* selectedDay */ },
+	ref
+) {
 	const [selectedDrug, setSelectedDrug] = useState(null);
 	const [selectedInfoDrug, setSelectedInfoDrug] = useState(null);
 	const [drugs, setDrugs] = useState([]);
@@ -22,6 +25,10 @@ const Modal = forwardRef(function MedicationsModal({}, ref) {
 
 	const [selectedDay, setSelectedDay] = useState("Poniedziałek");
 	const [selectedTime, setSelectedTime] = useState("08:00");
+
+	// if (selectedDay === null || selectedDay === undefined) {
+	// 	setSelectedDay("Poniedziałek");
+	// }
 
 	useEffect(() => {
 		async function fetchDrugs() {
@@ -94,6 +101,19 @@ const Modal = forwardRef(function MedicationsModal({}, ref) {
 	function handleAddMedication(drug) {
 		setSelectedDrug(drug);
 		setShowTimeSelection(true);
+	}
+
+	function handleConfirmMedication() {
+		if (!selectedDrug) return;
+		const medication = {
+			drugId: selectedDrug._id,
+			productName: selectedDrug.productName,
+			day: selectedDay,
+			time: selectedTime,
+		};
+
+		onAddMedication(medication);
+		handleClose();
 	}
 
 	if (!isOpen) return null;
@@ -195,7 +215,12 @@ const Modal = forwardRef(function MedicationsModal({}, ref) {
 								>
 									Anuluj
 								</button>
-								<button className={styles.confirmBtn}>Potwierdź</button>
+								<button
+									className={styles.confirmBtn}
+									onClick={handleConfirmMedication}
+								>
+									Potwierdź
+								</button>
 							</div>
 						</div>
 					)}

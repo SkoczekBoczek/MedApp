@@ -275,6 +275,146 @@
 	transform: scale(1.1);
 }
 
+.MedicationsSection_sectionHeader__ZxWdU {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 1rem;
+	border-bottom: 1px solid var(--black-2);
+	padding-bottom: 1rem;
+}
+
+.MedicationsSection_weeklyPlan__0iSQH {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 1rem;
+	margin-bottom: 1rem;
+}
+.MedicationsSection_dayCard__8arvd {
+	background: var(--color-light);
+	color: black;
+	border-radius: 8px;
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	min-height: 120px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.MedicationsSection_dayHeader__7xJqC {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 0.5rem;
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 0.5rem;
+}
+
+.MedicationsSection_dayTitle__zLjl7 {
+	color: black;
+	margin: 0 0 0.5rem 0;
+	font-size: 1.2rem;
+}
+
+.MedicationsSection_addButton__EJLyX {
+	color: var(--color-light);
+	background-color: rgb(0, 171, 0);
+	border: none;
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 24px;
+	cursor: pointer;
+	transition: all 0.2s ease-in-out;
+}
+
+.MedicationsSection_addButton__EJLyX:hover {
+	color: rgb(0, 171, 0);
+	background-color: var(--color-light);
+	border: 2px solid rgb(0, 171, 0);
+	transform: scale(1.1);
+}
+
+.MedicationsSection_medicationsList__Plm3i {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+}
+
+.MedicationsSection_noMedications__R4fo9 {
+	color: #9ca3af;
+	font-size: 0.875rem;
+	text-align: center;
+	padding: 2rem 0;
+	font-style: italic;
+}
+
+.MedicationsSection_medicationItem__PlWwr {
+	padding: 0.75rem;
+	border-radius: 8px;
+	border: 2px solid;
+	transition: all 0.2s;
+	cursor: pointer;
+}
+
+.MedicationsSection_medicationContent__epgY4 {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+}
+
+.MedicationsSection_medicationInfo__u3iUQ {
+	flex: 1;
+}
+
+.MedicationsSection_timeRow__rMKyi,
+.MedicationsSection_nameRow__UCyi6 {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	margin-bottom: 0.25rem;
+}
+
+.MedicationsSection_time__ZdgVZ {
+	font-size: 0.875rem;
+	font-weight: 500;
+	color: #374151;
+}
+
+.MedicationsSection_name__1JvM_ {
+	font-size: 0.875rem;
+	font-weight: 600;
+	color: #1f2937;
+}
+
+.MedicationsSection_checkbox__gg16F {
+	width: 1rem;
+	height: 1rem;
+	border-radius: 50%;
+	border: 2px solid;
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.2s;
+}
+
+@media (max-width: 900px) {
+	.MedicationsSection_weeklyPlan__0iSQH {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 600px) {
+	.MedicationsSection_weeklyPlan__0iSQH {
+		grid-template-columns: 1fr;
+	}
+}
+
 /*!*************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[3]!./app/components/MedicationsList.module.css ***!
   \*************************************************************************************************************************************************************************************************************************************************************************************/
@@ -649,11 +789,11 @@
 	width: 220px;
 	background-color: var(--color-primary);
 	border-radius: 16px;
+	padding: 20px;
 	margin: 20px 0 20px 20px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	padding: 20px;
 	flex-shrink: 0;
 	position: relative;
 }
@@ -679,7 +819,7 @@
 .SideBar_logo__70k47 {
 	font-size: 24px;
 	font-weight: bold;
-	margin: 2px;
+	margin: 2px auto 10px;
 }
 
 .SideBar_menu__BeEuB {
