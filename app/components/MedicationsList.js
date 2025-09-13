@@ -12,10 +12,7 @@ import {
 import { createPortal } from "react-dom";
 import SelectedDrugInfo from "./SelectedDrugInfo";
 
-const Modal = forwardRef(function MedicationsModal(
-	{ onAddMedication /* selectedDay */ },
-	ref
-) {
+const Modal = forwardRef(function MedicationsModal({ onAddMedication }, ref) {
 	const [selectedDrug, setSelectedDrug] = useState(null);
 	const [selectedInfoDrug, setSelectedInfoDrug] = useState(null);
 	const [drugs, setDrugs] = useState([]);
@@ -25,10 +22,6 @@ const Modal = forwardRef(function MedicationsModal(
 
 	const [selectedDay, setSelectedDay] = useState("Poniedziałek");
 	const [selectedTime, setSelectedTime] = useState("08:00");
-
-	// if (selectedDay === null || selectedDay === undefined) {
-	// 	setSelectedDay("Poniedziałek");
-	// }
 
 	useEffect(() => {
 		async function fetchDrugs() {
@@ -51,7 +44,10 @@ const Modal = forwardRef(function MedicationsModal(
 
 	useImperativeHandle(ref, () => {
 		return {
-			open: () => setIsOpen(true),
+			open: (day) => {
+				setSelectedDay(day);
+				setIsOpen(true);
+			},
 			close: () => setIsOpen(false),
 		};
 	});

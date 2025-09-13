@@ -8,16 +8,11 @@ export default function MedicationsSection() {
 	const [weeklyPlan, setWeeklyPlan] = useState([
 		{
 			day: "Poniedziałek",
-			medications: [
-				{ drugId: 1, productName: "Aspiryna", time: "08:00", taken: false },
-				{ drugId: 2, productName: "Ibuprofen", time: "20:00", taken: true },
-			],
+			medications: [],
 		},
 		{
 			day: "Wtorek",
-			medications: [
-				{ drugId: 3, productName: "Paracetamol", time: "09:00", taken: false },
-			],
+			medications: [],
 		},
 		{
 			day: "Środa",
@@ -25,22 +20,15 @@ export default function MedicationsSection() {
 		},
 		{
 			day: "Czwartek",
-			medications: [
-				{ drugId: 4, productName: "Witamina D", time: "07:00", taken: true },
-			],
+			medications: [],
 		},
 		{
 			day: "Piątek",
-			medications: [
-				{ drugId: 5, productName: "Metformina", time: "08:00", taken: false },
-				{ drugId: 6, productName: "Lisinopril", time: "20:00", taken: false },
-			],
+			medications: [],
 		},
 		{
 			day: "Sobota",
-			medications: [
-				{ drugId: 7, productName: "Omeprazol", time: "09:00", taken: true },
-			],
+			medications: [],
 		},
 		{
 			day: "Niedziela",
@@ -50,8 +38,8 @@ export default function MedicationsSection() {
 
 	const modal = useRef();
 
-	function showModal() {
-		modal.current.open();
+	function showModal(day = "Poniedziałek") {
+		modal.current.open(day);
 	}
 
 	function handleAddMedication(medication) {
@@ -61,19 +49,19 @@ export default function MedicationsSection() {
 					return {
 						...dayPlan,
 						medications: [
-							...dayPlan.medications,
 							{
 								drugId: medication.drugId,
 								productName: medication.productName,
 								time: medication.time,
 								taken: false,
 							},
-						],
+							...dayPlan.medications,
+						].sort((a, b) => a.time.localeCompare(b.time)),
 					};
 				}
 				return dayPlan;
 			});
-		});p
+		});
 	}
 
 	const toggleMedicationTaken = (day, id) => {
@@ -111,7 +99,7 @@ export default function MedicationsSection() {
 							<div className={styles.dayHeader}>
 								<h3 className={styles.dayTitle}>{dayPlan.day}</h3>
 								<button
-									onClick={showModal}
+									onClick={() => modal.current.open(dayPlan.day)}
 									className={styles.addButton}
 									title="Dodaj lek"
 								>
@@ -131,6 +119,9 @@ export default function MedicationsSection() {
 											className={`${styles.medicationItem} ${
 												med.taken ? styles.medicationTaken : ""
 											}`}
+											onClick={() => {
+												toggleMedicationTaken(dayPlan.day, med.drugId);
+											}}
 										>
 											<div className={styles.medicationContent}>
 												<div className={styles.medicationInfo}>
@@ -150,9 +141,6 @@ export default function MedicationsSection() {
 													className={`${styles.checkbox} ${
 														med.taken ? styles.checkboxChecked : ""
 													}`}
-													onClick={() => {
-														toggleMedicationTaken(dayPlan.day, med.drugId);
-													}}
 												>
 													{med.taken && (
 														<div className={styles.checkboxInner}>
