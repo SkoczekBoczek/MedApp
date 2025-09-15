@@ -1,7 +1,7 @@
-/*!**********************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[3]!./app/components/CalendarCard.module.css ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************************/
-.CalendarCard_calendar__JrpiW {
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[3]!./app/components/CalendarCard/CalendarCard.module.css ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************/
+.CalendarCard_calendar__OBa8J {
 	background-color: white;
 	color: black;
 	grid-column: 2 / 3;
@@ -10,25 +10,25 @@
 	padding: 20px;
 }
 
-.CalendarCard_calendar__JrpiW h3 {
+.CalendarCard_calendar__OBa8J h3 {
 	font-size: 18px;
 	margin-bottom: 10px;
 }
 
-.CalendarCard_month__XUMhg {
+.CalendarCard_month__F41Lr {
 	font-weight: bold;
 	margin-bottom: 15px;
 }
 
-.CalendarCard_appointment__K0s94 {
+.CalendarCard_appointment__OUkxC {
 	font-size: 14px;
 	color: #444;
 }
 
-/*!*********************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[3]!./app/components/ContactCard.module.css ***!
-  \*********************************************************************************************************************************************************************************************************************************************************************************/
-.ContactCard_contact__TYjAB {
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[3]!./app/components/ContactCard/ContactCard.module.css ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************/
+.ContactCard_contact__7C1XX {
 	grid-column: 1 / 2;
 	min-height: 170px;
 	background-color: var(--color-primary);
@@ -36,7 +36,7 @@
 	padding: 20px;
 }
 
-.ContactCard_contactHeader__zA7ra {
+.ContactCard_contactHeader__POHed {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -44,18 +44,18 @@
 	gap: 20px;
 }
 
-.ContactCard_categories__61tHW {
+.ContactCard_categories__MKFzO {
 	margin-bottom: 10px;
 }
 
-.ContactCard_categories__61tHW .ContactCard_categoriesList___11lQ {
+.ContactCard_categories__MKFzO .ContactCard_categoriesList__SpLvS {
 	gap: 10px;
 	list-style: none;
 	padding: 0;
 	margin: 0;
 }
 
-.ContactCard_categories__61tHW .ContactCard_categoriesList___11lQ button {
+.ContactCard_categories__MKFzO .ContactCard_categoriesList__SpLvS button {
 	padding: 5px;
 	color: black;
 	background-color: var(--color-light);
@@ -67,21 +67,21 @@
 	white-space: nowrap;
 }
 
-.ContactCard_categories__61tHW .ContactCard_categoriesList___11lQ button:hover {
+.ContactCard_categories__MKFzO .ContactCard_categoriesList__SpLvS button:hover {
 	background-color: var(--color-primary-hover);
 	color: var(--color-light);
 	transform: scale(1.1);
 }
 
-.ContactCard_desktopOnly__6PQ6G {
+.ContactCard_desktopOnly__6AgQ_ {
 	display: flex;
 }
 
-.ContactCard_mobileOnly__42a8S {
+.ContactCard_mobileOnly___GmMO {
 	display: none;
 }
 
-.ContactCard_arrows__2e4IV button {
+.ContactCard_arrows__S2R4Z button {
 	color: black;
 	background-color: var(--color-light);
 	border: none;
@@ -94,25 +94,25 @@
 	transition: all 0.2s ease-in-out;
 }
 
-.ContactCard_arrows__2e4IV button:hover {
+.ContactCard_arrows__S2R4Z button:hover {
 	background-color: var(--color-primary-hover);
 	color: var(--color-light);
 	transform: scale(1.1);
 }
 
-.ContactCard_contactInfo__xyQqX {
+.ContactCard_contactInfo__ZCt9M {
 	display: flex;
 	gap: 20px;
 	flex-wrap: wrap;
 	justify-content: flex-start;
 }
 
-.ContactCard_doctorInfo__Otzf1 p {
+.ContactCard_doctorInfo__fOfsa p {
 	font-size: 14px;
 	color: black;
 }
 
-.ContactCard_doctorCard__sg_7C {
+.ContactCard_doctorCard__AhRi9 {
 	display: flex;
 	align-items: center;
 	background-color: var(--color-light);
@@ -124,11 +124,11 @@
 	flex-shrink: 0;
 }
 
-.ContactCard_doctorCard__sg_7C:hover {
+.ContactCard_doctorCard__AhRi9:hover {
 	transform: scale(1.02);
 }
 
-.ContactCard_doctorImg__I5RHP {
+.ContactCard_doctorImg__XEY7M {
 	flex-shrink: 0;
 	width: 80px;
 	height: 80px;
@@ -137,29 +137,29 @@
 	margin-right: 15px;
 }
 
-.ContactCard_doctorImg__I5RHP img {
+.ContactCard_doctorImg__XEY7M img {
 	width: 100%;
 	height: 100%;
 	-o-object-fit: cover;
 	   object-fit: cover;
 }
 
-.ContactCard_doctorInfo__Otzf1 {
+.ContactCard_doctorInfo__fOfsa {
 	display: flex;
 	flex-direction: column;
 	gap: 5px;
 }
 
-.ContactCard_doctorName__8yDPs {
+.ContactCard_doctorName__3II0h {
 	font-weight: 600;
 	font-size: 16px;
 }
 
-.ContactCard_doctorSpecialty__P5xiC {
+.ContactCard_doctorSpecialty__P8J7U {
 	font-size: 14px;
 }
 
-.ContactCard_messageBtn__w1vbe {
+.ContactCard_messageBtn__Q2tNx {
 	margin-top: 8px;
 	background-color: var(--color-primary);
 	color: var(--color-light);
@@ -177,68 +177,68 @@
 	transition: background-color 0.2s ease-in-out;
 }
 
-.ContactCard_messageBtn__w1vbe:hover {
+.ContactCard_messageBtn__Q2tNx:hover {
 	background-color: var(--color-primary-hover);
 }
 
 @media (min-width: 768px) and (max-width: 1550px),
 	(min-width: 480px) and (max-width: 600px) {
-	.ContactCard_doctorCard__sg_7C {
+	.ContactCard_doctorCard__AhRi9 {
 		flex-direction: column;
 		align-items: center;
 		text-align: center;
 	}
 
-	.ContactCard_doctorImg__I5RHP {
+	.ContactCard_doctorImg__XEY7M {
 		margin-right: 0;
 		margin-bottom: 10px;
 	}
 }
 
 @media (max-width: 768px) {
-	.ContactCard_doctorCard__sg_7C {
+	.ContactCard_doctorCard__AhRi9 {
 		width: calc(50% - 20px);
 	}
 
-	.ContactCard_arrows__2e4IV button {
+	.ContactCard_arrows__S2R4Z button {
 		width: 36px;
 		height: 36px;
 		font-size: 16px;
 	}
-	.ContactCard_categories__61tHW .ContactCard_categoriesList___11lQ {
+	.ContactCard_categories__MKFzO .ContactCard_categoriesList__SpLvS {
 		flex-wrap: wrap;
 		justify-content: center;
 	}
 
-	.ContactCard_categories__61tHW .ContactCard_categoriesList___11lQ button {
+	.ContactCard_categories__MKFzO .ContactCard_categoriesList__SpLvS button {
 		font-size: 12px;
 		padding: 5px 10px;
 	}
 }
 
 @media (max-width: 480px) {
-	.ContactCard_doctorCard__sg_7C {
+	.ContactCard_doctorCard__AhRi9 {
 		width: 100%;
 	}
 
-	.ContactCard_arrows__2e4IV button {
+	.ContactCard_arrows__S2R4Z button {
 		width: 32px;
 		height: 32px;
 		font-size: 14px;
 		margin-left: 5px;
 	}
-	.ContactCard_categories__61tHW .ContactCard_categoriesList___11lQ {
+	.ContactCard_categories__MKFzO .ContactCard_categoriesList__SpLvS {
 		gap: 6px;
 	}
 
-	.ContactCard_categories__61tHW .ContactCard_categoriesList___11lQ button {
+	.ContactCard_categories__MKFzO .ContactCard_categoriesList__SpLvS button {
 		font-size: 11px;
 		padding: 4px 8px;
 	}
-	.ContactCard_desktopOnly__6PQ6G {
+	.ContactCard_desktopOnly__6AgQ_ {
 		display: none;
 	}
-	.ContactCard_mobileOnly__42a8S {
+	.ContactCard_mobileOnly___GmMO {
 		display: block;
 		width: 100%;
 		padding: 8px;
@@ -248,14 +248,14 @@
 	}
 }
 
-/*!****************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[3]!./app/components/MedicationsSection.module.css ***!
-  \****************************************************************************************************************************************************************************************************************************************************************************************/
-.MedicationsSection_bigBox__cremw {
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[3]!./app/components/MedicationsSection/MedicationsSection.module.css ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************/
+.MedicationsSection_bigBox__q6Ih7 {
 	grid-column: 1 / 2;
 }
 
-.MedicationsSection_bigBox__cremw .MedicationsSection_showModalBtn__vI5cX {
+.MedicationsSection_bigBox__q6Ih7 .MedicationsSection_showModalBtn__ICXId {
 	background-color: var(--color-light);
 	border: none;
 	border-radius: 50%;
@@ -269,29 +269,54 @@
 	transition: all 0.2s ease-in-out;
 }
 
-.MedicationsSection_bigBox__cremw .MedicationsSection_showModalBtn__vI5cX:hover {
+.MedicationsSection_bigBox__q6Ih7 .MedicationsSection_showModalBtn__ICXId:hover {
 	background-color: var(--color-primary-hover);
 	color: white;
 	transform: scale(1.1);
 }
 
-.MedicationsSection_sectionHeader__ZxWdU {
+.MedicationsSection_sectionHeader__ybNBv {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	margin-bottom: 1rem;
-	border-bottom: 1px solid var(--black-2);
 	padding-bottom: 1rem;
 }
 
-.MedicationsSection_weeklyPlan__0iSQH {
+.MedicationsSection_weeklyPlanContainer__V0b8H {
+	max-height: 320px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.MedicationsSection_weeklyPlanContainer__V0b8H::-webkit-scrollbar {
+	width: 8px;
+}
+
+.MedicationsSection_weeklyPlanContainer__V0b8H::-webkit-scrollbar-track {
+	background: #f1f1f1;
+	border-radius: 4px;
+}
+
+.MedicationsSection_weeklyPlanContainer__V0b8H::-webkit-scrollbar-thumb {
+	background: #c1c1c1;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.MedicationsSection_weeklyPlanContainer__V0b8H::-webkit-scrollbar-thumb:hover {
+	background: #a1a1a1;
+}
+
+.MedicationsSection_weeklyPlan__3438W {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	gap: 1rem;
-	margin-bottom: 1rem;
 	align-items: stretch;
+	padding: 4px;
 }
-.MedicationsSection_dayCard__8arvd {
+
+.MedicationsSection_dayCard__ge2_x {
 	background: var(--color-light);
 	color: black;
 	border-radius: 8px;
@@ -299,11 +324,10 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
-	min-height: 120px;
 	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-.MedicationsSection_dayHeader__7xJqC {
+.MedicationsSection_dayHeader__H2Bgn {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -312,13 +336,14 @@
 	padding-bottom: 0.5rem;
 }
 
-.MedicationsSection_dayTitle__zLjl7 {
+.MedicationsSection_dayTitle__tAzdO {
 	color: black;
 	margin: 0 0 0.5rem 0;
-	font-size: 1.2rem;
+	font-size: 1.1rem;
+	font-weight: 600;
 }
 
-.MedicationsSection_addButton__EJLyX {
+.MedicationsSection_addButton__mUbZt {
 	color: var(--color-light);
 	background-color: rgb(0, 171, 0);
 	border: none;
@@ -333,21 +358,23 @@
 	transition: all 0.2s ease-in-out;
 }
 
-.MedicationsSection_addButton__EJLyX:hover {
+.MedicationsSection_addButton__mUbZt:hover {
 	color: rgb(0, 171, 0);
 	background-color: var(--color-light);
 	border: 2px solid rgb(0, 171, 0);
 	transform: scale(1.1);
 }
 
-.MedicationsSection_medicationsList__Plm3i {
+.MedicationsSection_medicationsList__YPBbP {
 	display: flex;
 	flex-direction: column;
 	gap: 0.75rem;
 	margin-top: 0.5rem;
+	flex: 1;
+	overflow-y: auto;
 }
 
-.MedicationsSection_noMedications__R4fo9 {
+.MedicationsSection_noMedications__3bRcE {
 	color: #9ca3af;
 	font-size: 0.875rem;
 	text-align: center;
@@ -355,7 +382,7 @@
 	font-style: italic;
 }
 
-.MedicationsSection_medicationItem__PlWwr {
+.MedicationsSection_medicationItem__JoHUV {
 	padding: 0.75rem;
 	border-radius: 8px;
 	border: 2px solid;
@@ -363,42 +390,42 @@
 	cursor: pointer;
 }
 
-.MedicationsSection_medicationTaken__DWvDW {
+.MedicationsSection_medicationTaken__0CBWw {
 	background-color: #effff7;
 	border-color: #5cde5c;
 }
 
-.MedicationsSection_medicationContent__epgY4 {
+.MedicationsSection_medicationContent__GMuFa {
 	display: flex;
 	align-items: flex-start;
 	justify-content: space-between;
 }
 
-.MedicationsSection_medicationInfo__u3iUQ {
+.MedicationsSection_medicationInfo__f1SPM {
 	flex: 1;
 }
 
-.MedicationsSection_timeRow__rMKyi,
-.MedicationsSection_nameRow__UCyi6 {
+.MedicationsSection_timeRow__5TAdQ,
+.MedicationsSection_nameRow__dyu93 {
 	display: flex;
 	align-items: center;
 	gap: 0.5rem;
 	margin-bottom: 0.25rem;
 }
 
-.MedicationsSection_time__ZdgVZ {
+.MedicationsSection_time__hppPF {
 	font-size: 0.875rem;
 	font-weight: 500;
 	color: #374151;
 }
 
-.MedicationsSection_name__1JvM_ {
+.MedicationsSection_name__xHr9u {
 	font-size: 0.875rem;
 	font-weight: 600;
 	color: #1f2937;
 }
 
-.MedicationsSection_checkbox__gg16F {
+.MedicationsSection_checkbox__J7ic2 {
 	width: 1rem;
 	height: 1rem;
 	border-radius: 50%;
@@ -410,12 +437,12 @@
 	transition: all 0.2s;
 }
 
-.MedicationsSection_checkboxChecked__buSSX {
+.MedicationsSection_checkboxChecked__UB_No {
 	background-color: #10b981;
 	border-color: #10b981;
 }
 
-.MedicationsSection_checkboxInner__VqWCl {
+.MedicationsSection_checkboxInner__Wd7vG {
 	width: 100%;
 	height: 100%;
 	display: flex;
@@ -423,7 +450,7 @@
 	justify-content: center;
 }
 
-.MedicationsSection_checkboxDot__RGQar {
+.MedicationsSection_checkboxDot__f3Ur6 {
 	width: 0.5rem;
 	height: 0.5rem;
 	background-color: white;
@@ -431,21 +458,38 @@
 }
 
 @media (max-width: 900px) {
-	.MedicationsSection_weeklyPlan__0iSQH {
+	.MedicationsSection_weeklyPlan__3438W {
 		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.MedicationsSection_weeklyPlanContainer__V0b8H {
+		max-height: 320px;
 	}
 }
 
 @media (max-width: 600px) {
-	.MedicationsSection_weeklyPlan__0iSQH {
+	.MedicationsSection_sectionTitle___UpiG {
+		font-size: 1.3rem;
+	}
+	.MedicationsSection_weeklyPlan__3438W {
 		grid-template-columns: 1fr;
 	}
 }
+@media (max-width: 1024px) {
+	.MedicationsSection_weeklyPlanContainer__V0b8H {
+		max-height: none;
+		overflow-y: visible;
+	}
+}
 
-/*!*************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[3]!./app/components/MedicationsList.module.css ***!
-  \*************************************************************************************************************************************************************************************************************************************************************************************/
-.MedicationsList_dialogBackdrop__M8PY_ {
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[3]!./app/components/MedicationsSection/MedicationsList.module.css ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************/
+body.MedicationsList_modalOpen__sdI6p {
+  overflow: hidden;
+}
+
+.MedicationsList_dialogBackdrop__C4jxe {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -457,7 +501,7 @@
 	background: none;
 }
 
-.MedicationsList_modalWrapper__6l6v0 {
+.MedicationsList_modalWrapper__CVsQ6 {
 	position: relative;
 	display: flex;
 	align-items: center;
@@ -465,11 +509,11 @@
 	overflow-x: visible;
 }
 
-.MedicationsList_modalWrapperWithDetails__K_46S {
+.MedicationsList_modalWrapperWithDetails__hyICX {
 	overflow-x: visible;
 }
 
-.MedicationsList_modalContent__xJ10G {
+.MedicationsList_modalContent__JblWu {
 	background-color: var(--color-light);
 	border-radius: 12px;
 	padding: 1.5rem;
@@ -480,26 +524,26 @@
 	overflow-y: auto;
 	scrollbar-width: thin;
 	scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
-	animation: MedicationsList_fadeIn__CGTu0 0.3s ease;
+	animation: MedicationsList_fadeIn__q1LZy 0.3s ease;
 	z-index: 30;
 }
 
-.MedicationsList_modalContentActive__3F79V {
+.MedicationsList_modalContentActive__OAFiM {
 	border-radius: 12px 0 12px 12px;
 }
 
-.MedicationsList_header__qnvJ9 {
+.MedicationsList_header__MwMuZ {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	margin-bottom: 1rem;
 }
 
-.MedicationsList_header__qnvJ9 h2 {
+.MedicationsList_header__MwMuZ h2 {
 	color: black;
 }
 
-.MedicationsList_closeBtn__Rf_Ka {
+.MedicationsList_closeBtn__e3FJG {
 	color: black;
 	background-color: #f5f5f5;
 	border: none;
@@ -511,13 +555,13 @@
 	transition: all 0.2s ease-in-out;
 }
 
-.MedicationsList_closeBtn__Rf_Ka:hover {
+.MedicationsList_closeBtn__e3FJG:hover {
 	background-color: var(--color-primary-hover);
 	color: var(--color-light);
 	transform: scale(1.1);
 }
 
-.MedicationsList_modalContent__xJ10G input {
+.MedicationsList_modalContent__JblWu input {
 	width: 100%;
 	padding: 0.6rem 0.8rem;
 	margin-bottom: 1rem;
@@ -528,18 +572,18 @@
 	transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.MedicationsList_modalContent__xJ10G input:focus {
+.MedicationsList_modalContent__JblWu input:focus {
 	border-color: var(--color-primary);
 	box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.2);
 }
 
-.MedicationsList_content___f4AN {
+.MedicationsList_content__Sl9pp {
 	display: flex;
 	flex-direction: column;
 	gap: 0.75rem;
 }
 
-.MedicationsList_medicationItem__HIcs8 {
+.MedicationsList_medicationItem__CTzZ2 {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -548,13 +592,13 @@
 	border-radius: 8px;
 }
 
-.MedicationsList_buttons__BKInd {
+.MedicationsList_buttons__LfFl_ {
 	display: flex;
 	gap: 0.5rem;
 	align-items: center;
 }
 
-.MedicationsList_addBtn__iWOVJ {
+.MedicationsList_addBtn__KnzhY {
 	background-color: var(--color-primary);
 	color: white;
 	border: none;
@@ -564,12 +608,12 @@
 	transition: background-color 0.2s;
 }
 
-.MedicationsList_addBtn__iWOVJ:hover {
+.MedicationsList_addBtn__KnzhY:hover {
 	background-color: var(--color-primary-hover);
 	transform: scale(1.05);
 }
 
-.MedicationsList_infoBtn__X_eg7 {
+.MedicationsList_infoBtn__w3zmB {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -580,15 +624,15 @@
 	transition: background-color 0.2s, transform 0.1s;
 }
 
-.MedicationsList_infoBtn__X_eg7:hover {
+.MedicationsList_infoBtn__w3zmB:hover {
 	transform: scale(1.1);
 }
 
-.MedicationsList_infoBtn__X_eg7 svg {
+.MedicationsList_infoBtn__w3zmB svg {
 	color: var(--color-primary);
 }
 
-@keyframes MedicationsList_fadeIn__CGTu0 {
+@keyframes MedicationsList_fadeIn__q1LZy {
 	from {
 		opacity: 0;
 		transform: scale(0.95);
@@ -602,36 +646,36 @@
 /* DRUG DETAILS */
 
 @media (max-width: 992px) {
-	.MedicationsList_modalWrapper__6l6v0 {
+	.MedicationsList_modalWrapper__CVsQ6 {
 		overflow-x: hidden;
 	}
 
-	.MedicationsList_modalWrapperWithDetails__K_46S {
+	.MedicationsList_modalWrapperWithDetails__hyICX {
 		overflow-x: visible;
 	}
 
-	.MedicationsList_modalContent__xJ10G {
+	.MedicationsList_modalContent__JblWu {
 		width: 90%;
 		max-width: 500px;
 	}
 
-	.MedicationsList_modalContentActive__3F79V {
+	.MedicationsList_modalContentActive__OAFiM {
 		border-radius: 12px;
 	}
 }
 
 /* TIME SELECTION */
-.MedicationsList_timeSelection__Fml5k {
+.MedicationsList_timeSelection__yPqqe {
 	padding: 1rem 0;
 }
 
-.MedicationsList_timeSelection__Fml5k h3 {
+.MedicationsList_timeSelection__yPqqe h3 {
 	color: black;
 	margin-bottom: 1rem;
 	font-size: 1.2rem;
 }
 
-.MedicationsList_selectedDrug__9VJef {
+.MedicationsList_selectedDrug___DHHZ {
 	background-color: #f0f8ff;
 	padding: 0.75rem;
 	border-radius: 8px;
@@ -639,19 +683,19 @@
 	border-left: 4px solid var(--color-primary);
 }
 
-.MedicationsList_selectionGroup__oHUlc {
+.MedicationsList_selectionGroup__kWr2P {
 	margin-bottom: 1rem;
 }
 
-.MedicationsList_selectionGroup__oHUlc label {
+.MedicationsList_selectionGroup__kWr2P label {
 	display: block;
 	margin-bottom: 0.5rem;
 	font-weight: 500;
 	color: black;
 }
 
-.MedicationsList_selectInput___1my3,
-.MedicationsList_timeInput__1WrgK {
+.MedicationsList_selectInput__2LQWf,
+.MedicationsList_timeInput__3HCF8 {
 	width: 100%;
 	padding: 0.6rem 0.8rem;
 	border: 1px solid #ccc;
@@ -661,20 +705,20 @@
 	transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.MedicationsList_selectInput___1my3:focus,
-.MedicationsList_timeInput__1WrgK:focus {
+.MedicationsList_selectInput__2LQWf:focus,
+.MedicationsList_timeInput__3HCF8:focus {
 	border-color: var(--color-primary);
 	box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.2);
 }
 
-.MedicationsList_timeSelectionButtons__r0OTe {
+.MedicationsList_timeSelectionButtons__bgP1S {
 	display: flex;
 	gap: 0.75rem;
 	margin-top: 1.5rem;
 }
 
-.MedicationsList_cancelBtn__WhGI1,
-.MedicationsList_confirmBtn__7gs0_ {
+.MedicationsList_cancelBtn__pHfcf,
+.MedicationsList_confirmBtn__noN09 {
 	flex: 1;
 	padding: 0.75rem 1rem;
 	border: none;
@@ -684,32 +728,32 @@
 	transition: all 0.2s;
 }
 
-.MedicationsList_cancelBtn__WhGI1 {
+.MedicationsList_cancelBtn__pHfcf {
 	background-color: #f5f5f5;
 	color: #666;
 }
 
-.MedicationsList_cancelBtn__WhGI1:hover {
+.MedicationsList_cancelBtn__pHfcf:hover {
 	background-color: #e0e0e0;
 }
 
-.MedicationsList_confirmBtn__7gs0_ {
+.MedicationsList_confirmBtn__noN09 {
 	background-color: var(--color-primary);
 	color: white;
 }
 
-.MedicationsList_confirmBtn__7gs0_:hover {
+.MedicationsList_confirmBtn__noN09:hover {
 	background-color: var(--color-primary-hover);
 }
 
-/*!**************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[3]!./app/components/SelectedDrugInfo.module.css ***!
-  \**************************************************************************************************************************************************************************************************************************************************************************************/
-.SelectedDrugInfo_mobileOverlay__cQfFv {
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[3]!./app/components/MedicationsSection/SelectedDrugInfo.module.css ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************/
+.SelectedDrugInfo_mobileOverlay__9tcr_ {
 	display: none;
 }
 
-.SelectedDrugInfo_detailsPanel__YcznH {
+.SelectedDrugInfo_detailsPanel___vFjb {
 	position: absolute;
 	top: 0px;
 	left: 100%;
@@ -719,25 +763,25 @@
 	padding: 1rem;
 	border-top-right-radius: 12px;
 	border-bottom-right-radius: 12px;
-	animation: SelectedDrugInfo_slideIn__QpFzt 0.3s ease forwards;
+	animation: SelectedDrugInfo_slideIn__TOHjV 0.3s ease forwards;
 	z-index: 40;
 }
 
-.SelectedDrugInfo_detailsHeader__B9ZXH {
+.SelectedDrugInfo_detailsHeader__CVoON {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 }
 
-.SelectedDrugInfo_detailsHeader__B9ZXH h3 {
+.SelectedDrugInfo_detailsHeader__CVoON h3 {
 	color: black;
 }
 
-.SelectedDrugInfo_detailsContent__TZ4BU {
+.SelectedDrugInfo_detailsContent__sHvqT {
 	overflow-y: auto;
 }
 
-.SelectedDrugInfo_closeBtn__ppfYw {
+.SelectedDrugInfo_closeBtn__IePEe {
 	color: black;
 	background-color: #f5f5f5;
 	border: none;
@@ -749,13 +793,13 @@
 	transition: all 0.2s ease-in-out;
 }
 
-.SelectedDrugInfo_closeBtn__ppfYw:hover {
+.SelectedDrugInfo_closeBtn__IePEe:hover {
 	background-color: var(--color-primary-hover);
 	color: var(--color-light);
 	transform: scale(1.1);
 }
 
-@keyframes SelectedDrugInfo_slideIn__QpFzt {
+@keyframes SelectedDrugInfo_slideIn__TOHjV {
 	from {
 		transform: translateX(-100px);
 		opacity: 0;
@@ -766,7 +810,7 @@
 	}
 }
 
-@keyframes SelectedDrugInfo_slideInPhone__9Gx0x {
+@keyframes SelectedDrugInfo_slideInPhone__CB10B {
 	from {
 		transform: translateY(100%);
 		opacity: 0;
@@ -778,7 +822,7 @@
 }
 
 @media (max-width: 992px) {
-	.SelectedDrugInfo_mobileOverlay__cQfFv {
+	.SelectedDrugInfo_mobileOverlay__9tcr_ {
 		display: block;
 		position: fixed;
 		top: 0;
@@ -789,7 +833,7 @@
 		z-index: 35;
 	}
 
-	.SelectedDrugInfo_detailsPanel__YcznH {
+	.SelectedDrugInfo_detailsPanel___vFjb {
 		position: fixed;
 		top: auto;
 		bottom: 0;
@@ -799,20 +843,20 @@
 		height: 40%;
 		max-height: 80%;
 		border-radius: 16px 16px 0 0;
-		animation: SelectedDrugInfo_slideInPhone__9Gx0x 0.3s ease forwards;
+		animation: SelectedDrugInfo_slideInPhone__CB10B 0.3s ease forwards;
 		z-index: 45;
 		overflow-y: auto;
 	}
 
-	.SelectedDrugInfo_detailsContent__TZ4BU {
+	.SelectedDrugInfo_detailsContent__sHvqT {
 		padding-bottom: 2rem;
 	}
 }
 
-/*!*****************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[3]!./app/components/SideBar.module.css ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************/
-.SideBar_sidebar__XeGCt {
+/*!*************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[3]!./app/components/SideBar/SideBar.module.css ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************/
+.SideBar_sidebar__IFu1a {
 	width: 220px;
 	background-color: var(--color-primary);
 	border-radius: 16px;
@@ -825,14 +869,14 @@
 	position: relative;
 }
 
-.SideBar_sidebarHeader__kxk9B {
+.SideBar_sidebarHeader__tR5xw {
 	width: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 }
 
-.SideBar_burger__hRzEB {
+.SideBar_burger__CdP2E {
 	display: none;
 	position: relative;
 	background: none;
@@ -843,20 +887,20 @@
 	z-index: 20;
 }
 
-.SideBar_logo__70k47 {
+.SideBar_logo__Qjnoq {
 	font-size: 24px;
 	font-weight: bold;
 	margin: 2px auto 10px;
 }
 
-.SideBar_menu__BeEuB {
+.SideBar_menu__OYKK7 {
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
 	width: 100%;
 }
 
-.SideBar_menu__BeEuB a {
+.SideBar_menu__OYKK7 a {
 	text-decoration: none;
 	color: white;
 	display: flex;
@@ -868,28 +912,28 @@
 	transition: 0.3s;
 }
 
-.SideBar_menu__BeEuB a:hover {
+.SideBar_menu__OYKK7 a:hover {
 	background-color: var(--color-primary-hover);
 	color: #fff;
 }
 
 @media (max-width: 768px) {
-	.SideBar_sidebar__XeGCt {
+	.SideBar_sidebar__IFu1a {
 		width: 100%;
 		margin: 0;
 		border-radius: 0;
 		padding: 15px;
 	}
 
-	.SideBar_sidebar-header___0T_8 {
+	.SideBar_sidebar-header__ZGwXq {
 		justify-content: space-between;
 	}
 
-	.SideBar_burger__hRzEB {
+	.SideBar_burger__CdP2E {
 		display: block;
 	}
 
-	.SideBar_menu__BeEuB {
+	.SideBar_menu__OYKK7 {
 		display: none;
 		flex-direction: column;
 		background-color: var(--color-primary);
@@ -902,31 +946,63 @@
 		border-radius: 0 0 10px 10px;
 	}
 
-	.SideBar_menu__BeEuB.SideBar_active__FOxtk {
+	.SideBar_menu__OYKK7.SideBar_active__TKMXg {
 		display: flex;
 	}
 }
 
-/*!*********************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[3]!./app/components/WelcomeCard.module.css ***!
-  \*********************************************************************************************************************************************************************************************************************************************************************************/
-.WelcomeCard_welcome__T_egw {
-	position: relative;
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[3]!./app/components/WelcomeCard/WelcomeCard.module.css ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************/
+.WelcomeCard_welcome__fKENQ {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	padding: 20px;
 	background-color: var(--color-primary);
 	border-radius: 16px;
-	min-height: 200px;
 	overflow: hidden;
 }
 
-.WelcomeCard_welcomeBtns__zGySx {
+.WelcomeCard_welcomeText__ZaySq {
 	display: flex;
-	position: absolute;
-	top: 20px;
-	left: 20px;
+	flex-direction: column;
+}
+
+.WelcomeCard_currentDate__q9_ID {
+	display: flex;
+	width: -moz-fit-content;
+	width: fit-content;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba(171, 174, 255, 0.96);
+	color: black;
+	gap: 10px;
+	border-radius: 10px;
+	padding: 10px 15px;
+}
+
+.WelcomeCard_currentDate__q9_ID .WelcomeCard_date__z5MMZ {
+	font-size: 16px;
+}
+
+.WelcomeCard_welcomeText__ZaySq h2 {
+	font-size: 38px;
+	font-weight: bold;
+	margin: 5px 0;
+}
+
+.WelcomeCard_welcomeText__ZaySq p {
+	font-size: 20px;
+	margin: 5px 0;
+}
+
+.WelcomeCard_welcomeBtns__iTwss {
+	display: flex;
 	gap: 10px;
 }
 
-.WelcomeCard_welcomeBtns__zGySx button {
+.WelcomeCard_welcomeBtns__iTwss button {
 	background-color: var(--color-light);
 	border: none;
 	border-radius: 50%;
@@ -940,103 +1016,36 @@
 	transition: all 0.2s ease-in-out;
 }
 
-.WelcomeCard_welcomeBtns__zGySx button:hover {
+.WelcomeCard_welcomeBtns__iTwss button:hover {
 	background-color: var(--color-primary-hover);
 	color: white;
 	transform: scale(1.1);
 }
 
-.WelcomeCard_welcomeText__9YfWJ {
-	position: absolute;
-	bottom: 30px;
-	left: 20px;
-}
-
-.WelcomeCard_currentDate__Gz8L9 {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	background-color: rgba(171, 174, 255, 0.96);
-	color: black;
-	gap: 10px;
-	border-radius: 10px;
-	padding: 10px;
-}
-
-.WelcomeCard_currentDate__Gz8L9 .WelcomeCard_date__jDm25 {
-	font-size: 16px;
-}
-
-.WelcomeCard_welcomeText__9YfWJ h2 {
-	font-size: 38px;
-	font-weight: bold;
-	margin: 5px 0;
-}
-
-.WelcomeCard_welcomeText__9YfWJ p {
-	font-size: 20px;
-	margin: 5px 0;
-}
-
-.WelcomeCard_welcomeImg__j76x8 {
-	position: absolute;
-	bottom: 0;
-	right: 0;
-	width: 60%;
-	max-width: 600px;
-	height: auto;
-}
-
-.WelcomeCard_welcomeImg__j76x8 img {
-	width: 100%;
-	border-radius: 12px;
-	display: block;
-}
-
-@media (min-width: 1024px) and (max-width: 1400px) {
-	.WelcomeCard_welcomeImg__j76x8 {
-		display: none;
-	}
-}
-
 @media (max-width: 1024px) {
-	.WelcomeCard_welcomeImg__j76x8 {
-		width: 55%;
-		max-width: 500px;
-	}
-	.WelcomeCard_welcomeText__9YfWJ {
-		bottom: 10px;
-	}
-	.WelcomeCard_welcomeText__9YfWJ h2 {
+	.WelcomeCard_welcomeText__ZaySq h2 {
 		font-size: 28px;
 	}
-	.WelcomeCard_welcomeText__9YfWJ p {
+	.WelcomeCard_welcomeText__ZaySq p {
 		font-size: 18px;
 	}
-	.WelcomeCard_currentDate__Gz8L9 .WelcomeCard_date__jDm25 {
+	.WelcomeCard_currentDate__q9_ID .WelcomeCard_date__z5MMZ {
 		font-size: 14px;
 	}
 }
 
 @media (max-width: 768px) {
-	.WelcomeCard_welcomeText__9YfWJ {
-		left: 15px;
-		bottom: 20px;
-	}
-
-	.WelcomeCard_currentDate__Gz8L9 {
+	.WelcomeCard_currentDate__q9_ID {
 		font-size: 12px;
 		padding: 8px;
 	}
-
-	.WelcomeCard_welcomeText__9YfWJ h2 {
+	.WelcomeCard_welcomeText__ZaySq h2 {
 		font-size: 22px;
 	}
-	.WelcomeCard_welcomeText__9YfWJ p {
+	.WelcomeCard_welcomeText__ZaySq p {
 		font-size: 16px;
 	}
-
-	.WelcomeCard_welcomeBtns__zGySx button {
+	.WelcomeCard_welcomeBtns__iTwss button {
 		width: 36px;
 		height: 36px;
 		font-size: 16px;
@@ -1044,23 +1053,18 @@
 }
 
 @media (max-width: 480px) {
-	.WelcomeCard_welcomeImg__j76x8 {
-		display: none;
-	}
-	.WelcomeCard_currentDate__Gz8L9 {
+	.WelcomeCard_currentDate__q9_ID {
 		padding: 7px;
 		font-size: 10px;
 	}
-
-	.WelcomeCard_welcomeText__9YfWJ h2 {
+	.WelcomeCard_welcomeText__ZaySq h2 {
 		font-size: 22px;
 	}
-	.WelcomeCard_welcomeText__9YfWJ p,
-	.WelcomeCard_date__jDm25 {
+	.WelcomeCard_welcomeText__ZaySq p,
+	.WelcomeCard_date__z5MMZ {
 		font-size: 16px;
 	}
-
-	.WelcomeCard_welcomeBtns__zGySx button {
+	.WelcomeCard_welcomeBtns__iTwss button {
 		width: 32px;
 		height: 32px;
 		font-size: 14px;

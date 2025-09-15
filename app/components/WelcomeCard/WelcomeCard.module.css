@@ -1,0 +1,115 @@
+.welcome {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	padding: 20px;
+	background-color: var(--color-primary);
+	border-radius: 16px;
+	overflow: hidden;
+}
+
+.welcomeText {
+	display: flex;
+	flex-direction: column;
+}
+
+.currentDate {
+	display: flex;
+	width: fit-content;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba(171, 174, 255, 0.96);
+	color: black;
+	gap: 10px;
+	border-radius: 10px;
+	padding: 10px 15px;
+}
+
+.currentDate .date {
+	font-size: 16px;
+}
+
+.welcomeText h2 {
+	font-size: 38px;
+	font-weight: bold;
+	margin: 5px 0;
+}
+
+.welcomeText p {
+	font-size: 20px;
+	margin: 5px 0;
+}
+
+.welcomeBtns {
+	display: flex;
+	gap: 10px;
+}
+
+.welcomeBtns button {
+	background-color: var(--color-light);
+	border: none;
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 18px;
+	cursor: pointer;
+	transition: all 0.2s ease-in-out;
+}
+
+.welcomeBtns button:hover {
+	background-color: var(--color-primary-hover);
+	color: white;
+	transform: scale(1.1);
+}
+
+@media (max-width: 1024px) {
+	.welcomeText h2 {
+		font-size: 28px;
+	}
+	.welcomeText p {
+		font-size: 18px;
+	}
+	.currentDate .date {
+		font-size: 14px;
+	}
+}
+
+@media (max-width: 768px) {
+	.currentDate {
+		font-size: 12px;
+		padding: 8px;
+	}
+	.welcomeText h2 {
+		font-size: 22px;
+	}
+	.welcomeText p {
+		font-size: 16px;
+	}
+	.welcomeBtns button {
+		width: 36px;
+		height: 36px;
+		font-size: 16px;
+	}
+}
+
+@media (max-width: 480px) {
+	.currentDate {
+		padding: 7px;
+		font-size: 10px;
+	}
+	.welcomeText h2 {
+		font-size: 22px;
+	}
+	.welcomeText p,
+	.date {
+		font-size: 16px;
+	}
+	.welcomeBtns button {
+		width: 32px;
+		height: 32px;
+		font-size: 14px;
+	}
+}
