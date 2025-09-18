@@ -1,6 +1,7 @@
 "use client";
 
 import styles from "./MedicationsList.module.css";
+import { v4 as uuidv4 } from "uuid";
 import { Info } from "lucide-react";
 import {
 	forwardRef,
@@ -106,6 +107,7 @@ const Modal = forwardRef(function MedicationsModal({ onAddMedication }, ref) {
 	function handleConfirmMedication() {
 		if (!selectedDrug) return;
 		const medication = {
+			instanceId: uuidv4(),
 			drugId: selectedDrug._id,
 			productName: selectedDrug.productName,
 			day: selectedDay,

@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import styles from "./ContactCard.module.css";
+import { ArrowLeft, ArrowRight, MessageCircle } from "lucide-react";
 
 export default function ContactCard() {
 	const [doctors, setDoctors] = useState([]);
@@ -75,14 +76,14 @@ export default function ContactCard() {
 					<button
 						onClick={() => currentPage > 1 && setCurrentPage(currentPage - 1)}
 					>
-						<i className="fas fa-arrow-left"></i>
+						<ArrowLeft />
 					</button>
 					<button
 						onClick={() =>
 							currentPage < totalPages && setCurrentPage(currentPage + 1)
 						}
 					>
-						<i className="fas fa-arrow-right"></i>
+						<ArrowRight />
 					</button>
 				</div>
 			</div>
@@ -132,7 +133,7 @@ export default function ContactCard() {
 								<p className={styles.doctorName}>{doctor.name}</p>
 								<p className={styles.doctorSpeciality}>{doctor.speciality}</p>
 								<button className={styles.messageBtn}>
-									<i className="fas fa-comment-dots"></i> Wiadomość
+									<MessageCircle /> Wiadomość
 								</button>
 							</div>
 						</div>

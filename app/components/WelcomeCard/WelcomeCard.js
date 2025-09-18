@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import styles from "./WelcomeCard.module.css";
+import { Calendar, Settings, Bell } from "lucide-react";
 
 export default function WelcomeCard() {
 	const [formattedDate, setFormattedDate] = useState("");
@@ -40,7 +41,7 @@ export default function WelcomeCard() {
 		<section className={`${styles.welcome} ${styles.card}`}>
 			<div className={styles.welcomeText}>
 				<div className={styles.currentDate}>
-					<i className="fa-solid fa-calendar"></i>
+					<Calendar />
 					<p className={styles.date}>{formattedDate}</p>
 				</div>
 				<h2>Witaj w MedCare!</h2>
@@ -48,10 +49,10 @@ export default function WelcomeCard() {
 			</div>
 			<div className={styles.welcomeBtns}>
 				<button>
-					<i className="fa-solid fa-gear"></i>
+					<Settings />
 				</button>
 				<button>
-					<i className="fa-solid fa-bell"></i>
+					<Bell />
 				</button>
 			</div>
 		</section>

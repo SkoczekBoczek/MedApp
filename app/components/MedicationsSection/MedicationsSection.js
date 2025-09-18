@@ -1,40 +1,40 @@
 "use client";
 import styles from "./MedicationsSection.module.css";
 import MedicationsModal from "./MedicationsList";
-import { useRef, useState } from "react";
-import { Plus, Pill, Clock } from "lucide-react";
+import userToken from "@/utils/userToken";
+import { useEffect, useRef, useState } from "react";
+import { Plus, Pill, Clock, PlusCircle } from "lucide-react";
 
 export default function MedicationsSection() {
 	const [weeklyPlan, setWeeklyPlan] = useState([
-		{
-			day: "Poniedziałek",
-			medications: [],
-		},
-		{
-			day: "Wtorek",
-			medications: [],
-		},
-		{
-			day: "Środa",
-			medications: [],
-		},
-		{
-			day: "Czwartek",
-			medications: [],
-		},
-		{
-			day: "Piątek",
-			medications: [],
-		},
-		{
-			day: "Sobota",
-			medications: [],
-		},
-		{
-			day: "Niedziela",
-			medications: [],
-		},
+		{ day: "Poniedziałek", medications: [] },
+		{ day: "Wtorek", medications: [] },
+		{ day: "Środa", medications: [] },
+		{ day: "Czwartek", medications: [] },
+		{ day: "Piątek", medications: [] },
+		{ day: "Sobota", medications: [] },
+		{ day: "Niedziela", medications: [] },
 	]);
+
+	useEffect(() => {
+		const token = userToken();
+		fetch(`/api/plan?token=${token}`)
+			.then((res) => res.json())
+			.then((data) => {
+				if (data?.weeklyPlan?.length) {
+					setWeeklyPlan(data.weeklyPlan);
+				}
+			});
+	}, []);
+
+	const savePlanToBackend = (plan) => {
+		const token = userToken();
+		fetch("/api/plan", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ userToken: token, plan }),
+		});
+	};
 
 	const modal = useRef();
 
@@ -44,12 +44,13 @@ export default function MedicationsSection() {
 
 	function handleAddMedication(medication) {
 		setWeeklyPlan((prevPlan) => {
-			return prevPlan.map((dayPlan) => {
+			const newPlan = prevPlan.map((dayPlan) => {
 				if (dayPlan.day === medication.day) {
 					return {
 						...dayPlan,
 						medications: [
 							{
+								instanceId: medication.instanceId,
 								drugId: medication.drugId,
 								productName: medication.productName,
 								time: medication.time,
@@ -61,17 +62,19 @@ export default function MedicationsSection() {
 				}
 				return dayPlan;
 			});
+			savePlanToBackend(newPlan);
+			return newPlan;
 		});
 	}
 
 	const toggleMedicationTaken = (day, id) => {
 		setWeeklyPlan((prevPlan) => {
-			return prevPlan.map((dayPlan) => {
+			const newPlan = prevPlan.map((dayPlan) => {
 				if (dayPlan.day === day) {
 					return {
 						...dayPlan,
 						medications: dayPlan.medications.map((med) => {
-							if (med.drugId === id) {
+							if (med.instanceId === id) {
 								return { ...med, taken: !med.taken };
 							}
 							return med;
@@ -80,6 +83,8 @@ export default function MedicationsSection() {
 				}
 				return dayPlan;
 			});
+			savePlanToBackend(newPlan);
+			return newPlan;
 		});
 	};
 
@@ -91,7 +96,7 @@ export default function MedicationsSection() {
 					className={styles.showModalBtn}
 					onClick={() => showModal("Poniedziałek")}
 				>
-					<i className="fa-solid fa-circle-plus"></i>
+					<PlusCircle size={24} />
 				</button>
 			</div>
 
@@ -119,12 +124,12 @@ export default function MedicationsSection() {
 									) : (
 										dayPlan.medications.map((med) => (
 											<div
-												key={med.drugId}
+												key={med.instanceId}
 												className={`${styles.medicationItem} ${
 													med.taken ? styles.medicationTaken : ""
 												}`}
 												onClick={() => {
-													toggleMedicationTaken(dayPlan.day, med.drugId);
+													toggleMedicationTaken(dayPlan.day, med.instanceId);
 												}}
 											>
 												<div className={styles.medicationContent}>
