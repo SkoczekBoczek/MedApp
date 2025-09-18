@@ -3,7 +3,7 @@ import styles from "./MedicationsSection.module.css";
 import MedicationsModal from "./MedicationsList";
 import userToken from "@/utils/userToken";
 import { useEffect, useRef, useState } from "react";
-import { Plus, Pill, Clock, PlusCircle } from "lucide-react";
+import { Plus, Pill, Clock, PlusCircle, Trash } from "lucide-react";
 
 export default function MedicationsSection() {
 	const [weeklyPlan, setWeeklyPlan] = useState([
@@ -88,6 +88,32 @@ export default function MedicationsSection() {
 		});
 	};
 
+	const handleDeleteMedication = (id, day) => {
+		setWeeklyPlan((prevPlan) => {
+			const newPlan = prevPlan.map((dayPlan) => {
+				if (dayPlan.day === day) {
+					return {
+						...dayPlan,
+						medications: dayPlan.medications.filter(
+							(med) => med.instanceId !== id
+						),
+					};
+				}
+				return dayPlan;
+			});
+			savePlanToBackend(newPlan);
+			return newPlan;
+		});
+	};
+
+	function isDuplicateMedication(med) {
+		const findCorrectDay = weeklyPlan.find((d) => d.day === med.day);
+
+		return findCorrectDay.medications.some(
+			(m) => m.productName === med.productName && m.time === med.time
+		);
+	}
+
 	return (
 		<section className={`${styles.bigBox} card`}>
 			<div className={styles.sectionHeader}>
@@ -146,16 +172,30 @@ export default function MedicationsSection() {
 														</div>
 													</div>
 
-													<div
-														className={`${styles.checkbox} ${
-															med.taken ? styles.checkboxChecked : ""
-														}`}
-													>
-														{med.taken && (
-															<div className={styles.checkboxInner}>
-																<div className={styles.checkboxDot}></div>
-															</div>
-														)}
+													<div className={styles.btnss}>
+														<div
+															className={`${styles.checkbox} ${
+																med.taken ? styles.checkboxChecked : ""
+															}`}
+														>
+															{med.taken && (
+																<div className={styles.checkboxInner}>
+																	<div className={styles.checkboxDot}></div>
+																</div>
+															)}
+														</div>
+														<button
+															className={styles.deleteBtn}
+															onClick={(e) => {
+																e.stopPropagation();
+																handleDeleteMedication(
+																	med.instanceId,
+																	dayPlan.day
+																);
+															}}
+														>
+															<Trash size={18} />
+														</button>
 													</div>
 												</div>
 											</div>
@@ -170,6 +210,7 @@ export default function MedicationsSection() {
 			<MedicationsModal
 				ref={modal}
 				onAddMedication={handleAddMedication}
+				isDuplicated={isDuplicateMedication}
 			></MedicationsModal>
 		</section>
 	);

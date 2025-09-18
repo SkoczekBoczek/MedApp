@@ -172,6 +172,30 @@
 	color: #1f2937;
 }
 
+.btnss {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.deleteBtn {
+	background: none;
+	border: none;
+	color: #d9534f;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 2px;
+	border-radius: 6px;
+	transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.deleteBtn:hover {
+	background-color: rgba(217, 83, 79, 0.1);
+	color: #b52b27;
+}
+
 .checkbox {
 	width: 1rem;
 	height: 1rem;

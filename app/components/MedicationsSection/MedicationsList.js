@@ -12,8 +12,12 @@ import {
 } from "react";
 import { createPortal } from "react-dom";
 import SelectedDrugInfo from "./SelectedDrugInfo";
+import AddMedicationSchedule from "./AddMedicationSchedule";
 
-const Modal = forwardRef(function MedicationsModal({ onAddMedication }, ref) {
+const Modal = forwardRef(function MedicationsModal(
+	{ onAddMedication, isDuplicated },
+	ref
+) {
 	const [selectedDrug, setSelectedDrug] = useState(null);
 	const [selectedInfoDrug, setSelectedInfoDrug] = useState(null);
 	const [drugs, setDrugs] = useState([]);
@@ -89,16 +93,6 @@ const Modal = forwardRef(function MedicationsModal({ onAddMedication }, ref) {
 		};
 	}, [selectedInfoDrug]);
 
-	const days = [
-		"Poniedziałek",
-		"Wtorek",
-		"Środa",
-		"Czwartek",
-		"Piątek",
-		"Sobota",
-		"Niedziela",
-	];
-
 	function handleAddMedication(drug) {
 		setSelectedDrug(drug);
 		setShowTimeSelection(true);
@@ -113,6 +107,11 @@ const Modal = forwardRef(function MedicationsModal({ onAddMedication }, ref) {
 			day: selectedDay,
 			time: selectedTime,
 		};
+
+		if (isDuplicated && isDuplicated(medication)) {
+			alert("Ten lek już jest zaplanowany na ten dzień i godzinę!");
+			return;
+		}
 
 		onAddMedication(medication);
 		handleClose();
@@ -139,7 +138,6 @@ const Modal = forwardRef(function MedicationsModal({ onAddMedication }, ref) {
 							&times;
 						</button>
 					</div>
-
 					{!showTimeSelection ? (
 						<>
 							<input
@@ -176,57 +174,19 @@ const Modal = forwardRef(function MedicationsModal({ onAddMedication }, ref) {
 							)}
 						</>
 					) : (
-						<div className={styles.timeSelection}>
-							<h3>Wybierz dzień i godzinę</h3>
-							<p className={styles.selectedDrug}>
-								<strong>Lek:</strong> {selectedDrug.productName}
-							</p>
-
-							<div className={styles.selectionGroup}>
-								<label>Dzień tygodnia:</label>
-								<select
-									value={selectedDay}
-									onChange={(e) => setSelectedDay(e.target.value)}
-									className={styles.selectInput}
-								>
-									{days.map((day) => (
-										<option key={day} value={day}>
-											{day}
-										</option>
-									))}
-								</select>
-							</div>
-
-							<div className={styles.selectionGroup}>
-								<label>Godzina:</label>
-								<input
-									type="time"
-									value={selectedTime}
-									onChange={(e) => setSelectedTime(e.target.value)}
-									className={styles.timeInput}
-								/>
-							</div>
-
-							<div className={styles.timeSelectionButtons}>
-								<button
-									className={styles.cancelBtn}
-									onClick={() => {
-										setShowTimeSelection(false);
-										setSelectedDrug(null);
-									}}
-								>
-									Anuluj
-								</button>
-								<button
-									className={styles.confirmBtn}
-									onClick={handleConfirmMedication}
-								>
-									Potwierdź
-								</button>
-							</div>
-						</div>
+						<AddMedicationSchedule
+							onConfirm={handleConfirmMedication}
+							onCanel={() => {
+								setShowTimeSelection(false);
+								setSelectedDrug(null);
+							}}
+							selectedDrug={selectedDrug}
+							selectedTime={selectedTime}
+							setSelectedTime={setSelectedTime}
+							selectedDay={selectedDay}
+							setSelectedDay={setSelectedDay}
+						/>
 					)}
-
 					{selectedInfoDrug && !showTimeSelection && (
 						<SelectedDrugInfo
 							selectedDrug={selectedInfoDrug}
