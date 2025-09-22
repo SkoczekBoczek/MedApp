@@ -24,18 +24,18 @@ export async function GET(req) {
 		if (!plan) {
 			return new Response(JSON.stringify({ error: "Plan not found" }), {
 				status: 404,
-				headers: { "Content-Type": "aplication/json" },
+				headers: { "Content-Type": "application/json" },
 			});
 		}
 
 		return new Response(JSON.stringify(plan), {
 			status: 200,
-			headers: { "Content-Type": "aplication/json" },
+			headers: { "Content-Type": "application/json" },
 		});
 	} catch (error) {
 		return new Response(JSON.stringify({ error: "Internal Server Error" }), {
 			status: 500,
-			headers: { "Content-Type": "aplication/json" },
+			headers: { "Content-Type": "application/json" },
 		});
 	}
 }
@@ -65,7 +65,10 @@ export async function POST(req) {
 				}
 			);
 		} else {
-			await db.collection("plans").insertOne(plan);
+			await db.collection("plans").insertOne({
+				userToken: plan.userToken,
+				weeklyPlan: plan.weeklyPlan,
+			});
 			return new Response(
 				JSON.stringify({ message: "Plan created successfully" }),
 				{

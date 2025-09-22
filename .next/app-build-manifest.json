@@ -17,15 +17,20 @@
       "static/chunks/main-app.js",
       "static/chunks/app/api/doctors/route.js"
     ],
+    "/api/plan/route": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/api/plan/route.js"
+    ],
     "/api/drugs/route": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/api/drugs/route.js"
     ],
-    "/api/plan/route": [
+    "/api/conversations/route": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/api/plan/route.js"
+      "static/chunks/app/api/conversations/route.js"
     ]
   }
 }

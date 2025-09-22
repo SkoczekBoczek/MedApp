@@ -3,7 +3,13 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import styles from "./ContactCard.module.css";
-import { ArrowLeft, ArrowRight, MessageCircle } from "lucide-react";
+import MessagesMenu from "./MessagesMenu";
+import {
+	ArrowLeft,
+	ArrowRight,
+	MessageCircle,
+	MessageSquareHeart,
+} from "lucide-react";
 
 export default function ContactCard() {
 	const [doctors, setDoctors] = useState([]);
@@ -67,6 +73,16 @@ export default function ContactCard() {
 
 	const totalPages = Math.ceil(filteredDoctors.length / doctorsPerPage);
 
+	const [isChatOpen, setIsChatOpen] = useState(false);
+	const [selectedDoctor, setSelectedDoctor] = useState(null);
+
+	function openChat() {
+		setIsChatOpen(true);
+	}
+	function closeChat() {
+		setIsChatOpen(false);
+	}
+
 	return (
 		<section className={`${styles.contact} ${styles.card}`}>
 			<div className={styles.contactHeader}>
@@ -110,7 +126,6 @@ export default function ContactCard() {
 					))}
 				</select>
 			</div>
-
 			<div
 				className={styles.contactInfo}
 				onTouchStart={handleTouchStart}
@@ -132,7 +147,13 @@ export default function ContactCard() {
 							<div className={styles.doctorInfo}>
 								<p className={styles.doctorName}>{doctor.name}</p>
 								<p className={styles.doctorSpeciality}>{doctor.speciality}</p>
-								<button className={styles.messageBtn}>
+								<button
+									className={styles.messageBtn}
+									onClick={() => {
+										openChat();
+										setSelectedDoctor(doctor);
+									}}
+								>
 									<MessageCircle /> Wiadomość
 								</button>
 							</div>
@@ -140,6 +161,21 @@ export default function ContactCard() {
 					))
 				)}
 			</div>
+			{isChatOpen && (
+				<MessagesMenu
+					doctors={doctors}
+					onCloseChat={closeChat}
+					selectedDoctor={selectedDoctor}
+				/>
+			)}
+			{!isChatOpen && (
+				<button
+					className={styles.floatingClose}
+					onClick={() => setIsChatOpen(true)}
+				>
+					<MessageSquareHeart className={styles.chatIcon} size={20} />
+				</button>
+			)}
 		</section>
 	);
 }
