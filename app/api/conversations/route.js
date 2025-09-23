@@ -1,4 +1,4 @@
-import { MongoClient } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 
 let cachedClient = null;
 let cachedDb = null;
@@ -48,6 +48,46 @@ export async function GET(req) {
 		);
 	} catch (error) {
 		console.error("Database error:", error);
+		return new Response(JSON.stringify({ error: "Internal Server Error" }), {
+			status: 500,
+			headers: { "Content-Type": "application/json" },
+		});
+	}
+}
+
+export async function POST(req) {
+	try {
+		const { db } = await connectToDatabase();
+		const { token, doctorId, message } = await req.json();
+
+		if (!token || !doctorId || !message) {
+			return new Response(JSON.stringify({ error: "Missing data" }), {
+				status: 400,
+				headers: { "Content-Type": "application/json" },
+			});
+		}
+
+		const newMessage = {
+			id: new ObjectId().toString(),
+			sender: "patient",
+			text: message,
+			timestamp: new Date(),
+		};
+
+		await db
+			.collection("conversations")
+			.updateOne(
+				{ doctorId: doctorId, userToken: token },
+				{ $push: { messages: newMessage } }
+			);
+		return new Response(
+			JSON.stringify({ message: "Message added successfully" }),
+			{
+				status: 200,
+				headers: { "Content-Type": "application/json" },
+			}
+		);
+	} catch (error) {
 		return new Response(JSON.stringify({ error: "Internal Server Error" }), {
 			status: 500,
 			headers: { "Content-Type": "application/json" },

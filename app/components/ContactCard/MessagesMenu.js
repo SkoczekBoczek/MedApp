@@ -7,6 +7,7 @@ import styles from "./MessagesMenu.module.css";
 export default function MessagesMenu({ doctors, onCloseChat, selectedDoctor }) {
 	const [messages, setMessages] = useState([]);
 	const [activeDoctor, setActiveDoctor] = useState(selectedDoctor);
+	const [messageInput, setMessageInput] = useState("");
 
 	useEffect(() => {
 		if (!activeDoctor) return;
@@ -30,6 +31,31 @@ export default function MessagesMenu({ doctors, onCloseChat, selectedDoctor }) {
 	const handleOpen = (doc) => {
 		setActiveDoctor(doc);
 	};
+
+	async function handleSend() {
+		if (!messageInput.trim()) return;
+
+		const token = userToken();
+		const doctorId = activeDoctor._id;
+
+		await fetch("/api/conversations", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ token, doctorId, message: messageInput }),
+		});
+
+		setMessages((prev) => [
+			...prev,
+			{
+				id: Date.now().toString(),
+				sender: "patient",
+				text: messageInput,
+				timestamp: new Date(),
+			},
+		]);
+
+		setMessageInput("");
+	}
 
 	const renderChat = () => (
 		<>
@@ -55,17 +81,36 @@ export default function MessagesMenu({ doctors, onCloseChat, selectedDoctor }) {
 				{messages.length === 0 ? (
 					<div className={styles.emptyChat}>Brak wiadomości</div>
 				) : (
-					messages.map((msg) => (
-						<div
-							key={msg.id}
-							className={
-								msg.sender === "patient" ? styles.patientMsg : styles.doctorMsg
-							}
-						>
-							<div className={styles.text}>{msg.text}</div>
-							<div className={styles.time}>23:66</div>
-						</div>
-					))
+					messages.map((msg) => {
+						const today = new Date();
+						const msgDate = new Date(msg.timestamp);
+
+						const isToday =
+							msgDate.getDate() === today.getDate() &&
+							msgDate.getMonth() === today.getMonth() &&
+							msgDate.getFullYear() === today.getFullYear();
+
+						return (
+							<div
+								key={msg.id}
+								className={
+									msg.sender === "patient"
+										? styles.patientMsg
+										: styles.doctorMsg
+								}
+							>
+								<div className={styles.text}>{msg.text}</div>
+								<div className={styles.time}>
+									{isToday
+										? msgDate.toLocaleTimeString([], {
+												hour: "2-digit",
+												minute: "2-digit",
+										  })
+										: msgDate.toLocaleDateString()}
+								</div>
+							</div>
+						);
+					})
 				)}
 			</main>
 
@@ -74,8 +119,12 @@ export default function MessagesMenu({ doctors, onCloseChat, selectedDoctor }) {
 					type="text"
 					placeholder="Napisz wiadomość..."
 					className={styles.input}
+					value={messageInput}
+					onChange={(e) => setMessageInput(e.target.value)}
 				/>
-				<button className={styles.sendBtn}>Wyślij</button>
+				<button className={styles.sendBtn} onClick={handleSend}>
+					Wyślij
+				</button>
 			</footer>
 		</>
 	);
