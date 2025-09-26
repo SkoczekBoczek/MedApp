@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import userToken from "@/utils/userToken";
 import styles from "./MessagesMenu.module.css";
+import Image from "next/image";
 
 export default function MessagesMenu({ doctors, onCloseChat, selectedDoctor }) {
 	const [messages, setMessages] = useState([]);
@@ -25,6 +26,8 @@ export default function MessagesMenu({ doctors, onCloseChat, selectedDoctor }) {
 	useEffect(() => {
 		if (selectedDoctor !== null) {
 			handleOpen(selectedDoctor);
+		} else {
+			setActiveDoctor(null);
 		}
 	}, [selectedDoctor]);
 
@@ -133,7 +136,13 @@ export default function MessagesMenu({ doctors, onCloseChat, selectedDoctor }) {
 		<>
 			<header className={styles.header}>
 				<h3 className={styles.title}>Wiadomości</h3>
-				<button className={styles.close} onClick={onCloseChat}>
+				<button
+					className={styles.close}
+					onClick={() => {
+						setActiveDoctor(null);
+						onCloseChat();
+					}}
+				>
 					<X size={20} />
 				</button>
 			</header>
@@ -145,7 +154,15 @@ export default function MessagesMenu({ doctors, onCloseChat, selectedDoctor }) {
 						className={styles.item}
 						onClick={() => handleOpen(doc)}
 					>
-						<div className={styles.avatar}></div>
+						<div className={styles.avatar}>
+							<Image
+								className={styles.doctorImg}
+								src={doc.image}
+								alt={doc.name}
+								width={80}
+								height={80}
+							/>
+						</div>
 						<div className={styles.content}>
 							<div className={styles.name}>dr {doc.name}</div>
 							<div className={styles.subtitle}>Kliknij, aby otworzyć</div>
@@ -160,10 +177,6 @@ export default function MessagesMenu({ doctors, onCloseChat, selectedDoctor }) {
 		<>
 			<div className={styles.shell}>
 				{activeDoctor ? renderChat() : renderList()}
-
-				<div className={styles.askBar}>
-					<button className={styles.ask}>Ask a question</button>
-				</div>
 
 				<div className={styles.tabs}>
 					<div className={styles.tab}>Start</div>

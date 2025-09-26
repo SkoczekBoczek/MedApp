@@ -43,14 +43,14 @@ export default function ContactCard() {
 	}, []);
 
 	const specialities = [
-		"All",
+		"Wszyscy",
 		"Kardiolog",
 		"Stomatolog",
 		"Pediatra",
 		"Ortopeda",
 	];
 
-	const [selectedSpeciality, setSelectedSpeciality] = useState("All");
+	const [selectedSpeciality, setSelectedSpeciality] = useState("Wszyscy");
 
 	function handleSpecialityChange(speciality) {
 		setSelectedSpeciality(speciality);
@@ -58,7 +58,7 @@ export default function ContactCard() {
 	}
 
 	const filteredDoctors =
-		selectedSpeciality === "All"
+		selectedSpeciality === "Wszyscy"
 			? doctors
 			: doctors.filter((doctor) => doctor.speciality === selectedSpeciality);
 
@@ -86,7 +86,7 @@ export default function ContactCard() {
 	return (
 		<section className={`${styles.contact} ${styles.card}`}>
 			<div className={styles.contactHeader}>
-				<h3>Skontaktuj się z lekarzem</h3>
+				<h2>Skontaktuj się z lekarzem</h2>
 
 				<div className={styles.arrows}>
 					<button
@@ -161,6 +161,20 @@ export default function ContactCard() {
 					))
 				)}
 			</div>
+
+			<div className={styles.paginationDots}>
+				{Array.from({ length: totalPages }).map((_, i) => {
+					return (
+						<span
+							key={i}
+							onClick={() => setCurrentPage(i + 1)}
+							className={`${styles.dot} ${
+								i + 1 === currentPage ? styles.activeDot : ""
+							}`}
+						/>
+					);
+				})}
+			</div>
 			{isChatOpen && (
 				<MessagesMenu
 					doctors={doctors}
@@ -171,7 +185,10 @@ export default function ContactCard() {
 			{!isChatOpen && (
 				<button
 					className={styles.floatingClose}
-					onClick={() => setIsChatOpen(true)}
+					onClick={() => {
+						setSelectedDoctor(null);
+						setIsChatOpen(true);
+					}}
 				>
 					<MessageSquareHeart className={styles.chatIcon} size={20} />
 				</button>

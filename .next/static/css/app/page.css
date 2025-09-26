@@ -1,7 +1,7 @@
-/*!**********************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[3]!./app/components/CalendarCard.module.css ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************************/
-.CalendarCard_calendar__JrpiW {
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[3]!./app/components/CalendarCard/CalendarCard.module.css ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************/
+.CalendarCard_calendar__OBa8J {
 	background-color: white;
 	color: black;
 	grid-column: 2 / 3;
@@ -10,17 +10,17 @@
 	padding: 20px;
 }
 
-.CalendarCard_calendar__JrpiW h3 {
+.CalendarCard_calendar__OBa8J h3 {
 	font-size: 18px;
 	margin-bottom: 10px;
 }
 
-.CalendarCard_month__XUMhg {
+.CalendarCard_month__F41Lr {
 	font-weight: bold;
 	margin-bottom: 15px;
 }
 
-.CalendarCard_appointment__K0s94 {
+.CalendarCard_appointment__OUkxC {
 	font-size: 14px;
 	color: #444;
 }
@@ -177,6 +177,28 @@
 
 .ContactCard_messageBtn__Q2tNx:hover {
 	background-color: var(--color-primary-hover);
+}
+
+.ContactCard_paginationDots__Y8dax {
+	display: flex;
+	gap: 8px;
+	justify-content: center;
+	align-items: center;
+	margin-top: 12px;
+}
+
+.ContactCard_dot__5NJIo {
+	width: 10px;
+	height: 10px;
+	background-color: #ccc;
+	border-radius: 50%;
+	display: inline-block;
+	transition: background-color 0.3s;
+	cursor: pointer;
+}
+
+.ContactCard_activeDot__Fte2r {
+	background-color: #333;
 }
 
 @media (min-width: 768px) and (max-width: 1550px),
@@ -349,11 +371,21 @@
 }
 
 .MessagesMenu_avatar__HmWx_ {
-	width: 40px;
-	height: 40px;
-	background-color: #ddd;
+	width: 45px;
+	height: 45px;
 	border-radius: 50%;
+	overflow: hidden;
 	margin-right: 12px;
+	flex-shrink: 0;
+	border: 2px solid var(--color-primary);
+}
+
+.MessagesMenu_avatar__HmWx_ img {
+	width: 100%;
+	height: 100%;
+	-o-object-fit: cover;
+	   object-fit: cover;
+	display: block;
 }
 
 .MessagesMenu_content__zNBPi {
@@ -444,26 +476,6 @@
 	cursor: pointer;
 }
 .MessagesMenu_sendBtn__aQiqr:hover {
-	background-color: var(--color-primary-hover);
-}
-
-.MessagesMenu_askBar__7vB6O {
-	padding: 12px 16px;
-}
-
-.MessagesMenu_ask__k1sfH {
-	width: 100%;
-	background-color: var(--color-primary);
-	color: #fff;
-	border: none;
-	border-radius: 8px;
-	padding: 10px;
-	font-size: 14px;
-	cursor: pointer;
-	transition: background-color 0.2s;
-}
-
-.MessagesMenu_ask__k1sfH:hover {
 	background-color: var(--color-primary-hover);
 }
 

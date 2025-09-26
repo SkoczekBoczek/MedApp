@@ -1,4 +1,4 @@
-import CalendarCard from "./components/CalendarCard";
+import CalendarCard from "./components/CalendarCard/CalendarCard";
 import SideBar from "./components/SideBar/SideBar";
 import WelcomeCard from "./components/WelcomeCard/WelcomeCard";
 import ContactCard from "./components//ContactCard/ContactCard";

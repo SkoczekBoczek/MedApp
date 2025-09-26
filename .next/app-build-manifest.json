@@ -27,10 +27,10 @@
       "static/chunks/main-app.js",
       "static/chunks/app/api/plan/route.js"
     ],
-    "/api/conversations/route": [
+    "/api/events/route": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/api/conversations/route.js"
+      "static/chunks/app/api/events/route.js"
     ]
   }
 }

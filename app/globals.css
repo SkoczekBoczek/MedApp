@@ -9,7 +9,7 @@ dialog::backdrop {
 	flex: 1;
 	display: grid;
 	grid-template-columns: 2fr 1fr;
-	grid-template-rows: 0.7fr 1fr 2fr;
+	grid-template-rows: 0.65fr 1fr 1.8fr;
 	gap: 12px;
 	padding: 12px;
 }
