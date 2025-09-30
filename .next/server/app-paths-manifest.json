@@ -1,6 +1,3 @@
 {
-  "/api/doctors/route": "app/api/doctors/route.js",
-  "/api/drugs/route": "app/api/drugs/route.js",
-  "/api/plan/route": "app/api/plan/route.js",
   "/page": "app/page.js"
 }

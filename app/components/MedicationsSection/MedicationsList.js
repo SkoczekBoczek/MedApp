@@ -30,18 +30,18 @@ const Modal = forwardRef(function MedicationsModal(
 
 	useEffect(() => {
 		async function fetchDrugs() {
-			const res = await fetch("/api/drugs");
+			const res = await fetch(`/api/drugs?query=${findDrug}&limit=50&skip=0`);
 			const data = await res.json();
 			console.log("Fetched drugs:", data);
 			setLoading(false);
 			setDrugs(data);
 		}
 		fetchDrugs();
-	}, []);
+	}, [findDrug]);
 
-	const results = drugs.filter((d) =>
-		d.productName.toLowerCase().includes(findDrug.toLowerCase())
-	);
+	// const results = drugs.filter((d) =>
+	// 	d.productName.toLowerCase().includes(findDrug.toLowerCase())
+	// );
 
 	const [isOpen, setIsOpen] = useState(false);
 
@@ -151,7 +151,7 @@ const Modal = forwardRef(function MedicationsModal(
 								<p>Ładowanie leków...</p>
 							) : (
 								<div className={styles.content}>
-									{results.map((drug) => (
+									{drugs.map((drug) => (
 										<div className={styles.medicationItem} key={drug._id}>
 											<p>{drug.productName}</p>
 											<div className={styles.buttons}>

@@ -67,7 +67,7 @@ export async function POST(req) {
 		} else {
 			await db.collection("plans").insertOne({
 				userToken: plan.userToken,
-				weeklyPlan: plan.weeklyPlan,
+				weeklyPlan: plan.plan,
 			});
 			return new Response(
 				JSON.stringify({ message: "Plan created successfully" }),

@@ -2,10 +2,23 @@ import { MongoClient } from "mongodb";
 
 const client = await MongoClient.connect(process.env.MONGODB_URI);
 
-export async function GET() {
+export async function GET(req) {
 	try {
+		const { searchParams } = new URL(req.url);
+		const query = searchParams.get("query");
+		const limit = parseInt(searchParams.get("limit"));
+		const skip = parseInt(searchParams.get("skip"));
+
 		const db = client.db("clinicDB");
-		const drugs = await db.collection("drugs").find().limit(20).toArray();
+
+		const regex = new RegExp(query, "i");
+
+		const drugs = await db
+			.collection("drugs")
+			.find({ productName: { $regex: regex } })
+			.skip(skip)
+			.limit(limit)
+			.toArray();
 
 		return new Response(JSON.stringify(drugs), {
 			status: 200,
