@@ -1,5 +1,5 @@
 body.modalOpen {
-  overflow: hidden;
+	overflow: hidden;
 }
 
 .dialogBackdrop {
@@ -89,7 +89,12 @@ body.modalOpen {
 	border-color: var(--color-primary);
 	box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.2);
 }
-
+.virtualList {
+	height: 400px;
+	overflow-y: auto;
+	width: 100%;
+	position: relative;
+}
 .content {
 	display: flex;
 	flex-direction: column;
@@ -103,6 +108,9 @@ body.modalOpen {
 	background-color: #f7f7f7;
 	padding: 0.5rem 0.75rem;
 	border-radius: 8px;
+
+	height: 60px;
+	box-sizing: border-box;
 }
 
 .buttons {
@@ -161,6 +169,7 @@ body.modalOpen {
 @media (max-width: 992px) {
 	.modalWrapper {
 		overflow-x: hidden;
+		width: 400px;
 	}
 
 	.modalWrapperWithDetails {
@@ -174,6 +183,12 @@ body.modalOpen {
 
 	.modalContentActive {
 		border-radius: 12px;
+	}
+}
+
+@media (max-width: 600px) {
+	.modalWrapper {
+		width: 100%;
 	}
 }
 

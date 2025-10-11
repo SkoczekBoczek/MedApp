@@ -13,6 +13,7 @@ import {
 import { createPortal } from "react-dom";
 import SelectedDrugInfo from "./SelectedDrugInfo";
 import AddMedicationSchedule from "./AddMedicationSchedule";
+import { useVirtualizer } from "@tanstack/react-virtual";
 
 const Modal = forwardRef(function MedicationsModal(
 	{ onAddMedication, isDuplicated },
@@ -27,6 +28,14 @@ const Modal = forwardRef(function MedicationsModal(
 
 	const [selectedDay, setSelectedDay] = useState("Poniedziałek");
 	const [selectedTime, setSelectedTime] = useState("08:00");
+
+	const parentRef = useRef(null);
+	const rowVirtualizer = useVirtualizer({
+		count: drugs.length,
+		getScrollElement: () => parentRef.current,
+		estimateSize: () => 70,
+		overscan: 5,
+	});
 
 	useEffect(() => {
 		async function fetchDrugs() {
@@ -150,26 +159,56 @@ const Modal = forwardRef(function MedicationsModal(
 							{loading ? (
 								<p>Ładowanie leków...</p>
 							) : (
-								<div className={styles.content}>
-									{drugs.map((drug) => (
-										<div className={styles.medicationItem} key={drug._id}>
-											<p>{drug.productName}</p>
-											<div className={styles.buttons}>
-												<button
-													className={styles.addBtn}
-													onClick={() => handleAddMedication(drug)}
+								<div
+									ref={parentRef}
+									className={styles.virtualList}
+									style={{
+										height: "435px",
+										overflowY: "auto",
+										width: "100%",
+										position: "relative",
+									}}
+								>
+									<div
+										style={{
+											height: `${rowVirtualizer.getTotalSize()}px`,
+											width: "100%",
+											position: "relative",
+										}}
+									>
+										{rowVirtualizer.getVirtualItems().map((virtualRow) => {
+											const drug = drugs[virtualRow.index];
+											return (
+												<div
+													key={drug._id}
+													className={styles.medicationItem}
+													style={{
+														position: "absolute",
+														top: 0,
+														left: 0,
+														width: "100%",
+														transform: `translateY(${virtualRow.start}px)`,
+													}}
 												>
-													Dodaj
-												</button>
-												<button
-													className={styles.infoBtn}
-													onClick={() => setSelectedInfoDrug(drug)}
-												>
-													<Info size={18} />
-												</button>
-											</div>
-										</div>
-									))}
+													<p>{drug.productName}</p>
+													<div className={styles.buttons}>
+														<button
+															className={styles.addBtn}
+															onClick={() => handleAddMedication(drug)}
+														>
+															Dodaj
+														</button>
+														<button
+															className={styles.infoBtn}
+															onClick={() => setSelectedInfoDrug(drug)}
+														>
+															<Info size={18} />
+														</button>
+													</div>
+												</div>
+											);
+										})}
+									</div>
 								</div>
 							)}
 						</>

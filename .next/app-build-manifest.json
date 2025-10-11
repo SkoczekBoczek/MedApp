@@ -12,15 +12,15 @@
       "static/css/app/page.css",
       "static/chunks/app/page.js"
     ],
-    "/api/doctors/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/doctors/route.js"
-    ],
     "/api/drugs/route": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/api/drugs/route.js"
+    ],
+    "/api/doctors/route": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/api/doctors/route.js"
     ],
     "/api/plan/route": [
       "static/chunks/webpack.js",
