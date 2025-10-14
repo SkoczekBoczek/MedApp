@@ -1,13 +1,66 @@
+"use client";
+
+import "react-big-calendar/lib/css/react-big-calendar.css";
 import styles from "./CalendarCard.module.css";
+import { Calendar, momentLocalizer } from "react-big-calendar";
+import moment from "moment";
+import { useEffect, useState } from "react";
+import userToken from "@/utils/userToken";
+
+const localizer = momentLocalizer(moment);
 
 export default function CalendarCard() {
+	const [events, setEvents] = useState([]);
+
+	useEffect(() => {
+		const token = userToken();
+		fetch(`/api/events?token=${token}`)
+			.then((res) => res.json())
+			.then((data) => {
+				const formatted = data.map((event) => ({
+					...event,
+					start: new Date(event.start),
+					end: new Date(event.end),
+				}));
+				setEvents(formatted);
+			});
+	}, []);
+
+	function handleAddEvent(slotInfo) {
+		const title = prompt("Wpisz nazwę wydarzenia");
+		if (!title) return;
+
+		const token = userToken();
+
+		const newEvent = {
+			title,
+			start: slotInfo.start,
+			end: slotInfo.end,
+			userToken: token,
+		};
+
+		fetch("/api/events", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(newEvent),
+		}).then(() => {
+			setEvents((prev) => [...prev, { ...newEvent }]);
+		});
+	}
+
 	return (
 		<aside className={`${styles.calendar} ${styles.card}`}>
-			<h3>Kalendarz</h3>
-			<p className={styles.month}>Styczeń 2025</p>
-			<div className={styles.appointment}>
-				<p>26 Czw - Dr. Max Vita</p>
-				<span>10:30</span>
+			<Calendar
+				localizer={localizer}
+				events={events}
+				startAccessor="start"
+				endAccessor="end"
+				selectable
+				style={{ height: 600 }}
+				onSelectSlot={handleAddEvent}
+			/>
+			<div>
+				<h3>Najbliższe wydarzenia:</h3>
 			</div>
 		</aside>
 	);
