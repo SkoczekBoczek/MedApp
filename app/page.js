@@ -13,7 +13,7 @@ export default function Home() {
 				<CalendarCard />
 				<ContactCard />
 				<MedicationsSection />
-				<section className="smallBox card"></section>
+				{/* <section className="smallBox card"></section> */}
 			</main>
 		</>
 	);
