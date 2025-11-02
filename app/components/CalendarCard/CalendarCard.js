@@ -50,6 +50,18 @@ export default function CalendarCard() {
 		});
 	}
 
+	function eventPropGetter(event) {
+		const isPast = new Date(event.start) < new Date();
+		if (isPast) {
+			return { className: "old" };
+		}
+		return { className: "accurate" };
+	}
+
+	function handleDeleteEvent() {
+		alert("Usun event");
+	}
+
 	const upcomingEvents = events
 		.filter((e) => e.start > new Date())
 		.sort((a, b) => a.start - b.start)
@@ -63,8 +75,21 @@ export default function CalendarCard() {
 				startAccessor="start"
 				endAccessor="end"
 				selectable
+				eventPropGetter={eventPropGetter}
+				messages={{
+					today: "Dziś",
+					next: "Dalej",
+					previous: "Wstecz",
+					week: "Week",
+					day: "Day",
+					month: "Month",
+					day: "Dzień",
+					month: "Miesiąc",
+				}}
+				views={["month", "day"]}
 				style={{ height: 600 }}
 				onSelectSlot={handleAddEvent}
+				onSelectEvent={handleDeleteEvent}
 			/>
 			<div className={styles.upcoming}>
 				<h3>Najbliższe wydarzenia:</h3>

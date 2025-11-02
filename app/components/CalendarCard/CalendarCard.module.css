@@ -32,8 +32,8 @@
 
 .calendar :global(.rbc-toolbar .rbc-btn-group:first-child) {
 	display: flex;
-	/* gap: 6px; */
 	margin-right: auto;
+	width: 270px; /* Prawdopodobnie bedzie trzeba zmienic */
 }
 
 .calendar :global(.rbc-toolbar .rbc-btn-group:first-child button) {
@@ -58,6 +58,12 @@
 	font-size: 1.1rem;
 	font-weight: 600;
 	text-align: right;
+	text-transform: capitalize;
+}
+
+.calendar :global(.rbc-toolbar .rbc-btn-group:last-child) {
+	display: flex;
+	margin: auto;
 }
 
 .calendar :global(.rbc-toolbar .rbc-btn-group:last-child button) {
@@ -77,8 +83,14 @@
 	transform: scale(1.05);
 }
 
-.calendar :global(.rbc-event) {
+.calendar :global(.old) {
+	background-color: tomato;
+}
+.calendar :global(.accurate) {
 	background-color: rgb(0, 171, 0);
+}
+
+.calendar :global(.rbc-event) {
 	color: white;
 	border-radius: 8px;
 	padding: 2px 6px;

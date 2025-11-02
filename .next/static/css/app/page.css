@@ -732,8 +732,8 @@ button.rbc-input::-moz-focus-inner {
 
 .CalendarCard_calendar__OBa8J .rbc-toolbar .rbc-btn-group:first-child {
 	display: flex;
-	/* gap: 6px; */
 	margin-right: auto;
+	width: 270px; /* Prawdopodobnie bedzie trzeba zmienic */
 }
 
 .CalendarCard_calendar__OBa8J .rbc-toolbar .rbc-btn-group:first-child button {
@@ -758,6 +758,12 @@ button.rbc-input::-moz-focus-inner {
 	font-size: 1.1rem;
 	font-weight: 600;
 	text-align: right;
+	text-transform: capitalize;
+}
+
+.CalendarCard_calendar__OBa8J .rbc-toolbar .rbc-btn-group:last-child {
+	display: flex;
+	margin: auto;
 }
 
 .CalendarCard_calendar__OBa8J .rbc-toolbar .rbc-btn-group:last-child button {
@@ -777,8 +783,14 @@ button.rbc-input::-moz-focus-inner {
 	transform: scale(1.05);
 }
 
-.CalendarCard_calendar__OBa8J .rbc-event {
+.CalendarCard_calendar__OBa8J .old {
+	background-color: tomato;
+}
+.CalendarCard_calendar__OBa8J .accurate {
 	background-color: rgb(0, 171, 0);
+}
+
+.CalendarCard_calendar__OBa8J .rbc-event {
 	color: white;
 	border-radius: 8px;
 	padding: 2px 6px;
