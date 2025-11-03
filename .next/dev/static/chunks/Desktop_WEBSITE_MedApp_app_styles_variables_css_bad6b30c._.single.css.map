@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/Desktop/WEBSITE/MedApp/app/styles/variables.css"],"sourcesContent":[":root {\n\t--color-bg: #111;\n\t--color-text: #ffffff;\n\t--color-primary: #636cff;\n\t--color-primary-hover: #4f46e5;\n\t--color-secondary: #444;\n\t--color-light: #ffffff;\n\t--color-dark: #000000;\n\n\t--black-1: #242424;\n\t--black-2: #333;\n\t--black-3: #4d4d4d;\n\t--black-4: #5c5c5c;\n}\n"],"names":[],"mappings":"AAAA"}}]
+}

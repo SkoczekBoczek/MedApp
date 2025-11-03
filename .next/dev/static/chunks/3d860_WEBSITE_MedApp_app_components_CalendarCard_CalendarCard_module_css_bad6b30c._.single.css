@@ -1,0 +1,184 @@
+/* [project]/Desktop/WEBSITE/MedApp/app/components/CalendarCard/CalendarCard.module.css [app-client] (css) */
+.CalendarCard-module__UY31_q__calendar {
+  background-color: var(--color-primary);
+  border-radius: 16px;
+  grid-area: 1 / 2 / 4 / 3;
+  padding: 20px;
+}
+
+.CalendarCard-module__UY31_q__calendar h3 {
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+.CalendarCard-module__UY31_q__month {
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.CalendarCard-module__UY31_q__calendar .rbc-calendar {
+  background-color: var(--color-primary);
+  font-family: Inter, sans-serif;
+  overflow: hidden;
+}
+
+.CalendarCard-module__UY31_q__calendar .rbc-toolbar {
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  display: flex;
+}
+
+.CalendarCard-module__UY31_q__calendar .rbc-toolbar .rbc-btn-group:first-child {
+  width: 270px;
+  margin-right: auto;
+  display: flex;
+}
+
+.CalendarCard-module__UY31_q__calendar .rbc-toolbar .rbc-btn-group:first-child button {
+  background-color: var(--color-light);
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  margin-left: 4px;
+  padding: 6px 10px;
+  font-size: .85rem;
+  transition: all .2s;
+}
+
+.CalendarCard-module__UY31_q__calendar .rbc-toolbar .rbc-btn-group:first-child button:hover {
+  background-color: var(--color-primary-hover);
+  color: #fff;
+  transform: scale(1.05);
+}
+
+.CalendarCard-module__UY31_q__calendar .rbc-toolbar-label {
+  text-align: right;
+  text-transform: capitalize;
+  margin-left: auto;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.CalendarCard-module__UY31_q__calendar .rbc-toolbar .rbc-btn-group:last-child {
+  margin: auto;
+  display: flex;
+}
+
+.CalendarCard-module__UY31_q__calendar .rbc-toolbar .rbc-btn-group:last-child button {
+  background-color: var(--color-light);
+  border: none;
+  border-radius: 8px;
+  margin-top: 10px;
+  margin-left: 4px;
+  padding: 6px 10px;
+  font-size: .85rem;
+  transition: all .2s;
+}
+
+.CalendarCard-module__UY31_q__calendar .rbc-toolbar .rbc-btn-group:last-child button:hover {
+  background-color: var(--color-primary-hover);
+  color: #fff;
+  transform: scale(1.05);
+}
+
+.CalendarCard-module__UY31_q__calendar .old {
+  background-color: tomato;
+}
+
+.CalendarCard-module__UY31_q__calendar .accurate {
+  background-color: #00ab00;
+}
+
+.CalendarCard-module__UY31_q__calendar .rbc-event {
+  color: #fff;
+  border-radius: 8px;
+  padding: 2px 6px;
+  font-size: .9rem;
+}
+
+.CalendarCard-module__UY31_q__calendar .rbc-today {
+  background-color: var(--color-primary-hover);
+}
+
+.CalendarCard-module__UY31_q__calendar .rbc-off-range-bg {
+  background-color: #777eff;
+}
+
+.CalendarCard-module__UY31_q__upcoming {
+  margin-top: 1rem;
+}
+
+.CalendarCard-module__UY31_q__upcoming h3 {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.CalendarCard-module__UY31_q__eventList {
+  flex-direction: column;
+  gap: .9rem;
+  padding: 0;
+  list-style: none;
+  display: flex;
+}
+
+.CalendarCard-module__UY31_q__eventCard {
+  color: #fff;
+  background-color: #6366f1;
+  border-radius: 1rem;
+  align-items: center;
+  padding: .5rem 1rem;
+  display: flex;
+}
+
+.CalendarCard-module__UY31_q__dateBox {
+  flex-direction: column;
+  align-items: center;
+  margin-left: 1rem;
+  margin-right: 2rem;
+  display: flex;
+}
+
+.CalendarCard-module__UY31_q__dayName {
+  opacity: .9;
+  font-size: .9rem;
+  font-weight: 500;
+}
+
+.CalendarCard-module__UY31_q__dayNumber {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.CalendarCard-module__UY31_q__infoBox {
+  flex-direction: column;
+  flex: 1;
+  display: flex;
+}
+
+.CalendarCard-module__UY31_q__title {
+  margin-bottom: 3px;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.CalendarCard-module__UY31_q__subtitle {
+  opacity: .9;
+  margin-bottom: .5rem;
+  font-size: .9rem;
+}
+
+.CalendarCard-module__UY31_q__timeBox {
+  color: #000;
+  background: #fff;
+  border-radius: .6rem;
+  width: fit-content;
+  padding: .3rem 1rem;
+  font-size: 1rem;
+  font-weight: 700;
+  display: inline-block;
+}
+
+/*# sourceMappingURL=3d860_WEBSITE_MedApp_app_components_CalendarCard_CalendarCard_module_css_bad6b30c._.single.css.map*/

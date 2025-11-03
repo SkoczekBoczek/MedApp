@@ -15,11 +15,12 @@
     "lucide-react": "^0.543.0",
     "mongodb": "^6.19.0",
     "mongoose": "^8.18.1",
-    "next": "^15.1.6",
+    "next": "^16.0.1",
     "react": "^19.0.0",
     "react-big-calendar": "^1.19.4",
     "react-dom": "^19.0.0",
-    "react-router-dom": "^7.9.4"
+    "react-router-dom": "^7.9.4",
+    "uuid": "^13.0.0"
   },
   "devDependencies": {
     "@types/node": "^24.0.14",

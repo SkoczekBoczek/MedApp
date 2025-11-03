@@ -1,0 +1,257 @@
+/* [project]/Desktop/WEBSITE/MedApp/app/components/MedicationsSection/MedicationsSection.module.css [app-client] (css) */
+.MedicationsSection-module__bDz-7a__bigBox {
+  grid-column: 1 / 2;
+}
+
+.MedicationsSection-module__bDz-7a__bigBox .MedicationsSection-module__bDz-7a__showModalBtn {
+  background-color: var(--color-light);
+  cursor: pointer;
+  border: none;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  transition: all .2s ease-in-out;
+  display: flex;
+}
+
+.MedicationsSection-module__bDz-7a__bigBox .MedicationsSection-module__bDz-7a__showModalBtn:hover {
+  background-color: var(--color-primary-hover);
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.MedicationsSection-module__bDz-7a__sectionHeader {
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  display: flex;
+}
+
+.MedicationsSection-module__bDz-7a__weeklyPlanContainer {
+  max-height: 320px;
+  overflow: hidden auto;
+}
+
+.MedicationsSection-module__bDz-7a__weeklyPlanContainer::-webkit-scrollbar {
+  width: 8px;
+}
+
+.MedicationsSection-module__bDz-7a__weeklyPlanContainer::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.MedicationsSection-module__bDz-7a__weeklyPlanContainer::-webkit-scrollbar-thumb {
+  cursor: pointer;
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.MedicationsSection-module__bDz-7a__weeklyPlanContainer::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
+
+.MedicationsSection-module__bDz-7a__weeklyPlan {
+  grid-template-columns: repeat(3, 1fr);
+  align-items: stretch;
+  gap: 1rem;
+  padding: 4px;
+  display: grid;
+}
+
+.MedicationsSection-module__bDz-7a__dayCard {
+  background: var(--color-light);
+  color: #000;
+  border-radius: 8px;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1rem;
+  display: flex;
+  box-shadow: 0 2px 6px #0000001a;
+}
+
+.MedicationsSection-module__bDz-7a__dayHeader {
+  border-bottom: 1px solid #ccc;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: .5rem;
+  padding-bottom: .5rem;
+  display: flex;
+}
+
+.MedicationsSection-module__bDz-7a__dayTitle {
+  color: #000;
+  margin: 0 0 .5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.MedicationsSection-module__bDz-7a__addButton {
+  color: var(--color-light);
+  cursor: pointer;
+  background-color: #00ab00;
+  border: none;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  font-size: 24px;
+  transition: all .2s ease-in-out;
+  display: flex;
+}
+
+.MedicationsSection-module__bDz-7a__addButton:hover {
+  color: #00ab00;
+  background-color: var(--color-light);
+  border: 2px solid #00ab00;
+  transform: scale(1.1);
+}
+
+.MedicationsSection-module__bDz-7a__medicationsList {
+  flex-direction: column;
+  flex: 1;
+  gap: .75rem;
+  margin-top: .5rem;
+  display: flex;
+  overflow-y: auto;
+}
+
+.MedicationsSection-module__bDz-7a__noMedications {
+  color: #9ca3af;
+  text-align: center;
+  padding: 2rem 0;
+  font-size: .875rem;
+  font-style: italic;
+}
+
+.MedicationsSection-module__bDz-7a__medicationItem {
+  cursor: pointer;
+  border: 2px solid;
+  border-radius: 8px;
+  padding: .75rem;
+  transition: all .2s;
+}
+
+.MedicationsSection-module__bDz-7a__medicationTaken {
+  background-color: #effff7;
+  border-color: #5cde5c;
+}
+
+.MedicationsSection-module__bDz-7a__medicationContent {
+  justify-content: space-between;
+  align-items: flex-start;
+  display: flex;
+}
+
+.MedicationsSection-module__bDz-7a__medicationInfo {
+  flex: 1;
+}
+
+.MedicationsSection-module__bDz-7a__timeRow, .MedicationsSection-module__bDz-7a__nameRow {
+  align-items: center;
+  gap: .5rem;
+  margin-bottom: .25rem;
+  display: flex;
+}
+
+.MedicationsSection-module__bDz-7a__time {
+  color: #374151;
+  font-size: .875rem;
+  font-weight: 500;
+}
+
+.MedicationsSection-module__bDz-7a__name {
+  color: #1f2937;
+  font-size: .875rem;
+  font-weight: 600;
+}
+
+.MedicationsSection-module__bDz-7a__btnss {
+  align-items: center;
+  gap: .5rem;
+  display: flex;
+}
+
+.MedicationsSection-module__bDz-7a__deleteBtn {
+  color: #d9534f;
+  cursor: pointer;
+  background: none;
+  border: none;
+  border-radius: 6px;
+  justify-content: center;
+  align-items: center;
+  padding: 2px;
+  transition: background-color .2s, color .2s;
+  display: flex;
+}
+
+.MedicationsSection-module__bDz-7a__deleteBtn:hover {
+  color: #b52b27;
+  background-color: #d9534f1a;
+}
+
+.MedicationsSection-module__bDz-7a__checkbox {
+  border: 2px solid;
+  border-radius: 50%;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  width: 1rem;
+  height: 1rem;
+  transition: all .2s;
+  display: flex;
+}
+
+.MedicationsSection-module__bDz-7a__checkboxChecked {
+  background-color: #10b981;
+  border-color: #10b981;
+}
+
+.MedicationsSection-module__bDz-7a__checkboxInner {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.MedicationsSection-module__bDz-7a__checkboxDot {
+  background-color: #fff;
+  border-radius: 50%;
+  width: .5rem;
+  height: .5rem;
+}
+
+@media (max-width: 900px) {
+  .MedicationsSection-module__bDz-7a__weeklyPlan {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .MedicationsSection-module__bDz-7a__weeklyPlanContainer {
+    max-height: 320px;
+  }
+}
+
+@media (max-width: 600px) {
+  .MedicationsSection-module__bDz-7a__sectionTitle {
+    font-size: 1.3rem;
+  }
+
+  .MedicationsSection-module__bDz-7a__weeklyPlan {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 1024px) {
+  .MedicationsSection-module__bDz-7a__weeklyPlanContainer {
+    max-height: none;
+    overflow-y: visible;
+  }
+}
+
+/*# sourceMappingURL=875f0_MedApp_app_components_MedicationsSection_MedicationsSection_module_css_bad6b30c._.single.css.map*/

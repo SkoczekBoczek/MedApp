@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 48, "column": 0}, "map": {"version":3,"sources":["file:///Users/nikodemwitkowski/Desktop/WEBSITE/MedApp/app/api/doctors/route.js"],"sourcesContent":["import { MongoClient } from \"mongodb\";\n\nconst client = await MongoClient.connect(process.env.MONGODB_URI);\nexport async function GET() {\n\ttry {\n\t\tconst db = client.db(\"clinicDB\");\n\t\tconst doctors = await db.collection(\"doctors\").find().toArray();\n\n\t\treturn new Response(JSON.stringify(doctors), {\n\t\t\tstatus: 200,\n\t\t\theaders: { \"Content-Type\": \"application/json\" },\n\t\t});\n\t} catch (error) {\n\t\treturn new Response(JSON.stringify({ error: \"Błąd połączenia z bazą\" }), {\n\t\t\tstatus: 500,\n\t\t\theaders: { \"Content-Type\": \"application/json\" },\n\t\t});\n\t}\n}\n"],"names":[],"mappings":";;;;AAAA;;AAEA,MAAM,SAAS,MAAM,sHAAW,CAAC,OAAO,CAAC,QAAQ,GAAG,CAAC,WAAW;AACzD,eAAe;IACrB,IAAI;QACH,MAAM,KAAK,OAAO,EAAE,CAAC;QACrB,MAAM,UAAU,MAAM,GAAG,UAAU,CAAC,WAAW,IAAI,GAAG,OAAO;QAE7D,OAAO,IAAI,SAAS,KAAK,SAAS,CAAC,UAAU;YAC5C,QAAQ;YACR,SAAS;gBAAE,gBAAgB;YAAmB;QAC/C;IACD,EAAE,OAAO,OAAO;QACf,OAAO,IAAI,SAAS,KAAK,SAAS,CAAC;YAAE,OAAO;QAAyB,IAAI;YACxE,QAAQ;YACR,SAAS;gBAAE,gBAAgB;YAAmB;QAC/C;IACD;AACD","debugId":null}}]
+}

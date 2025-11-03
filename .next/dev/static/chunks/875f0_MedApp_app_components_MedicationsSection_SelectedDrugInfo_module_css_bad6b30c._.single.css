@@ -1,0 +1,105 @@
+/* [project]/Desktop/WEBSITE/MedApp/app/components/MedicationsSection/SelectedDrugInfo.module.css [app-client] (css) */
+.SelectedDrugInfo-module__knwL5G__mobileOverlay {
+  display: none;
+}
+
+.SelectedDrugInfo-module__knwL5G__detailsPanel {
+  background-color: var(--color-light);
+  z-index: 40;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+  width: 300px;
+  height: auto;
+  padding: 1rem;
+  animation: .3s forwards SelectedDrugInfo-module__knwL5G__slideIn;
+  position: absolute;
+  top: 0;
+  left: 100%;
+}
+
+.SelectedDrugInfo-module__knwL5G__detailsHeader {
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+}
+
+.SelectedDrugInfo-module__knwL5G__detailsHeader h3 {
+  color: #000;
+}
+
+.SelectedDrugInfo-module__knwL5G__detailsContent {
+  overflow-y: auto;
+}
+
+.SelectedDrugInfo-module__knwL5G__closeBtn {
+  color: #000;
+  cursor: pointer;
+  background-color: #f5f5f5;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  transition: all .2s ease-in-out;
+}
+
+.SelectedDrugInfo-module__knwL5G__closeBtn:hover {
+  background-color: var(--color-primary-hover);
+  color: var(--color-light);
+  transform: scale(1.1);
+}
+
+@keyframes SelectedDrugInfo-module__knwL5G__slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes SelectedDrugInfo-module__knwL5G__slideInPhone {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 992px) {
+  .SelectedDrugInfo-module__knwL5G__mobileOverlay {
+    z-index: 35;
+    background-color: #0000004d;
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
+  .SelectedDrugInfo-module__knwL5G__detailsPanel {
+    z-index: 45;
+    border-radius: 16px 16px 0 0;
+    width: 100%;
+    height: 40%;
+    max-height: 80%;
+    animation: .3s forwards SelectedDrugInfo-module__knwL5G__slideInPhone;
+    position: fixed;
+    inset: auto 0 0;
+    overflow-y: auto;
+  }
+
+  .SelectedDrugInfo-module__knwL5G__detailsContent {
+    padding-bottom: 2rem;
+  }
+}
+
+/*# sourceMappingURL=875f0_MedApp_app_components_MedicationsSection_SelectedDrugInfo_module_css_bad6b30c._.single.css.map*/

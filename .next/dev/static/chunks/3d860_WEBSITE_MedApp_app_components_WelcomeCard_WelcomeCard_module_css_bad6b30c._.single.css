@@ -1,0 +1,125 @@
+/* [project]/Desktop/WEBSITE/MedApp/app/components/WelcomeCard/WelcomeCard.module.css [app-client] (css) */
+.WelcomeCard-module__2SY2WW__welcome {
+  background-color: var(--color-primary);
+  border-radius: 16px;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px;
+  display: flex;
+  overflow: hidden;
+}
+
+.WelcomeCard-module__2SY2WW__welcomeText {
+  flex-direction: column;
+  display: flex;
+}
+
+.WelcomeCard-module__2SY2WW__currentDate {
+  color: #000;
+  background-color: #abaefff5;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+  padding: 10px 15px;
+  display: flex;
+}
+
+.WelcomeCard-module__2SY2WW__currentDate .WelcomeCard-module__2SY2WW__date {
+  font-size: 16px;
+}
+
+.WelcomeCard-module__2SY2WW__welcomeText h2 {
+  margin: 5px 0;
+  font-size: 38px;
+  font-weight: bold;
+}
+
+.WelcomeCard-module__2SY2WW__welcomeText p {
+  margin: 5px 0;
+  font-size: 20px;
+}
+
+.WelcomeCard-module__2SY2WW__welcomeBtns {
+  gap: 10px;
+  display: flex;
+}
+
+.WelcomeCard-module__2SY2WW__welcomeBtns button {
+  background-color: var(--color-light);
+  cursor: pointer;
+  border: none;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  transition: all .2s ease-in-out;
+  display: flex;
+}
+
+.WelcomeCard-module__2SY2WW__welcomeBtns button:hover {
+  background-color: var(--color-primary-hover);
+  color: #fff;
+  transform: scale(1.1);
+}
+
+@media (max-width: 1024px) {
+  .WelcomeCard-module__2SY2WW__welcomeText h2 {
+    font-size: 28px;
+  }
+
+  .WelcomeCard-module__2SY2WW__welcomeText p {
+    font-size: 18px;
+  }
+
+  .WelcomeCard-module__2SY2WW__currentDate .WelcomeCard-module__2SY2WW__date {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .WelcomeCard-module__2SY2WW__currentDate {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  .WelcomeCard-module__2SY2WW__welcomeText h2 {
+    font-size: 22px;
+  }
+
+  .WelcomeCard-module__2SY2WW__welcomeText p {
+    font-size: 16px;
+  }
+
+  .WelcomeCard-module__2SY2WW__welcomeBtns button {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .WelcomeCard-module__2SY2WW__currentDate {
+    padding: 7px;
+    font-size: 10px;
+  }
+
+  .WelcomeCard-module__2SY2WW__welcomeText h2 {
+    font-size: 22px;
+  }
+
+  .WelcomeCard-module__2SY2WW__welcomeText p, .WelcomeCard-module__2SY2WW__date {
+    font-size: 16px;
+  }
+
+  .WelcomeCard-module__2SY2WW__welcomeBtns button {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+}
+
+/*# sourceMappingURL=3d860_WEBSITE_MedApp_app_components_WelcomeCard_WelcomeCard_module_css_bad6b30c._.single.css.map*/

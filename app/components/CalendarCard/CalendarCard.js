@@ -5,8 +5,9 @@ import styles from "./CalendarCard.module.css";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "moment/locale/pl";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import userToken from "@/utils/userToken";
+import AddEventModal from "./AddEventModal";
 
 moment.locale("pl");
 const localizer = momentLocalizer(moment);
@@ -28,28 +29,6 @@ export default function CalendarCard() {
 			});
 	}, []);
 
-	function handleAddEvent(slotInfo) {
-		const title = prompt("Wpisz nazwę wydarzenia");
-		if (!title) return;
-
-		const token = userToken();
-
-		const newEvent = {
-			title,
-			start: slotInfo.start,
-			end: slotInfo.end,
-			userToken: token,
-		};
-
-		fetch("/api/events", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(newEvent),
-		}).then(() => {
-			setEvents((prev) => [...prev, { ...newEvent }]);
-		});
-	}
-
 	function eventPropGetter(event) {
 		const isPast = new Date(event.start) < new Date();
 		if (isPast) {
@@ -60,6 +39,22 @@ export default function CalendarCard() {
 
 	function handleDeleteEvent() {
 		alert("Usun event");
+	}
+
+	const [selectedSlot, setSelectedSlot] = useState(null);
+	const [isOpen, setIsOpen] = useState(false);
+	const modal = useRef();
+
+	function handleSelectSlot(slotInfo) {
+		setSelectedSlot(slotInfo);
+		setIsOpen(true);
+		console.log(upcomingEvents);
+	}
+
+	function handleClose() {
+		setTitle("");
+		setTime("");
+		onClose();
 	}
 
 	const upcomingEvents = events
@@ -88,8 +83,8 @@ export default function CalendarCard() {
 				}}
 				views={["month", "day"]}
 				style={{ height: 600 }}
-				onSelectSlot={handleAddEvent}
-				onSelectEvent={handleDeleteEvent}
+				onSelectEvent={() => handleDeleteEvent(event.start)}
+				onSelectSlot={handleSelectSlot}
 			/>
 			<div className={styles.upcoming}>
 				<h3>Najbliższe wydarzenia:</h3>
@@ -98,7 +93,6 @@ export default function CalendarCard() {
 						{upcomingEvents.map((upcomingEvent, i) => {
 							const dayName = moment(upcomingEvent.start).format("ddd");
 							const dayNumber = moment(upcomingEvent.start).format("DD");
-							const eventTime = moment(upcomingEvent.start).format("HH:hh");
 
 							return (
 								<li key={i} className={styles.eventCard}>
@@ -108,7 +102,7 @@ export default function CalendarCard() {
 									</div>
 									<div className={styles.infoBox}>
 										<h4 className={styles.title}>{upcomingEvent.title}</h4>
-										<div className={styles.timeBox}>{eventTime}</div>
+										<div className={styles.timeBox}>{upcomingEvent.time}</div>
 									</div>
 								</li>
 							);
@@ -118,6 +112,13 @@ export default function CalendarCard() {
 					<p>Brak nadchodzących wydarzeń </p>
 				)}
 			</div>
+			<AddEventModal
+				ref={modal}
+				isOpen={isOpen}
+				slotInfo={selectedSlot}
+				onClose={handleClose}
+				setEvents={setEvents}
+			></AddEventModal>
 		</aside>
 	);
 }
