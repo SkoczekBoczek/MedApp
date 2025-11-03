@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/Desktop/WEBSITE/MedApp/app/styles/main.css"],"sourcesContent":["* {\n\tmargin: 0;\n\tpadding: 0;\n\tbox-sizing: border-box;\n\tfont-family: Arial, sans-serif;\n}\n\nbody {\n\tdisplay: flex;\n\tmin-height: 100vh;\n\tbackground-color: #111;\n\tcolor: white;\n\tflex-direction: row;\n}\n\na {\n\tcolor: inherit;\n\ttext-decoration: none;\n}\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n\tfont-weight: bold;\n\tcolor: white;\n}\n\nbutton {\n\tcursor: pointer;\n\tfont-family: inherit;\n}\n"],"names":[],"mappings":"AAAA;;;;;;;AAOA;;;;;;;;AAQA;;;;;AAKA;;;;;AAUA"}}]
-}
