@@ -51,12 +51,6 @@ export default function CalendarCard() {
 		console.log(upcomingEvents);
 	}
 
-	function handleClose() {
-		setTitle("");
-		setTime("");
-		onClose();
-	}
-
 	const upcomingEvents = events
 		.filter((e) => e.start > new Date())
 		.sort((a, b) => a.start - b.start)
@@ -116,7 +110,9 @@ export default function CalendarCard() {
 				ref={modal}
 				isOpen={isOpen}
 				slotInfo={selectedSlot}
-				onClose={handleClose}
+				onClose={() => {
+					setIsOpen(false);
+				}}
 				setEvents={setEvents}
 			></AddEventModal>
 		</aside>

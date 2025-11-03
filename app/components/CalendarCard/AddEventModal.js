@@ -14,6 +14,12 @@ const AddEventModal = forwardRef(function MedicationsModal(
 	const [time, setTime] = useState("");
 	const [title, setTitle] = useState("");
 
+	function handleClose() {
+		setTitle("");
+		setTime("");
+		onClose();
+	}
+
 	function handleAddEvent(slotInfo) {
 		if (!title || !time) return;
 
@@ -33,6 +39,7 @@ const AddEventModal = forwardRef(function MedicationsModal(
 			body: JSON.stringify(newEvent),
 		}).then(() => {
 			setEvents((prev) => [...prev, { ...newEvent }]);
+			handleClose();
 		});
 	}
 
