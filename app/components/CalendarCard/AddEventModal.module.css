@@ -12,17 +12,49 @@
 }
 
 .modal {
-	background-color: var(--color-primary);
+	background-color: var(--color-light);
+	color: black;
 	padding: 2rem;
 	border-radius: 12px;
 	width: 400px;
 	max-width: 90%;
 }
 
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 1rem;
+}
+
+.header h2 {
+	color: black;
+}
+
+.closeBtn {
+	color: black;
+	background-color: #f5f5f5;
+	border: none;
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	font-size: 24px;
+	cursor: pointer;
+	transition: all 0.2s ease-in-out;
+}
+
+.closeBtn:hover {
+	background-color: var(--color-primary-hover);
+	color: var(--color-light);
+	transform: scale(1.1);
+}
+
 .modalForm label {
 	display: flex;
 	flex-direction: column;
-	margin-bottom: 1rem;
+	margin: 0.5rem 0;
+	font-weight: 500;
+	color: #333;
 }
 
 .modalForm input {
@@ -30,8 +62,63 @@
 	margin-top: 0.3rem;
 }
 
+.titleInput,
+.timeInput {
+	width: 100%;
+	padding: 0.75rem;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	font-size: 1rem;
+	outline: none;
+	transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.titleInput:focus,
+.timeInput:focus {
+	border-color: var(--color-primary);
+	box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.2);
+}
+
 .modalButtons {
 	display: flex;
 	justify-content: flex-end;
 	gap: 1rem;
+	margin-top: 1rem;
+}
+
+.modalButtons {
+	display: flex;
+	gap: 0.5rem;
+	align-items: center;
+}
+
+.cancelBtn,
+.addBtn,
+.deleteBtn {
+	padding: 0.75rem 1rem;
+	border: none;
+	border-radius: 8px;
+	font-size: 1rem;
+	cursor: pointer;
+	transition: all 0.2s;
+}
+
+.cancelBtn {
+	background-color: #f5f5f5;
+	color: #666;
+}
+
+.cancelBtn:hover {
+	background-color: #e0e0e0;
+}
+
+.addBtn,
+.deleteBtn {
+	background-color: var(--color-primary);
+	color: white;
+}
+
+.addBtn:hover,
+.deleteBtn:hover {
+	background-color: var(--color-primary-hover);
 }

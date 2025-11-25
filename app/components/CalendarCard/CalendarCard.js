@@ -14,6 +14,8 @@ const localizer = momentLocalizer(moment);
 
 export default function CalendarCard() {
 	const [events, setEvents] = useState([]);
+	const [deleteEvent, setDeleteEvent] = useState(false);
+	const [selectedEvent, setSelectedEvent] = useState(false);
 
 	useEffect(() => {
 		const token = userToken();
@@ -37,8 +39,10 @@ export default function CalendarCard() {
 		return { className: "accurate" };
 	}
 
-	function handleDeleteEvent() {
-		alert("Usun event");
+	function handleDeleteEvent(eventToDelete) {
+		setDeleteEvent(true);
+		setSelectedEvent(eventToDelete);
+		setIsOpen(true);
 	}
 
 	const [selectedSlot, setSelectedSlot] = useState(null);
@@ -77,7 +81,7 @@ export default function CalendarCard() {
 				}}
 				views={["month", "day"]}
 				style={{ height: 600 }}
-				onSelectEvent={() => handleDeleteEvent(event.start)}
+				onSelectEvent={handleDeleteEvent}
 				onSelectSlot={handleSelectSlot}
 			/>
 			<div className={styles.upcoming}>
@@ -110,10 +114,14 @@ export default function CalendarCard() {
 				ref={modal}
 				isOpen={isOpen}
 				slotInfo={selectedSlot}
+				eventInfo={selectedEvent}
 				onClose={() => {
 					setIsOpen(false);
+					setDeleteEvent(false);
+					setSelectedEvent(null);
 				}}
 				setEvents={setEvents}
+				deleteEvent={deleteEvent}
 			></AddEventModal>
 		</aside>
 	);

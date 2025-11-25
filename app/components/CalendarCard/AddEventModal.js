@@ -6,7 +6,7 @@ import { createPortal } from "react-dom";
 import userToken from "@/utils/userToken";
 
 const AddEventModal = forwardRef(function MedicationsModal(
-	{ isOpen, slotInfo, onClose, setEvents },
+	{ isOpen, slotInfo, onClose, setEvents, deleteEvent, eventInfo },
 	ref
 ) {
 	if (!isOpen) return;
@@ -18,6 +18,23 @@ const AddEventModal = forwardRef(function MedicationsModal(
 		setTitle("");
 		setTime("");
 		onClose();
+	}
+
+	function handleDelete() {
+		if (!eventInfo) return;
+
+		fetch(`api/events?eventId=${eventInfo._id}`, {
+			method: "DELETE",
+		}).then((res) => {
+			if (res.ok) {
+				setEvents((prevEvents) =>
+					prevEvents.filter((event) => event._id !== eventInfo._id)
+				);
+				handleClose();
+			} else {
+				console.error("Nie udało się usunąć wydarzenia.");
+			}
+		});
 	}
 
 	function handleAddEvent(slotInfo) {
@@ -46,34 +63,70 @@ const AddEventModal = forwardRef(function MedicationsModal(
 	return createPortal(
 		<div className={styles.modalOverlay} ref={ref}>
 			<div className={styles.modal}>
-				<h2>Dodaj nowe wydarzenie</h2>
-				<form
-					className={styles.modalForm}
-					onSubmit={() => handleAddEvent(slotInfo)}
-				>
-					<label>
-						Tytuł:
+				<div className={styles.header}>
+					{!deleteEvent ? (
+						<h2>Dodaj nowe wydarzenie</h2>
+					) : (
+						<h2>Usuń wydarzenie</h2>
+					)}
+					<button className={styles.closeBtn} onClick={handleClose}>
+						&times;
+					</button>
+				</div>
+				{!deleteEvent ? (
+					<form
+						className={styles.modalForm}
+						onSubmit={() => handleAddEvent(slotInfo)}
+					>
+						<label>Tytuł:</label>
 						<input
 							type="text"
 							value={title}
 							onChange={(e) => setTitle(e.target.value)}
+							className={styles.titleInput}
 						/>
-					</label>
 
-					<label>Godzina:</label>
-					<input
-						type="time"
-						value={time}
-						onChange={(e) => setTime(e.target.value)}
-					/>
+						<label>Godzina:</label>
+						<input
+							type="time"
+							value={time}
+							onChange={(e) => setTime(e.target.value)}
+							className={styles.timeInput}
+						/>
 
-					<div className={styles.modalButtons}>
-						<button type="submit">Dodaj</button>
-						<button type="button" onClick={onClose}>
-							Anuluj
-						</button>
+						<div className={styles.modalButtons}>
+							<button type="submit" className={styles.addBtn}>
+								Dodaj
+							</button>
+							<button
+								type="button"
+								className={styles.cancelBtn}
+								onClick={onClose}
+							>
+								Anuluj
+							</button>
+						</div>
+					</form>
+				) : (
+					<div className={styles.deleteConfirm}>
+						<p>
+							Czy na pewno chcesz usunąć wydarzenie:{" "}
+							<strong>{eventInfo?.title}</strong>?
+						</p>
+						<div className={styles.modalButtons}>
+							<button onClick={handleDelete} className={styles.deleteBtn}>
+								Usuń
+							</button>
+							<button
+								type="button"
+								className={styles.cancelBtn}
+								onClick={onClose}
+							>
+								Anuluj
+							</button>
+						</div>
 					</div>
-				</form>
+				)}
 			</div>
 		</div>,
 		document.body
