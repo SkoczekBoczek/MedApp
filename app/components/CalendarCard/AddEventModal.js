@@ -4,6 +4,7 @@ import styles from "./AddEventModal.module.css";
 import { forwardRef, useState } from "react";
 import { createPortal } from "react-dom";
 import userToken from "@/utils/userToken";
+import AlertPopup from "../AlertPopup/AlertPopup";
 
 const AddEventModal = forwardRef(function MedicationsModal(
 	{ isOpen, slotInfo, onClose, setEvents, deleteEvent, eventInfo },
@@ -13,6 +14,7 @@ const AddEventModal = forwardRef(function MedicationsModal(
 
 	const [time, setTime] = useState("");
 	const [title, setTitle] = useState("");
+	const [alert, setAlert] = useState({ message: "", type: "" });
 
 	function handleClose() {
 		setTitle("");
@@ -32,13 +34,19 @@ const AddEventModal = forwardRef(function MedicationsModal(
 				);
 				handleClose();
 			} else {
-				console.error("Nie udało się usunąć wydarzenia.");
+				setAlert({
+					message: "Nie udało się usunąć wydarzenia",
+					type: "error",
+				});
 			}
 		});
 	}
 
 	function handleAddEvent(slotInfo) {
-		if (!title || !time) return;
+		if (!title || !time) {
+			setAlert({ message: "Nie udało się dodać wydarzenia", type: "error" });
+			return;
+		}
 
 		const token = userToken();
 
@@ -61,74 +69,84 @@ const AddEventModal = forwardRef(function MedicationsModal(
 	}
 
 	return createPortal(
-		<div className={styles.modalOverlay} ref={ref}>
-			<div className={styles.modal}>
-				<div className={styles.header}>
-					{!deleteEvent ? (
-						<h2>Dodaj nowe wydarzenie</h2>
-					) : (
-						<h2>Usuń wydarzenie</h2>
-					)}
-					<button className={styles.closeBtn} onClick={handleClose}>
-						&times;
-					</button>
-				</div>
-				{!deleteEvent ? (
-					<form
-						className={styles.modalForm}
-						onSubmit={() => handleAddEvent(slotInfo)}
-					>
-						<label>Tytuł:</label>
-						<input
-							type="text"
-							value={title}
-							onChange={(e) => setTitle(e.target.value)}
-							className={styles.titleInput}
-						/>
-
-						<label>Godzina:</label>
-						<input
-							type="time"
-							value={time}
-							onChange={(e) => setTime(e.target.value)}
-							className={styles.timeInput}
-						/>
-
-						<div className={styles.modalButtons}>
-							<button type="submit" className={styles.addBtn}>
-								Dodaj
-							</button>
-							<button
-								type="button"
-								className={styles.cancelBtn}
-								onClick={onClose}
-							>
-								Anuluj
-							</button>
-						</div>
-					</form>
-				) : (
-					<div className={styles.deleteConfirm}>
-						<p>
-							Czy na pewno chcesz usunąć wydarzenie:{" "}
-							<strong>{eventInfo?.title}</strong>?
-						</p>
-						<div className={styles.modalButtons}>
-							<button onClick={handleDelete} className={styles.deleteBtn}>
-								Usuń
-							</button>
-							<button
-								type="button"
-								className={styles.cancelBtn}
-								onClick={onClose}
-							>
-								Anuluj
-							</button>
-						</div>
+		<>
+			<div className={styles.modalOverlay} ref={ref}>
+				<div className={styles.modal}>
+					<div className={styles.header}>
+						{!deleteEvent ? (
+							<h2>Dodaj nowe wydarzenie</h2>
+						) : (
+							<h2>Usuń wydarzenie</h2>
+						)}
+						<button className={styles.closeBtn} onClick={handleClose}>
+							&times;
+						</button>
 					</div>
-				)}
+					{!deleteEvent ? (
+						<form
+							className={styles.modalForm}
+							onSubmit={(e) => {
+								e.preventDefault();
+								handleAddEvent(slotInfo);
+							}}
+						>
+							<label>Tytuł:</label>
+							<input
+								type="text"
+								value={title}
+								onChange={(e) => setTitle(e.target.value)}
+								className={styles.titleInput}
+							/>
+
+							<label>Godzina:</label>
+							<input
+								type="time"
+								value={time}
+								onChange={(e) => setTime(e.target.value)}
+								className={styles.timeInput}
+							/>
+
+							<div className={styles.modalButtons}>
+								<button type="submit" className={styles.addBtn}>
+									Dodaj
+								</button>
+								<button
+									type="button"
+									className={styles.cancelBtn}
+									onClick={onClose}
+								>
+									Anuluj
+								</button>
+							</div>
+						</form>
+					) : (
+						<div className={styles.deleteConfirm}>
+							<p>
+								Czy na pewno chcesz usunąć wydarzenie:{" "}
+								<strong>{eventInfo?.title}</strong>?
+							</p>
+							<div className={styles.modalButtons}>
+								<button onClick={handleDelete} className={styles.deleteBtn}>
+									Usuń
+								</button>
+								<button
+									type="button"
+									className={styles.cancelBtn}
+									onClick={onClose}
+								>
+									Anuluj
+								</button>
+							</div>
+						</div>
+					)}
+				</div>
 			</div>
-		</div>,
+			<AlertPopup
+				message={alert.message}
+				type={alert.type}
+				onClose={() => setAlert({ message: "", type: "" })}
+			/>
+		</>,
 		document.body
 	);
 });
