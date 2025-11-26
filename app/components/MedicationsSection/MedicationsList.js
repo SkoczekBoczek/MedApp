@@ -28,6 +28,8 @@ const Modal = forwardRef(function MedicationsModal(
 
 	const [selectedDay, setSelectedDay] = useState("Poniedziałek");
 	const [selectedTime, setSelectedTime] = useState("08:00");
+	const [selectedDose, setSelectedDose] = useState(1);
+	const [selectedUnit, setSelectedUnit] = useState("szt.");
 
 	const parentRef = useRef(null);
 	const rowVirtualizer = useVirtualizer({
@@ -114,6 +116,7 @@ const Modal = forwardRef(function MedicationsModal(
 			drugId: selectedDrug._id,
 			productName: selectedDrug.productName,
 			day: selectedDay,
+			dose: `${selectedDose} ${selectedUnit}`,
 			time: selectedTime,
 		};
 
@@ -224,6 +227,10 @@ const Modal = forwardRef(function MedicationsModal(
 							setSelectedTime={setSelectedTime}
 							selectedDay={selectedDay}
 							setSelectedDay={setSelectedDay}
+							selectedDose={selectedDose}
+							setSelectedDose={setSelectedDose}
+							selectedUnit={selectedUnit}
+							setSelectedUnit={setSelectedUnit}
 						/>
 					)}
 					{selectedInfoDrug && !showTimeSelection && (

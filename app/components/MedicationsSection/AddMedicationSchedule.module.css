@@ -28,7 +28,8 @@
 }
 
 .selectInput,
-.timeInput {
+.timeInput,
+.doseInput {
 	width: 100%;
 	padding: 0.75rem;
 	border: 1px solid #ccc;
@@ -39,7 +40,8 @@
 }
 
 .selectInput:focus,
-.timeInput:focus {
+.timeInput:focus,
+.doseInput:focus {
 	border-color: var(--color-primary);
 	box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.2);
 }
@@ -48,6 +50,22 @@
 	display: flex;
 	gap: 0.75rem;
 	margin-top: 1.5rem;
+}
+
+.doseInputGroup {
+	display: flex;
+	gap: 0.5rem;
+	align-items: center;
+}
+
+.doseInput {
+	flex: 3;
+}
+
+.selectUnit {
+	padding: 0.55rem;
+	flex: 1;
+	margin-top: -15px;
 }
 
 .cancelBtn,

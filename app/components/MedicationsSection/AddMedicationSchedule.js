@@ -6,8 +6,12 @@ export default function AddMedicationSchedule({
 	selectedDrug,
 	selectedTime,
 	setSelectedTime,
+	selectedDose,
+	setSelectedDose,
 	selectedDay,
 	setSelectedDay,
+	selectedUnit,
+	setSelectedUnit,
 }) {
 	const days = [
 		"Poniedziałek",
@@ -18,6 +22,8 @@ export default function AddMedicationSchedule({
 		"Sobota",
 		"Niedziela",
 	];
+
+	const units = ["szt.", "tabl.", "ml", "mg", "krople", "łyżeczka", "saszetka"];
 
 	return (
 		<div className={styles.timeSelection}>
@@ -49,6 +55,28 @@ export default function AddMedicationSchedule({
 					onChange={(e) => setSelectedTime(e.target.value)}
 					className={styles.timeInput}
 				/>
+				<label>Dawka:</label>
+				<div className={styles.doseInputGroup}>
+					<input
+						type="number"
+						step="0.1"
+						min="0"
+						value={selectedDose}
+						onChange={(e) => setSelectedDose(e.target.value)}
+						className={styles.doseInput}
+					/>
+					<select
+						value={selectedUnit}
+						onChange={(e) => setSelectedUnit(e.target.value)}
+						className={`${styles.selectInput} ${styles.selectUnit}`}
+					>
+						{units.map((unit) => (
+							<option key={unit} value={unit}>
+								{unit}
+							</option>
+						))}
+					</select>
+				</div>
 			</div>
 
 			<div className={styles.timeSelectionButtons}>

@@ -3,7 +3,7 @@ import styles from "./MedicationsSection.module.css";
 import MedicationsModal from "./MedicationsList";
 import userToken from "@/utils/userToken";
 import { useEffect, useRef, useState } from "react";
-import { Plus, Pill, Clock, PlusCircle, Trash } from "lucide-react";
+import { Plus, Pill, Clock, PlusCircle, Trash, Syringe } from "lucide-react";
 
 export default function MedicationsSection() {
 	const [weeklyPlan, setWeeklyPlan] = useState([
@@ -54,6 +54,7 @@ export default function MedicationsSection() {
 								drugId: medication.drugId,
 								productName: medication.productName,
 								time: medication.time,
+								dose: medication.dose,
 								taken: false,
 							},
 							...dayPlan.medications,
@@ -160,15 +161,22 @@ export default function MedicationsSection() {
 											>
 												<div className={styles.medicationContent}>
 													<div className={styles.medicationInfo}>
+														{/* GODZINA */}
 														<div className={styles.timeRow}>
 															<Clock size={14} className={styles.icon} />
 															<span className={styles.time}>{med.time}</span>
 														</div>
+														{/* NAZWA */}
 														<div className={styles.nameRow}>
 															<Pill size={14} className={styles.icon} />
 															<span className={styles.name}>
 																{med.productName}
 															</span>
+														</div>
+														{/* DAWAKA */}
+														<div className={styles.doseRow}>
+															<Syringe size={14} className={styles.icon} />
+															<span className={styles.name}>{med.dose}</span>
 														</div>
 													</div>
 
