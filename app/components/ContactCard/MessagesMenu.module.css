@@ -233,6 +233,46 @@
 	animation: rotateIn 0.5s ease forwards;
 }
 
+.loader {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100px;
+	width: 100%;
+}
+
+.spinner {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background: conic-gradient(
+		from 0deg at 50% 50%,
+		transparent 0deg,
+		#9b72cb 180deg,
+		transparent 180deg
+	);
+	-webkit-mask: radial-gradient(
+		farthest-side,
+		transparent calc(100% - 4px),
+		#fff calc(100% - 4px + 0.5px)
+	);
+	mask: radial-gradient(
+		farthest-side,
+		transparent calc(100% - 4px),
+		#fff calc(100% - 4px + 0.5px)
+	);
+	animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
 @keyframes rotateIn {
 	0% {
 		transform: rotate(-90deg);

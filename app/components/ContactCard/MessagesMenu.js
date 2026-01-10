@@ -9,9 +9,12 @@ export default function MessagesMenu({ doctors, onCloseChat, selectedDoctor }) {
 	const [messages, setMessages] = useState([]);
 	const [activeDoctor, setActiveDoctor] = useState(selectedDoctor);
 	const [messageInput, setMessageInput] = useState("");
+	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
 		if (!activeDoctor) return;
+
+		setIsLoading(true);
 
 		const token = userToken();
 		const doctorId = activeDoctor._id;
@@ -20,6 +23,12 @@ export default function MessagesMenu({ doctors, onCloseChat, selectedDoctor }) {
 			.then((res) => res.json())
 			.then((data) => {
 				setMessages(data?.messages || []);
+			})
+			.catch((err) => {
+				console.error("Error fetching messages:", err);
+			})
+			.finally(() => {
+				setIsLoading(false);
 			});
 	}, [activeDoctor]);
 
@@ -81,7 +90,11 @@ export default function MessagesMenu({ doctors, onCloseChat, selectedDoctor }) {
 				</div>
 			)}
 			<main className={styles.chatWindow}>
-				{messages.length === 0 ? (
+				{isLoading ? (
+					<div className={styles.loader}>
+						<div className={styles.spinner}></div>
+					</div>
+				) : messages.length === 0 ? (
 					<div className={styles.emptyChat}>Brak wiadomości</div>
 				) : (
 					messages.map((msg) => {
