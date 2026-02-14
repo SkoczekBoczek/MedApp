@@ -1,6 +1,4 @@
-import { MongoClient } from "mongodb";
-
-const client = await MongoClient.connect(process.env.MONGODB_URI);
+import { connectToDatabase } from "@/lib/mongodb";
 
 export async function GET(req) {
 	try {
@@ -9,7 +7,7 @@ export async function GET(req) {
 		const limit = parseInt(searchParams.get("limit"));
 		const skip = parseInt(searchParams.get("skip"));
 
-		const db = client.db("clinicDB");
+		const { db } = await connectToDatabase();
 
 		const regex = new RegExp(query, "i");
 

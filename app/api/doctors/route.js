@@ -1,10 +1,9 @@
-import { MongoClient } from "mongodb";
+import { connectToDatabase } from "@/lib/mongodb";
 
-const client = await MongoClient.connect(process.env.MONGODB_URI);
 export async function GET() {
 	try {
-		const db = client.db("clinicDB");
-		const doctors = await db.collection("doctors").find().toArray();
+		const { db } = await connectToDatabase();
+		const doctors = await db.collection("doctors").find().limit(20).toArray();
 
 		return new Response(JSON.stringify(doctors), {
 			status: 200,

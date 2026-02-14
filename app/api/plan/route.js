@@ -1,18 +1,4 @@
-import { MongoClient } from "mongodb";
-
-let cachedClient = null;
-let cachedDb = null;
-
-async function connectToDatabase() {
-	if (cachedClient && cachedDb) return { client: cachedClient, db: cachedDb };
-
-	const client = await MongoClient.connect(process.env.MONGODB_URI);
-	const db = client.db("clinicDB");
-	cachedClient = client;
-	cachedDb = db;
-
-	return { client, db };
-}
+import { connectToDatabase } from "@/lib/mongodb";
 
 export async function GET(req) {
 	try {
@@ -45,38 +31,21 @@ export async function POST(req) {
 		const { db } = await connectToDatabase();
 		const plan = await req.json();
 
-		const existingPlan = await db
+		await db
 			.collection("plans")
-			.findOne({ userToken: plan.userToken });
-
-		if (existingPlan) {
-			await db
-				.collection("plans")
-				.updateOne(
-					{ userToken: plan.userToken },
-					{ $set: { weeklyPlan: plan.plan } }
-				);
-
-			return new Response(
-				JSON.stringify({ message: "Plan updated successfully" }),
-				{
-					status: 200,
-					headers: { "Content-Type": "application/json" },
-				}
+			.updateOne(
+				{ userToken: plan.userToken },
+				{ $set: { weeklyPlan: plan.plan } },
+				{ upsert: true },
 			);
-		} else {
-			await db.collection("plans").insertOne({
-				userToken: plan.userToken,
-				weeklyPlan: plan.plan,
-			});
-			return new Response(
-				JSON.stringify({ message: "Plan created successfully" }),
-				{
-					status: 201,
-					headers: { "Content-Type": "application/json" },
-				}
-			);
-		}
+
+		return new Response(
+			JSON.stringify({ message: "Plan saved successfully" }),
+			{
+				status: 200,
+				headers: { "Content-Type": "application/json" },
+			},
+		);
 	} catch (error) {
 		return new Response(JSON.stringify({ error: "Internal Server Error" }), {
 			status: 500,

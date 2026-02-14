@@ -1,19 +1,5 @@
-import { MongoClient, ObjectId } from "mongodb";
-
-let cachedClient = null;
-let cachedDb = null;
-
-async function connectToDatabase() {
-	if (cachedClient && cachedDb) return { client: cachedClient, db: cachedDb };
-
-	const client = await MongoClient.connect(process.env.MONGODB_URI);
-	const db = client.db("clinicDB");
-
-	cachedClient = client;
-	cachedDb = db;
-
-	return { client, db };
-}
+import { ObjectId } from "mongodb";
+import { connectToDatabase } from "@/lib/mongodb";
 
 export async function GET(req) {
 	try {
@@ -22,7 +8,11 @@ export async function GET(req) {
 		const { searchParams } = new URL(req.url);
 
 		const userToken = searchParams.get("token");
-		const events = await db.collection("events").find({ userToken }).toArray();
+		const events = await db
+			.collection("events")
+			.find({ userToken })
+			.limit(20)
+			.toArray();
 
 		return new Response(JSON.stringify(events), {
 			status: 200,
@@ -55,7 +45,7 @@ export async function POST(req) {
 			{
 				status: 200,
 				headers: { "Content-Type": "application/json" },
-			}
+			},
 		);
 	} catch (error) {
 		return new Response(JSON.stringify({ error: "Internal Server Error" }), {
@@ -86,7 +76,7 @@ export async function DELETE(req) {
 			{
 				status: 200,
 				headers: { "Content-Type": "application/json" },
-			}
+			},
 		);
 	} catch (error) {
 		return new Response(JSON.stringify({ error: "Internal Server Error" }), {
