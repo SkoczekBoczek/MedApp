@@ -78,6 +78,9 @@
 }
 
 @media (max-width: 768px) {
+	.welcome {
+		margin-top: 84px;
+	}
 	.currentDate {
 		font-size: 12px;
 		padding: 8px;

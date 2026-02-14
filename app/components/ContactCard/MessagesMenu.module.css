@@ -11,7 +11,7 @@
 	flex-direction: column;
 	overflow: hidden;
 	font-family: system-ui, sans-serif;
-	z-index: 9999;
+	z-index: 9;
 }
 
 .header {
@@ -281,5 +281,11 @@
 	100% {
 		transform: rotate(0deg);
 		opacity: 1;
+	}
+}
+
+@media (max-width: 768px) {
+	.shell {
+		height: 470px;
 	}
 }

@@ -17,7 +17,7 @@ import { useVirtualizer } from "@tanstack/react-virtual";
 
 const Modal = forwardRef(function MedicationsModal(
 	{ onAddMedication, isDuplicated },
-	ref
+	ref,
 ) {
 	const [selectedDrug, setSelectedDrug] = useState(null);
 	const [selectedInfoDrug, setSelectedInfoDrug] = useState(null);
@@ -242,7 +242,7 @@ const Modal = forwardRef(function MedicationsModal(
 				</div>
 			</div>
 		</dialog>,
-		document.body
+		document.body,
 	);
 });
 

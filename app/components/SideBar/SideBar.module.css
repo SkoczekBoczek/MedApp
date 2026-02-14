@@ -8,7 +8,6 @@
 	flex-direction: column;
 	align-items: center;
 	flex-shrink: 0;
-	position: relative;
 }
 
 .sidebarHeader {
@@ -16,6 +15,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	margin-bottom: 15px;
 }
 
 .burger {
@@ -65,6 +65,10 @@
 		margin: 0;
 		border-radius: 0;
 		padding: 15px;
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 100;
 	}
 
 	.sidebar-header {

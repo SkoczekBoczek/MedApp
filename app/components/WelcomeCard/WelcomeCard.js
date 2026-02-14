@@ -3,9 +3,13 @@
 import { useState, useEffect } from "react";
 import styles from "./WelcomeCard.module.css";
 import { Calendar, Settings, Bell } from "lucide-react";
+import SettingsModal from "./SettingsModal.js";
 
 export default function WelcomeCard() {
 	const [formattedDate, setFormattedDate] = useState("");
+	const [userName, setUserName] = useState("");
+	const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+
 	const months = [
 		"Styczeń",
 		"Luty",
@@ -22,6 +26,18 @@ export default function WelcomeCard() {
 	];
 
 	useEffect(() => {
+		const savedName = localStorage.getItem("userName");
+		if (savedName) {
+			setUserName(savedName);
+		}
+
+		const handleNameChange = () => {
+			const newName = localStorage.getItem("userName");
+			if (newName) setUserName(newName);
+		};
+
+		window.addEventListener("userNameChange", handleNameChange);
+
 		function updateDate() {
 			const date = new Date();
 			const month = months[date.getMonth()];
@@ -34,8 +50,22 @@ export default function WelcomeCard() {
 
 		updateDate();
 		const interval = setInterval(updateDate, 1000);
-		return () => clearInterval(interval);
+		return () => {
+			clearInterval(interval);
+			window.removeEventListener("userNameChange", handleNameChange);
+		};
 	}, []);
+
+	const openSettings = () => {
+		setIsSettingsOpen(true);
+	};
+
+	const saveSettings = (newName) => {
+		setUserName(newName);
+		localStorage.setItem("userName", newName);
+		window.dispatchEvent(new Event("userNameChange"));
+		setIsSettingsOpen(false);
+	};
 
 	return (
 		<section className={`${styles.welcome} ${styles.card}`}>
@@ -45,16 +75,23 @@ export default function WelcomeCard() {
 					<p className={styles.date}>{formattedDate}</p>
 				</div>
 				<h2>Witaj w MedCare!</h2>
-				<p>Miłego dnia, Łucja!</p>
+				<p>Miłego dnia {userName}</p>
 			</div>
 			<div className={styles.welcomeBtns}>
-				<button>
+				<button onClick={openSettings}>
 					<Settings />
 				</button>
 				<button>
 					<Bell />
 				</button>
 			</div>
+			{isSettingsOpen && (
+				<SettingsModal
+					onClose={() => setIsSettingsOpen(false)}
+					onSave={saveSettings}
+					initialName={userName}
+				/>
+			)}
 		</section>
 	);
 }
