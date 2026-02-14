@@ -1,55 +1,175 @@
-# MedCare - Next.js Medical Dashboard
+# MedApp - Healthcare Management Dashboard
 
-A modern medical dashboard application built with Next.js, featuring a responsive design and intuitive user interface for healthcare management.
+A full-stack medical management application built with Next.js and React, providing a comprehensive platform for patients to manage their healthcare information, appointments, medications, and communications with doctors.
+
+## Project Overview
+
+MedApp is a healthcare management system designed to help patients organize their medical life efficiently. It combines an intuitive frontend interface with robust backend APIs to deliver a seamless healthcare management experience.
 
 ## Features
 
-- **Dashboard Overview**: Welcome screen with real-time date and time
-- **Calendar Integration**: View upcoming medical appointments
-- **Doctor Directory**: Browse and contact healthcare providers
-- **Responsive Design**: Optimized for desktop, tablet, and mobile devices
-- **Modern UI**: Clean, professional interface with smooth animations
+### User Management
+
+- **Settings Modal**: Change user name and preferences
+- **Real-time Updates**: Instant synchronization across dashboard components
+
+### Medication Management
+
+- **Medication Scheduling**: Add and organize medications by day and time
+- **Drug Database**: Browse and select from a comprehensive drug database
+- **Schedule Tracking**: View medication schedules for each day of the week
+- **Medication Details**: Detailed information about selected medications
+
+### Appointments & Events
+
+- **Calendar Integration**: Interactive calendar for viewing and managing medical events
+- **Event Creation**: Add new medical appointments with date and time
+- **Event Management**: Organize and track upcoming medical appointments
+
+### Doctor Communications
+
+- **Doctor Directory**: Browse available healthcare providers
+- **Direct Messaging**: Real-time messaging system with doctors
+- **Contact Management**: Save and organize favorite doctor contacts
+
+### Dashboard
+
+- **Welcome Screen**: Personalized greeting with real-time date/time display
+- **Quick Access**: Fast navigation to all features via responsive sidebar
+- **Mobile-Optimized**: Fully responsive design with sticky navigation on mobile
 
 ## Getting Started
 
-First, install the dependencies:
+### Prerequisites
+
+- Node.js 18+
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/SkoczekBoczek/MedApp.git
+cd MedApp
+```
+
+2. Install dependencies:
 
 ```bash
 npm install
 ```
 
-Then, run the development server:
+3. Run the development server:
 
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-## Project Structure
+### Build for Production
+
+```bash
+npm run build
+npm start
+```
+
+## 📁 Project Structure
 
 ```
 app/
-├── components/          # Reusable UI components
-│   ├── SideBar.js      # Navigation sidebar
-│   ├── WelcomeCard.js  # Welcome dashboard card
-│   ├── CalendarCard.js # Calendar widget
-│   └── ContactCard.js  # Doctor contact cards
-├── styles/             # Global styles and CSS variables
-├── layout.js           # Root layout component
-└── page.js            # Home page component
+├── api/                          # Backend API routes
+│   ├── conversations/            # Messaging API
+│   ├── doctors/                  # Doctor data API
+│   ├── drugs/                    # Medication database API
+│   ├── events/                   # Calendar events API
+│   └── plan/                     # Medication schedule API
+│
+├── components/                   # Reusable React components
+│   ├── SideBar/                  # Navigation sidebar
+│   ├── WelcomeCard/              # Welcome dashboard & settings
+│   ├── CalendarCard/             # Calendar & event management
+│   ├── ContactCard/              # Doctor directory & messaging
+│   ├── MedicationsSection/       # Medication management
+│   └── AlertPopup/               # Alert notifications
+│
+├── styles/                       # Global styling
+│   ├── main.css                  # Main styles
+│   └── variables.css             # CSS variables & theme
+│
+├── layout.js                     # Root layout component
+├── page.js                       # Home page
+└── globals.css                   # Global CSS
 ```
 
 ## Technologies Used
 
-- **Next.js 15** - React framework with App Router
-- **React 19** - UI library
-- **CSS Modules** - Component-scoped styling
-- **Font Awesome** - Icon library
-- **Next.js Image** - Optimized image loading
+### Frontend
 
-## Deployment
+- **Next.js 16**
+- **React 19**
+- **CSS Modules**
+- **Lucide React** - Icon library
+- **react-big-calendar** - Calendar component
+- **@tanstack/react-virtual** - Virtual scrolling for performance
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new) from the creators of Next.js.
+### Backend & Database
 
-Check out the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- **Node.js**
+- **MongoDB**
+
+## Key Components
+
+### SideBar
+
+Main navigation component with:
+
+- Profile settings access
+- Doctor messaging
+- Medication management
+- Fixed positioning on mobile devices
+
+### MedicationsSection
+
+Comprehensive medication management with:
+
+- Day-based medication scheduling
+- Drug selection from database
+- Medication details display
+- Add/remove medications
+
+### CalendarCard
+
+Event management featuring:
+
+- Interactive calendar view
+- Event creation modal
+- Event listing and management
+
+### ContactCard & MessagesMenu
+
+Doctor communication system:
+
+- Doctor directory browsing
+- Real-time messaging interface
+- Contact information display
+
+## State Management
+
+The application uses:
+
+- React hooks (useState, useEffect) for component state
+- localStorage for persistent user data
+- Context through prop passing
+- Event listeners for cross-component synchronization
+
+## Responsive Design
+
+- **Desktop**: Full-featured layout with sidebar navigation
+- **Tablet**: Optimized touch interface
+- **Mobile**: Hamburger menu, sticky sidebar at top, touch-friendly buttons
+
+## License
+
+This project is open source and available under the MIT License.
