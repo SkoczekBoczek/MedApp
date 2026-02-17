@@ -41,7 +41,7 @@ const Modal = forwardRef(function MedicationsModal(
 
 	useEffect(() => {
 		async function fetchDrugs() {
-			const res = await fetch(`/api/drugs?query=${findDrug}&limit=50&skip=0`);
+			const res = await fetch(`/api/drugs?query=${findDrug}&limit=1000&skip=0`);
 			const data = await res.json();
 			console.log("Fetched drugs:", data);
 			setLoading(false);
@@ -233,13 +233,13 @@ const Modal = forwardRef(function MedicationsModal(
 							setSelectedUnit={setSelectedUnit}
 						/>
 					)}
-					{selectedInfoDrug && !showTimeSelection && (
-						<SelectedDrugInfo
-							selectedDrug={selectedInfoDrug}
-							onClose={() => setSelectedInfoDrug(null)}
-						/>
-					)}
 				</div>
+				{selectedInfoDrug && !showTimeSelection && (
+					<SelectedDrugInfo
+						selectedDrug={selectedInfoDrug}
+						onClose={() => setSelectedInfoDrug(null)}
+					/>
+				)}
 			</div>
 		</dialog>,
 		document.body,

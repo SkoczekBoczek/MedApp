@@ -22,13 +22,18 @@ export default function CalendarCard() {
 		fetch(`/api/events?token=${token}`)
 			.then((res) => res.json())
 			.then((data) => {
-				const formatted = data.map((event) => ({
-					...event,
-					start: new Date(event.start),
-					end: new Date(event.end),
-				}));
-				setEvents(formatted);
-			});
+				if (Array.isArray(data)) {
+					const formatted = data.map((event) => ({
+						...event,
+						start: new Date(event.start),
+						end: new Date(event.end),
+					}));
+					setEvents(formatted);
+				} else {
+					console.error("Invalid events data received", data);
+				}
+			})
+			.catch((err) => console.error("Error fetching events", err));
 	}, []);
 
 	function eventPropGetter(event) {

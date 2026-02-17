@@ -36,8 +36,16 @@ export default function ContactCard() {
 		fetch("api/doctors")
 			.then((res) => res.json())
 			.then((data) => {
-				console.log("Fetched doctors:", data);
-				setDoctors(data);
+				if (Array.isArray(data)) {
+					setDoctors(data);
+				} else {
+					console.error("Invalid doctors data received", data);
+					setDoctors([]);
+				}
+				setLoading(false);
+			})
+			.catch((err) => {
+				console.error("Error fetching doctors", err);
 				setLoading(false);
 			});
 	}, []);
@@ -68,7 +76,7 @@ export default function ContactCard() {
 	const indexOfFirstDoctor = indexOfLastDoctor - doctorsPerPage;
 	const currentDoctors = filteredDoctors.slice(
 		indexOfFirstDoctor,
-		indexOfLastDoctor
+		indexOfLastDoctor,
 	);
 
 	const totalPages = Math.ceil(filteredDoctors.length / doctorsPerPage);
