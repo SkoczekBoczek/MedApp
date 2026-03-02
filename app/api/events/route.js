@@ -1,16 +1,22 @@
 import { ObjectId } from "mongodb";
 import { connectToDatabase } from "@/lib/mongodb";
 
+import { getUserIdFromRequest } from "@/lib/authMiddleware";
+
 export async function GET(req) {
 	try {
+		const userId = getUserIdFromRequest(req);
+		if (!userId) {
+			return new Response(JSON.stringify({ error: "Unauthorized" }), {
+				status: 401,
+				headers: { "Content-Type": "application/json" },
+			});
+		}
+
 		const { db } = await connectToDatabase();
-
-		const { searchParams } = new URL(req.url);
-
-		const userToken = searchParams.get("token");
 		const events = await db
 			.collection("events")
-			.find({ userToken })
+			.find({ userId })
 			.limit(20)
 			.toArray();
 
@@ -28,6 +34,14 @@ export async function GET(req) {
 
 export async function POST(req) {
 	try {
+		const userId = getUserIdFromRequest(req);
+		if (!userId) {
+			return new Response(JSON.stringify({ error: "Unauthorized" }), {
+				status: 401,
+				headers: { "Content-Type": "application/json" },
+			});
+		}
+
 		const { db } = await connectToDatabase();
 		const newEvent = await req.json();
 
@@ -38,6 +52,7 @@ export async function POST(req) {
 			});
 		}
 
+		newEvent.userId = userId;
 		await db.collection("events").insertOne(newEvent);
 
 		return new Response(
@@ -57,6 +72,14 @@ export async function POST(req) {
 
 export async function DELETE(req) {
 	try {
+		const userId = getUserIdFromRequest(req);
+		if (!userId) {
+			return new Response(JSON.stringify({ error: "Unauthorized" }), {
+				status: 1,
+				headers: { "Content-Type": "application/json" },
+			});
+		}
+
 		const { db } = await connectToDatabase();
 
 		const { searchParams } = new URL(req.url);
@@ -69,7 +92,9 @@ export async function DELETE(req) {
 			});
 		}
 
-		await db.collection("events").deleteOne({ _id: new ObjectId(eventId) });
+		await db
+			.collection("events")
+			.deleteOne({ _id: new ObjectId(eventId), userId });
 
 		return new Response(
 			JSON.stringify({ error: "Event deleted successfully" }),

@@ -1,11 +1,19 @@
 import { connectToDatabase } from "@/lib/mongodb";
 
+import { getUserIdFromRequest } from "@/lib/authMiddleware";
+
 export async function GET(req) {
 	try {
+		const userId = getUserIdFromRequest(req);
+		if (!userId) {
+			return new Response(JSON.stringify({ error: "Unauthorized" }), {
+				status: 401,
+				headers: { "Content-Type": "application/json" },
+			});
+		}
+
 		const { db } = await connectToDatabase();
-		const { searchParams } = new URL(req.url);
-		const userToken = searchParams.get("token");
-		const plan = await db.collection("plans").findOne({ userToken });
+		const plan = await db.collection("plans").findOne({ userId });
 
 		if (!plan) {
 			return new Response(JSON.stringify({ error: "Plan not found" }), {
@@ -28,13 +36,21 @@ export async function GET(req) {
 
 export async function POST(req) {
 	try {
+		const userId = getUserIdFromRequest(req);
+		if (!userId) {
+			return new Response(JSON.stringify({ error: "Unauthorized" }), {
+				status: 401,
+				headers: { "Content-Type": "application/json" },
+			});
+		}
+
 		const { db } = await connectToDatabase();
 		const plan = await req.json();
 
 		await db
 			.collection("plans")
 			.updateOne(
-				{ userToken: plan.userToken },
+				{ userId },
 				{ $set: { weeklyPlan: plan.plan } },
 				{ upsert: true },
 			);

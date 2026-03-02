@@ -1,10 +1,15 @@
-import { v4 as uuidv4 } from "uuid";
-
-export default function userToken() {
-	let token = localStorage.getItem("userToken");
-	if (!token) {
-		token = uuidv4();
-		localStorage.setItem("userToken", token);
-	}
-	return token;
+export function getAuthToken() {
+	return localStorage.getItem("authToken");
 }
+
+export function getUserId() {
+	return localStorage.getItem("userToken");
+}
+
+export function clearAuth() {
+	localStorage.removeItem("authToken");
+	localStorage.removeItem("userToken");
+	localStorage.removeItem("userName");
+}
+
+export default getAuthToken;

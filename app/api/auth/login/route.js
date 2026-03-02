@@ -1,4 +1,5 @@
 import { connectToDatabase } from "@/lib/mongodb";
+import { signToken } from "@/lib/auth";
 
 export async function POST(request) {
 	try {
@@ -44,7 +45,12 @@ export async function POST(request) {
 			name: user.name || null,
 		};
 
-		return new Response(JSON.stringify({ user: safeUser }), {
+		const token = signToken({
+			userId: user._id.toString(),
+			role: user.role || null,
+		});
+
+		return new Response(JSON.stringify({ user: safeUser, token }), {
 			status: 200,
 			headers: { "Content-Type": "application/json" },
 		});

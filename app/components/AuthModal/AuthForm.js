@@ -54,6 +54,8 @@ const AuthForm = forwardRef(function AuthForm(props, ref) {
 
 			if (data.user) {
 				localStorage.setItem("userName", data.user.name || "User");
+				if (data.token) localStorage.setItem("authToken", data.token);
+				localStorage.setItem("userToken", data.user._id);
 				window.dispatchEvent(new Event("userNameChange"));
 				dialog.current?.close();
 			}

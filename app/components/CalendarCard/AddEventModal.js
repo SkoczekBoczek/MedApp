@@ -3,12 +3,12 @@
 import styles from "./AddEventModal.module.css";
 import { forwardRef, useState } from "react";
 import { createPortal } from "react-dom";
-import userToken from "@/utils/userToken";
+import { getAuthToken } from "@/utils/userToken";
 import AlertPopup from "../AlertPopup/AlertPopup";
 
 const AddEventModal = forwardRef(function MedicationsModal(
 	{ isOpen, slotInfo, onClose, setEvents, deleteEvent, eventInfo },
-	ref
+	ref,
 ) {
 	if (!isOpen) return;
 
@@ -25,12 +25,14 @@ const AddEventModal = forwardRef(function MedicationsModal(
 	function handleDelete() {
 		if (!eventInfo) return;
 
+		const token = getAuthToken();
 		fetch(`api/events?eventId=${eventInfo._id}`, {
 			method: "DELETE",
+			headers: { Authorization: `Bearer ${token}` },
 		}).then((res) => {
 			if (res.ok) {
 				setEvents((prevEvents) =>
-					prevEvents.filter((event) => event._id !== eventInfo._id)
+					prevEvents.filter((event) => event._id !== eventInfo._id),
 				);
 				handleClose();
 			} else {
@@ -48,19 +50,21 @@ const AddEventModal = forwardRef(function MedicationsModal(
 			return;
 		}
 
-		const token = userToken();
+		const token = getAuthToken();
 
 		const newEvent = {
 			title,
 			start: slotInfo.start,
 			end: slotInfo.end,
 			time: time,
-			userToken: token,
 		};
 
 		fetch("/api/events", {
 			method: "POST",
-			headers: { "Content-Type": "application/json" },
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`,
+			},
 			body: JSON.stringify(newEvent),
 		}).then(() => {
 			setEvents((prev) => [...prev, { ...newEvent }]);
@@ -147,7 +151,7 @@ const AddEventModal = forwardRef(function MedicationsModal(
 				onClose={() => setAlert({ message: "", type: "" })}
 			/>
 		</>,
-		document.body
+		document.body,
 	);
 });
 export default AddEventModal;

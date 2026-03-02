@@ -50,10 +50,6 @@ const Modal = forwardRef(function MedicationsModal(
 		fetchDrugs();
 	}, [findDrug]);
 
-	// const results = drugs.filter((d) =>
-	// 	d.productName.toLowerCase().includes(findDrug.toLowerCase())
-	// );
-
 	const [isOpen, setIsOpen] = useState(false);
 
 	const dialog = useRef();

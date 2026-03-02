@@ -59,6 +59,8 @@ export default function SideBar() {
 	const handleLogout = (e) => {
 		e.preventDefault();
 		localStorage.removeItem("userName");
+		localStorage.removeItem("userToken");
+		localStorage.removeItem("authToken");
 		window.dispatchEvent(new Event("userNameChange"));
 	};
 

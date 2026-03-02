@@ -6,7 +6,7 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "moment/locale/pl";
 import { useEffect, useState, useRef } from "react";
-import userToken from "@/utils/userToken";
+import { getAuthToken } from "@/utils/userToken";
 import AddEventModal from "./AddEventModal";
 
 moment.locale("pl");
@@ -18,22 +18,42 @@ export default function CalendarCard() {
 	const [selectedEvent, setSelectedEvent] = useState(false);
 
 	useEffect(() => {
-		const token = userToken();
-		fetch(`/api/events?token=${token}`)
-			.then((res) => res.json())
-			.then((data) => {
-				if (Array.isArray(data)) {
-					const formatted = data.map((event) => ({
-						...event,
-						start: new Date(event.start),
-						end: new Date(event.end),
-					}));
-					setEvents(formatted);
-				} else {
-					console.error("Invalid events data received", data);
-				}
+		const fetchEvents = () => {
+			const token = getAuthToken();
+
+			if (!token) {
+				setEvents([]);
+				return;
+			}
+
+			fetch(`/api/events`, {
+				headers: { Authorization: `Bearer ${token}` },
 			})
-			.catch((err) => console.error("Error fetching events", err));
+				.then((res) => {
+					if (res.status === 401) return [];
+					return res.json();
+				})
+				.then((data) => {
+					if (Array.isArray(data)) {
+						const formatted = data.map((event) => ({
+							...event,
+							start: new Date(event.start),
+							end: new Date(event.end),
+						}));
+						setEvents(formatted);
+					} else if (data && !data.error) {
+						console.error("Invalid events data received", data);
+					}
+				})
+				.catch((err) => console.error("Error fetching events", err));
+		};
+
+		fetchEvents();
+		window.addEventListener("userNameChange", fetchEvents);
+
+		return () => {
+			window.removeEventListener("userNameChange", fetchEvents);
+		};
 	}, []);
 
 	function eventPropGetter(event) {

@@ -1,7 +1,7 @@
 "use client";
 import styles from "./MedicationsSection.module.css";
 import MedicationsModal from "./MedicationsList";
-import userToken from "@/utils/userToken";
+import { getAuthToken } from "@/utils/userToken";
 import { useEffect, useRef, useState } from "react";
 import { PlusCircle } from "lucide-react";
 import DayCard from "./DayCard";
@@ -18,22 +18,53 @@ export default function MedicationsSection() {
 	]);
 
 	useEffect(() => {
-		const token = userToken();
-		fetch(`/api/plan?token=${token}`)
-			.then((res) => res.json())
-			.then((data) => {
-				if (data?.weeklyPlan?.length) {
-					setWeeklyPlan(data.weeklyPlan);
-				}
-			});
+		const fetchPlan = () => {
+			const token = getAuthToken();
+
+			if (!token) {
+				setWeeklyPlan([
+					{ day: "Poniedziałek", medications: [] },
+					{ day: "Wtorek", medications: [] },
+					{ day: "Środa", medications: [] },
+					{ day: "Czwartek", medications: [] },
+					{ day: "Piątek", medications: [] },
+					{ day: "Sobota", medications: [] },
+					{ day: "Niedziela", medications: [] },
+				]);
+				return;
+			}
+
+			fetch(`/api/plan`, {
+				headers: { Authorization: `Bearer ${token}` },
+			})
+				.then((res) => {
+					if (res.status === 401) return null;
+					return res.json();
+				})
+				.then((data) => {
+					if (data?.weeklyPlan?.length) {
+						setWeeklyPlan(data.weeklyPlan);
+					}
+				});
+		};
+
+		fetchPlan();
+		window.addEventListener("userNameChange", fetchPlan);
+
+		return () => {
+			window.removeEventListener("userNameChange", fetchPlan);
+		};
 	}, []);
 
 	const savePlanToBackend = (plan) => {
-		const token = userToken();
+		const token = getAuthToken();
 		fetch("/api/plan", {
 			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ userToken: token, plan }),
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`,
+			},
+			body: JSON.stringify({ plan }),
 		});
 	};
 
@@ -97,7 +128,7 @@ export default function MedicationsSection() {
 					return {
 						...dayPlan,
 						medications: dayPlan.medications.filter(
-							(med) => med.instanceId !== id
+							(med) => med.instanceId !== id,
 						),
 					};
 				}
@@ -112,7 +143,7 @@ export default function MedicationsSection() {
 		const findCorrectDay = weeklyPlan.find((d) => d.day === med.day);
 
 		return findCorrectDay.medications.some(
-			(m) => m.productName === med.productName && m.time === med.time
+			(m) => m.productName === med.productName && m.time === med.time,
 		);
 	}
 

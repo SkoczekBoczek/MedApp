@@ -1,7 +1,7 @@
 import { X, ChevronDown } from "lucide-react";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import userToken from "@/utils/userToken";
+import { getAuthToken } from "@/utils/userToken";
 import styles from "./MessagesMenu.module.css";
 import Image from "next/image";
 
@@ -16,10 +16,12 @@ export default function MessagesMenu({ doctors, onCloseChat, selectedDoctor }) {
 
 		setIsLoading(true);
 
-		const token = userToken();
+		const token = getAuthToken();
 		const doctorId = activeDoctor._id;
 
-		fetch(`/api/conversations?token=${token}&doctorId=${doctorId}`)
+		fetch(`/api/conversations?doctorId=${doctorId}`, {
+			headers: { Authorization: `Bearer ${token}` },
+		})
 			.then((res) => res.json())
 			.then((data) => {
 				setMessages(data?.messages || []);
@@ -47,13 +49,16 @@ export default function MessagesMenu({ doctors, onCloseChat, selectedDoctor }) {
 	async function handleSend() {
 		if (!messageInput.trim()) return;
 
-		const token = userToken();
+		const token = getAuthToken();
 		const doctorId = activeDoctor._id;
 
 		await fetch("/api/conversations", {
 			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ token, doctorId, message: messageInput }),
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`,
+			},
+			body: JSON.stringify({ doctorId, message: messageInput }),
 		});
 
 		setMessages((prev) => [
@@ -212,6 +217,6 @@ export default function MessagesMenu({ doctors, onCloseChat, selectedDoctor }) {
 				<ChevronDown className={styles.arrowIcon} size={20} />
 			</button>
 		</>,
-		document.body
+		document.body,
 	);
 }
