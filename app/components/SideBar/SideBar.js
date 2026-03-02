@@ -3,10 +3,19 @@
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import styles from "./SideBar.module.css";
-import { Menu, X, User, MessageCircle, Calendar, Pill } from "lucide-react";
+import {
+	Menu,
+	X,
+	User,
+	MessageCircle,
+	LogIn,
+	LogOut,
+	Pill,
+} from "lucide-react";
 import MessagesMenu from "../ContactCard/MessagesMenu";
 import MedicationsModal from "../MedicationsSection/MedicationsList";
 import SettingsModal from "../WelcomeCard/SettingsModal";
+import AuthForm from "../AuthModal/AuthForm";
 
 export default function SideBar() {
 	const [menuActive, setMenuActive] = useState(false);
@@ -15,6 +24,7 @@ export default function SideBar() {
 	const [doctors, setDoctors] = useState([]);
 	const [userName, setUserName] = useState("");
 	const medicationsModalRef = useRef();
+	const authDialogRef = useRef();
 
 	useEffect(() => {
 		const savedName = localStorage.getItem("userName");
@@ -24,7 +34,7 @@ export default function SideBar() {
 
 		const handleNameChange = () => {
 			const newName = localStorage.getItem("userName");
-			if (newName) setUserName(newName);
+			setUserName(newName || "");
 		};
 
 		window.addEventListener("userNameChange", handleNameChange);
@@ -44,6 +54,12 @@ export default function SideBar() {
 		localStorage.setItem("userName", newName);
 		window.dispatchEvent(new Event("userNameChange"));
 		setShowSettings(false);
+	};
+
+	const handleLogout = (e) => {
+		e.preventDefault();
+		localStorage.removeItem("userName");
+		window.dispatchEvent(new Event("userNameChange"));
 	};
 
 	return (
@@ -83,6 +99,21 @@ export default function SideBar() {
 				>
 					<Pill size={18} /> Leki
 				</Link>
+				{userName ? (
+					<Link href="#" onClick={handleLogout}>
+						<LogOut size={18} /> Wyloguj się
+					</Link>
+				) : (
+					<Link
+						href="#"
+						onClick={(e) => {
+							e.preventDefault();
+							authDialogRef.current?.showModal();
+						}}
+					>
+						<LogIn size={18} /> Zaloguj się
+					</Link>
+				)}
 			</nav>
 			{showMessages && (
 				<MessagesMenu
@@ -99,6 +130,7 @@ export default function SideBar() {
 				/>
 			)}
 			<MedicationsModal ref={medicationsModalRef} onAddMedication={() => {}} />
+			<AuthForm ref={authDialogRef} />
 		</aside>
 	);
 }

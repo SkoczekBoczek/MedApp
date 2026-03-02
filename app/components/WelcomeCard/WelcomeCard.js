@@ -33,7 +33,7 @@ export default function WelcomeCard() {
 
 		const handleNameChange = () => {
 			const newName = localStorage.getItem("userName");
-			if (newName) setUserName(newName);
+			setUserName(newName || "");
 		};
 
 		window.addEventListener("userNameChange", handleNameChange);
