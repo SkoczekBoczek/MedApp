@@ -20,27 +20,28 @@ export default function MessagesMenu({
 	useEffect(() => {
 		if (!activeContact) return;
 
-		setIsLoading(true);
+		if (messages.length === 0) setIsLoading(true);
 
-		const token = getAuthToken();
-		const contactId = activeContact._id;
+		const fetchMessages = () => {
+			const token = getAuthToken();
+			const contactId = activeContact._id;
+			const queryParam = isDoctor ? `id=${contactId}` : `doctorId=${contactId}`;
 
-		const queryParam = isDoctor ? `id=${contactId}` : `doctorId=${contactId}`;
-
-		fetch(`/api/conversations?${queryParam}`, {
-			headers: { Authorization: `Bearer ${token}` },
-		})
-			.then((res) => res.json())
-			.then((data) => {
-				setMessages(data?.messages || []);
+			fetch(`/api/conversations?${queryParam}`, {
+				headers: { Authorization: `Bearer ${token}` },
 			})
-			.catch((err) => {
-				console.error("Error fetching messages:", err);
-			})
-			.finally(() => {
-				setIsLoading(false);
-			});
-	}, [activeContact]);
+				.then((res) => res.json())
+				.then((data) => {
+					setMessages(data?.messages || []);
+				})
+				.catch((err) => console.error("Error fetching messages:", err))
+				.finally(() => setIsLoading(false));
+		};
+
+		fetchMessages();
+		const interval = setInterval(fetchMessages, 3000);
+		return () => clearInterval(interval);
+	}, [activeContact, isDoctor]);
 
 	useEffect(() => {
 		if (selectedDoctor !== null) {

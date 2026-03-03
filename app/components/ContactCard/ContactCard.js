@@ -18,6 +18,7 @@ export default function ContactCard() {
 	const [chatListItems, setChatListItems] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [currentPage, setCurrentPage] = useState(1);
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 	const [startPositionX, setStartPositionX] = useState(0);
 
@@ -35,38 +36,64 @@ export default function ContactCard() {
 			setCurrentPage(currentPage + 1);
 		}
 	}
+
 	useEffect(() => {
-		const token = getAuthToken();
-		fetch("/api/conversations", {
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
-		})
-			.then((res) => res.json())
-			.then((data) => {
-				if (data.isDoctor) {
-					setIsDoctor(true);
-					setChatListItems(data.items || []);
-					setLoading(false);
-				} else {
-					fetch("api/doctors")
-						.then((res) => res.json())
-						.then((data) => {
-							if (Array.isArray(data)) {
-								setDoctors(data);
-								setChatListItems(data);
-							} else {
-								setChatListItems([]);
-								setDoctors([]);
-							}
-							setLoading(false);
-						});
-				}
+		const handleAuthChange = () => {
+			const token = getAuthToken();
+			setIsLoggedIn(!!token);
+			if (!token) {
+				setIsChatOpen(false);
+				setSelectedDoctor(null);
+			}
+		};
+		setIsLoggedIn(!!getAuthToken());
+		window.addEventListener("userNameChange", handleAuthChange);
+		return () => window.removeEventListener("userNameChange", handleAuthChange);
+	}, []);
+
+	useEffect(() => {
+		const fetchData = () => {
+			const token = getAuthToken();
+
+			if (!token) {
+				return;
+			}
+			fetch("/api/conversations", {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
 			})
-			.catch((err) => {
-				console.error("Error fetching data", err);
-				setLoading(false);
-			});
+				.then((res) => res.json())
+				.then((data) => {
+					if (data.isDoctor) {
+						setIsDoctor(true);
+						setChatListItems(data.items || []);
+						setLoading(false);
+					} else {
+						setIsDoctor(false);
+						fetch("/api/doctors")
+							.then((res) => res.json())
+							.then((data) => {
+								if (Array.isArray(data)) {
+									setDoctors(data);
+									setChatListItems(data);
+								} else {
+									setChatListItems([]);
+									setDoctors([]);
+								}
+								setLoading(false);
+							});
+					}
+				})
+				.catch((err) => {
+					console.error("Error fetching data", err);
+					setLoading(false);
+				});
+		};
+
+		fetchData();
+		const interval = setInterval(fetchData, 5000);
+		return () => clearInterval(interval);
 	}, []);
 
 	const specialities = [
@@ -210,7 +237,7 @@ export default function ContactCard() {
 					selectedDoctor={selectedDoctor}
 				/>
 			)}
-			{!isChatOpen && (
+			{!isChatOpen && isLoggedIn && (
 				<button
 					className={styles.floatingClose}
 					onClick={() => {

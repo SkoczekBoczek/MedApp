@@ -62,6 +62,7 @@ export default function SideBar() {
 		localStorage.removeItem("userToken");
 		localStorage.removeItem("authToken");
 		window.dispatchEvent(new Event("userNameChange"));
+		setShowMessages(false);
 	};
 
 	return (
