@@ -1,25 +1,33 @@
-import { X, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { getAuthToken } from "@/utils/userToken";
 import styles from "./MessagesMenu.module.css";
-import Image from "next/image";
+import RenderChat from "./RenderChat";
+import RenderList from "./RenderList";
 
-export default function MessagesMenu({ doctors, onCloseChat, selectedDoctor }) {
+export default function MessagesMenu({
+	items,
+	onCloseChat,
+	selectedDoctor,
+	isDoctor,
+}) {
 	const [messages, setMessages] = useState([]);
-	const [activeDoctor, setActiveDoctor] = useState(selectedDoctor);
+	const [activeContact, setActiveContact] = useState(selectedDoctor);
 	const [messageInput, setMessageInput] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
-		if (!activeDoctor) return;
+		if (!activeContact) return;
 
 		setIsLoading(true);
 
 		const token = getAuthToken();
-		const doctorId = activeDoctor._id;
+		const contactId = activeContact._id;
 
-		fetch(`/api/conversations?doctorId=${doctorId}`, {
+		const queryParam = isDoctor ? `id=${contactId}` : `doctorId=${contactId}`;
+
+		fetch(`/api/conversations?${queryParam}`, {
 			headers: { Authorization: `Bearer ${token}` },
 		})
 			.then((res) => res.json())
@@ -32,25 +40,28 @@ export default function MessagesMenu({ doctors, onCloseChat, selectedDoctor }) {
 			.finally(() => {
 				setIsLoading(false);
 			});
-	}, [activeDoctor]);
+	}, [activeContact]);
 
 	useEffect(() => {
 		if (selectedDoctor !== null) {
 			handleOpen(selectedDoctor);
 		} else {
-			setActiveDoctor(null);
+			setActiveContact(null);
 		}
 	}, [selectedDoctor]);
 
 	const handleOpen = (doc) => {
-		setActiveDoctor(doc);
+		setActiveContact(doc);
 	};
 
 	async function handleSend() {
 		if (!messageInput.trim()) return;
 
 		const token = getAuthToken();
-		const doctorId = activeDoctor._id;
+		const contactId = activeContact._id;
+		const body = isDoctor
+			? { recipientId: contactId, message: messageInput }
+			: { doctorId: contactId, message: messageInput };
 
 		await fetch("/api/conversations", {
 			method: "POST",
@@ -58,14 +69,14 @@ export default function MessagesMenu({ doctors, onCloseChat, selectedDoctor }) {
 				"Content-Type": "application/json",
 				Authorization: `Bearer ${token}`,
 			},
-			body: JSON.stringify({ doctorId, message: messageInput }),
+			body: JSON.stringify(body),
 		});
 
 		setMessages((prev) => [
 			...prev,
 			{
 				id: Date.now().toString(),
-				sender: "patient",
+				sender: isDoctor ? "doctor" : "patient",
 				text: messageInput,
 				timestamp: new Date(),
 			},
@@ -74,133 +85,35 @@ export default function MessagesMenu({ doctors, onCloseChat, selectedDoctor }) {
 		setMessageInput("");
 	}
 
-	const renderChat = () => (
-		<>
-			<header className={styles.header}>
-				<h3 className={styles.title}>Wiadomości</h3>
-				<button
-					className={styles.back}
-					onClick={() => {
-						setActiveDoctor(null);
-						onCloseChat();
-					}}
-				>
-					<X size={20} />
-				</button>
-			</header>
-
-			{activeDoctor && (
-				<div className={styles.chatDoctorHeader}>
-					<div className={styles.doctorName}>dr {activeDoctor.name}</div>
-				</div>
-			)}
-			<main className={styles.chatWindow}>
-				{isLoading ? (
-					<div className={styles.loader}>
-						<div className={styles.spinner}></div>
-					</div>
-				) : messages.length === 0 ? (
-					<div className={styles.emptyChat}>Brak wiadomości</div>
-				) : (
-					messages.map((msg) => {
-						const today = new Date();
-						const msgDate = new Date(msg.timestamp);
-
-						const isToday =
-							msgDate.getDate() === today.getDate() &&
-							msgDate.getMonth() === today.getMonth() &&
-							msgDate.getFullYear() === today.getFullYear();
-
-						return (
-							<div
-								key={msg.id}
-								className={
-									msg.sender === "patient"
-										? styles.patientMsg
-										: styles.doctorMsg
-								}
-							>
-								<div className={styles.text}>{msg.text}</div>
-								<div className={styles.time}>
-									{isToday
-										? msgDate.toLocaleTimeString([], {
-												hour: "2-digit",
-												minute: "2-digit",
-										  })
-										: msgDate.toLocaleDateString()}
-								</div>
-							</div>
-						);
-					})
-				)}
-			</main>
-
-			<footer className={styles.inputBar}>
-				<input
-					type="text"
-					placeholder="Napisz wiadomość..."
-					className={styles.input}
-					value={messageInput}
-					onChange={(e) => setMessageInput(e.target.value)}
-				/>
-				<button className={styles.sendBtn} onClick={handleSend}>
-					Wyślij
-				</button>
-			</footer>
-		</>
-	);
-
-	const renderList = () => (
-		<>
-			<header className={styles.header}>
-				<h3 className={styles.title}>Wiadomości</h3>
-				<button
-					className={styles.close}
-					onClick={() => {
-						setActiveDoctor(null);
-						onCloseChat();
-					}}
-				>
-					<X size={20} />
-				</button>
-			</header>
-
-			<div className={styles.list}>
-				{doctors.map((doc) => (
-					<div
-						key={doc._id}
-						className={styles.item}
-						onClick={() => handleOpen(doc)}
-					>
-						<div className={styles.avatar}>
-							<Image
-								className={styles.doctorImg}
-								src={doc.image}
-								alt={doc.name}
-								width={80}
-								height={80}
-							/>
-						</div>
-						<div className={styles.content}>
-							<div className={styles.name}>dr {doc.name}</div>
-							<div className={styles.subtitle}>Kliknij, aby otworzyć</div>
-						</div>
-					</div>
-				))}
-			</div>
-		</>
-	);
-
 	return createPortal(
 		<>
 			<div className={styles.shell}>
-				{activeDoctor ? renderChat() : renderList()}
+				{activeContact ? (
+					<RenderChat
+						activeContact={activeContact}
+						setActiveContact={setActiveContact}
+						isDoctor={isDoctor}
+						onCloseChat={onCloseChat}
+						isLoading={isLoading}
+						messages={messages}
+						messageInput={messageInput}
+						setMessageInput={setMessageInput}
+						handleSend={handleSend}
+					/>
+				) : (
+					<RenderList
+						items={items}
+						setActiveContact={setActiveContact}
+						onCloseChat={onCloseChat}
+						handleOpen={handleOpen}
+					/>
+				)}
 
 				<div className={styles.tabs}>
 					<div className={styles.tab}>Start</div>
 					<div
 						className={`${styles.tab} ${styles.active}`}
-						onClick={() => setActiveDoctor(null)}
+						onClick={() => setActiveContact(null)}
 					>
 						Wiadomości
 					</div>

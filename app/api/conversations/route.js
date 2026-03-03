@@ -15,23 +15,72 @@ export async function GET(req) {
 
 		const { db } = await connectToDatabase();
 		const { searchParams } = new URL(req.url);
-		const doctorId = searchParams.get("doctorId");
 
-		const conversation = await db
-			.collection("conversations")
-			.findOne({ userId, doctorId });
+		const user = await db
+			.collection("users")
+			.findOne({ _id: new ObjectId(userId) });
+		const doctorProfile = await db.collection("doctors").findOne({
+			$or: [{ userId: userId }, { userId: new ObjectId(userId) }],
+		});
+		const isDoctor = user?.role === "doctor" || !!doctorProfile;
 
-		if (!conversation) {
-			return new Response(JSON.stringify({ error: "Conversation not found" }), {
-				status: 404,
-				headers: { "Content-Type": "application/json" },
-			});
+		const specificId = searchParams.get("doctorId") || searchParams.get("id");
+
+		if (specificId) {
+			let query;
+			if (isDoctor) {
+				if (!doctorProfile) {
+					return new Response(
+						JSON.stringify({
+							messages: [],
+							isDoctor,
+						}),
+						{ status: 200, headers: { "Content-Type": "application/json" } },
+					);
+				}
+				query = { doctorId: doctorProfile._id.toString(), userId: specificId };
+			} else {
+				query = { userId, doctorId: specificId };
+			}
+
+			const conversation = await db.collection("conversations").findOne(query);
+
+			return new Response(
+				JSON.stringify({
+					messages: conversation?.messages || [],
+					isDoctor,
+				}),
+				{
+					status: 200,
+					headers: { "Content-Type": "application/json" },
+				},
+			);
 		}
 
-		return new Response(JSON.stringify({ messages: conversation.messages }), {
-			status: 200,
-			headers: { "Content-Type": "application/json" },
-		});
+		if (isDoctor) {
+			if (!doctorProfile) {
+				return new Response(JSON.stringify({ items: [], isDoctor: true }), {
+					status: 200,
+				});
+			}
+
+			const conversations = await db
+				.collection("conversations")
+				.find({ doctorId: doctorProfile._id.toString() })
+				.toArray();
+
+			const patientIds = [...new Set(conversations.map((c) => c.userId))];
+			const patients = await db
+				.collection("users")
+				.find({ _id: { $in: patientIds.map((id) => new ObjectId(id)) } })
+				.toArray();
+
+			return new Response(JSON.stringify({ items: patients, isDoctor: true }), {
+				status: 200,
+			});
+		} else {
+			return new Response(JSON.stringify({ isDoctor: false }), { status: 200 });
+		}
 	} catch (error) {
 		console.error("Database error:", error);
 		return new Response(JSON.stringify({ error: "Internal Server Error" }), {
@@ -52,9 +101,23 @@ export async function POST(req) {
 		}
 
 		const { db } = await connectToDatabase();
-		const { doctorId, message } = await req.json();
+		const { doctorId, recipientId, message } = await req.json();
 
-		if (!doctorId || !message) {
+		const user = await db
+			.collection("users")
+			.findOne({ _id: new ObjectId(userId) });
+		const doctorProfile = await db.collection("doctors").findOne({
+			$or: [{ userId: userId }, { userId: new ObjectId(userId) }],
+		});
+		const isDoctor = user?.role === "doctor" || !!doctorProfile;
+
+		const docId = isDoctor
+			? doctorProfile?._id.toString()
+			: doctorId || recipientId;
+		const patId = isDoctor ? recipientId : userId;
+		const sender = isDoctor ? "doctor" : "patient";
+
+		if (!docId || !message) {
 			return new Response(JSON.stringify({ error: "Missing data" }), {
 				status: 400,
 				headers: { "Content-Type": "application/json" },
@@ -63,7 +126,7 @@ export async function POST(req) {
 
 		const newMessage = {
 			id: new ObjectId().toString(),
-			sender: "patient",
+			sender: sender,
 			text: message,
 			timestamp: new Date(),
 		};
@@ -71,7 +134,7 @@ export async function POST(req) {
 		await db
 			.collection("conversations")
 			.updateOne(
-				{ doctorId: doctorId, userId },
+				{ doctorId: docId, userId: patId },
 				{ $push: { messages: newMessage } },
 				{ upsert: true },
 			);

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import styles from "./ContactCard.module.css";
 import MessagesMenu from "./MessagesMenu";
+import getAuthToken from "@/utils/userToken";
 import {
 	ArrowLeft,
 	ArrowRight,
@@ -13,6 +14,8 @@ import {
 
 export default function ContactCard() {
 	const [doctors, setDoctors] = useState([]);
+	const [isDoctor, setIsDoctor] = useState(false);
+	const [chatListItems, setChatListItems] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [currentPage, setCurrentPage] = useState(1);
 
@@ -33,19 +36,35 @@ export default function ContactCard() {
 		}
 	}
 	useEffect(() => {
-		fetch("api/doctors")
+		const token = getAuthToken();
+		fetch("/api/conversations", {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		})
 			.then((res) => res.json())
 			.then((data) => {
-				if (Array.isArray(data)) {
-					setDoctors(data);
+				if (data.isDoctor) {
+					setIsDoctor(true);
+					setChatListItems(data.items || []);
+					setLoading(false);
 				} else {
-					console.error("Invalid doctors data received", data);
-					setDoctors([]);
+					fetch("api/doctors")
+						.then((res) => res.json())
+						.then((data) => {
+							if (Array.isArray(data)) {
+								setDoctors(data);
+								setChatListItems(data);
+							} else {
+								setChatListItems([]);
+								setDoctors([]);
+							}
+							setLoading(false);
+						});
 				}
-				setLoading(false);
 			})
 			.catch((err) => {
-				console.error("Error fetching doctors", err);
+				console.error("Error fetching data", err);
 				setLoading(false);
 			});
 	}, []);
@@ -185,7 +204,8 @@ export default function ContactCard() {
 			</div>
 			{isChatOpen && (
 				<MessagesMenu
-					doctors={doctors}
+					items={chatListItems}
+					isDoctor={isDoctor}
 					onCloseChat={closeChat}
 					selectedDoctor={selectedDoctor}
 				/>
