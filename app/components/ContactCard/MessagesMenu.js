@@ -1,21 +1,18 @@
 import { ChevronDown } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { createPortal } from "react-dom";
-import { getAuthToken } from "@/utils/userToken";
+import { AuthContext } from "@/app/context/AuthContext";
 import styles from "./MessagesMenu.module.css";
 import RenderChat from "./RenderChat";
 import RenderList from "./RenderList";
 
-export default function MessagesMenu({
-	items,
-	onCloseChat,
-	selectedDoctor,
-	isDoctor,
-}) {
+export default function MessagesMenu({ items, onCloseChat, selectedDoctor }) {
 	const [messages, setMessages] = useState([]);
 	const [activeContact, setActiveContact] = useState(selectedDoctor);
 	const [messageInput, setMessageInput] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
+
+	const { token, isDoctor } = useContext(AuthContext);
 
 	useEffect(() => {
 		if (!activeContact) return;
@@ -23,7 +20,6 @@ export default function MessagesMenu({
 		if (messages.length === 0) setIsLoading(true);
 
 		const fetchMessages = () => {
-			const token = getAuthToken();
 			const contactId = activeContact._id;
 			const queryParam = isDoctor ? `id=${contactId}` : `doctorId=${contactId}`;
 
@@ -41,7 +37,7 @@ export default function MessagesMenu({
 		fetchMessages();
 		const interval = setInterval(fetchMessages, 3000);
 		return () => clearInterval(interval);
-	}, [activeContact, isDoctor]);
+	}, [activeContact, isDoctor, token]);
 
 	useEffect(() => {
 		if (selectedDoctor !== null) {
@@ -58,7 +54,6 @@ export default function MessagesMenu({
 	async function handleSend() {
 		if (!messageInput.trim()) return;
 
-		const token = getAuthToken();
 		const contactId = activeContact._id;
 		const body = isDoctor
 			? { recipientId: contactId, message: messageInput }

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import styles from "./SideBar.module.css";
 import {
 	Menu,
@@ -16,53 +16,48 @@ import MessagesMenu from "../ContactCard/MessagesMenu";
 import MedicationsModal from "../MedicationsSection/MedicationsList";
 import SettingsModal from "../WelcomeCard/SettingsModal";
 import AuthForm from "../AuthModal/AuthForm";
+import { AuthContext } from "@/app/context/AuthContext";
 
 export default function SideBar() {
 	const [menuActive, setMenuActive] = useState(false);
 	const [showMessages, setShowMessages] = useState(false);
 	const [showSettings, setShowSettings] = useState(false);
-	const [doctors, setDoctors] = useState([]);
-	const [userName, setUserName] = useState("");
+	const [chatItems, setChatItems] = useState([]);
 	const medicationsModalRef = useRef();
 	const authDialogRef = useRef();
 
-	useEffect(() => {
-		const savedName = localStorage.getItem("userName");
-		if (savedName) {
-			setUserName(savedName);
-		}
-
-		const handleNameChange = () => {
-			const newName = localStorage.getItem("userName");
-			setUserName(newName || "");
-		};
-
-		window.addEventListener("userNameChange", handleNameChange);
-		return () => window.removeEventListener("userNameChange", handleNameChange);
-	}, []);
+	const authCtx = useContext(AuthContext);
 
 	useEffect(() => {
-		if (showMessages && doctors.length === 0) {
-			fetch("/api/doctors")
-				.then((res) => res.json())
-				.then((data) => setDoctors(data));
+		setChatItems([]);
+	}, [authCtx.user]);
+
+	useEffect(() => {
+		if (showMessages && chatItems.length === 0) {
+			if (authCtx.isDoctor) {
+				fetch("/api/conversations", {
+					headers: {
+						Authorization: `Bearer ${authCtx.token}`,
+					},
+				})
+					.then((res) => res.json())
+					.then((data) => setChatItems(data.items || []));
+			} else {
+				fetch("/api/doctors")
+					.then((res) => res.json())
+					.then((data) => setChatItems(data));
+			}
 		}
-	}, [showMessages]);
+	}, [showMessages, authCtx.isDoctor, authCtx.token]);
 
 	const saveSettings = (newName) => {
-		setUserName(newName);
-		localStorage.setItem("userName", newName);
-		window.dispatchEvent(new Event("userNameChange"));
-		setShowSettings(false);
-	};
+		authCtx.handleLogin({
+			user: newName,
+			token: authCtx.token,
+			isDoctor: authCtx.isDoctor,
+		});
 
-	const handleLogout = (e) => {
-		e.preventDefault();
-		localStorage.removeItem("userName");
-		localStorage.removeItem("userToken");
-		localStorage.removeItem("authToken");
-		window.dispatchEvent(new Event("userNameChange"));
-		setShowMessages(false);
+		setShowSettings(false);
 	};
 
 	return (
@@ -78,7 +73,13 @@ export default function SideBar() {
 			</div>
 
 			<nav className={`${styles.menu} ${menuActive ? styles.active : ""}`}>
-				<Link href="#" onClick={() => setShowSettings(true)}>
+				<Link
+					href="#"
+					onClick={(e) => {
+						e.preventDefault();
+						setShowSettings(true);
+					}}
+				>
 					<User size={18} /> Profil
 				</Link>
 				<Link
@@ -102,8 +103,14 @@ export default function SideBar() {
 				>
 					<Pill size={18} /> Leki
 				</Link>
-				{userName ? (
-					<Link href="#" onClick={handleLogout}>
+				{authCtx.user ? (
+					<Link
+						href="#"
+						onClick={(e) => {
+							authCtx.handleLogout(e);
+							setShowMessages(false);
+						}}
+					>
 						<LogOut size={18} /> Wyloguj się
 					</Link>
 				) : (
@@ -120,7 +127,8 @@ export default function SideBar() {
 			</nav>
 			{showMessages && (
 				<MessagesMenu
-					doctors={doctors}
+					items={chatItems}
+					isDoctor={authCtx.isDoctor}
 					onCloseChat={() => setShowMessages(false)}
 					selectedDoctor={null}
 				/>
@@ -129,7 +137,7 @@ export default function SideBar() {
 				<SettingsModal
 					onClose={() => setShowSettings(false)}
 					onSave={saveSettings}
-					initialName={userName}
+					initialName={authCtx.user}
 				/>
 			)}
 			<MedicationsModal ref={medicationsModalRef} onAddMedication={() => {}} />

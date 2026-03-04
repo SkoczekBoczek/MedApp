@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Image from "next/image";
 import styles from "./ContactCard.module.css";
 import MessagesMenu from "./MessagesMenu";
-import getAuthToken from "@/utils/userToken";
+import { AuthContext } from "@/app/context/AuthContext";
 import {
 	ArrowLeft,
 	ArrowRight,
@@ -14,11 +14,12 @@ import {
 
 export default function ContactCard() {
 	const [doctors, setDoctors] = useState([]);
-	const [isDoctor, setIsDoctor] = useState(false);
 	const [chatListItems, setChatListItems] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [currentPage, setCurrentPage] = useState(1);
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+	const { token, isDoctor } = useContext(AuthContext);
+	const isLoggedIn = !!token;
 
 	const [startPositionX, setStartPositionX] = useState(0);
 
@@ -38,63 +39,57 @@ export default function ContactCard() {
 	}
 
 	useEffect(() => {
-		const handleAuthChange = () => {
-			const token = getAuthToken();
-			setIsLoggedIn(!!token);
-			if (!token) {
-				setIsChatOpen(false);
-				setSelectedDoctor(null);
-			}
-		};
-		setIsLoggedIn(!!getAuthToken());
-		window.addEventListener("userNameChange", handleAuthChange);
-		return () => window.removeEventListener("userNameChange", handleAuthChange);
-	}, []);
+		if (!token) {
+			setIsChatOpen(false);
+			setSelectedDoctor(null);
+		}
+	}, [token]);
 
 	useEffect(() => {
 		const fetchData = () => {
-			const token = getAuthToken();
-
 			if (!token) {
 				return;
 			}
-			fetch("/api/conversations", {
-				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-			})
-				.then((res) => res.json())
-				.then((data) => {
-					if (data.isDoctor) {
-						setIsDoctor(true);
+
+			if (isDoctor) {
+				fetch("/api/conversations", {
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				})
+					.then((res) => res.json())
+					.then((data) => {
 						setChatListItems(data.items || []);
 						setLoading(false);
-					} else {
-						setIsDoctor(false);
-						fetch("/api/doctors")
-							.then((res) => res.json())
-							.then((data) => {
-								if (Array.isArray(data)) {
-									setDoctors(data);
-									setChatListItems(data);
-								} else {
-									setChatListItems([]);
-									setDoctors([]);
-								}
-								setLoading(false);
-							});
-					}
-				})
-				.catch((err) => {
-					console.error("Error fetching data", err);
-					setLoading(false);
-				});
+					})
+					.catch((err) => {
+						console.error("Error fetching conversations", err);
+						setLoading(false);
+					});
+			} else {
+				fetch("/api/doctors")
+					.then((res) => res.json())
+					.then((data) => {
+						if (Array.isArray(data)) {
+							setDoctors(data);
+							setChatListItems(data);
+						} else {
+							setChatListItems([]);
+							setDoctors([]);
+						}
+						setLoading(false);
+					})
+					.catch((err) => {
+						console.error("Error fetching data", err);
+						setLoading(false);
+					});
+			}
 		};
 
 		fetchData();
 		const interval = setInterval(fetchData, 5000);
 		return () => clearInterval(interval);
-	}, []);
+	}, [token, isDoctor]);
 
 	const specialities = [
 		"Wszyscy",
@@ -232,7 +227,6 @@ export default function ContactCard() {
 			{isChatOpen && (
 				<MessagesMenu
 					items={chatListItems}
-					isDoctor={isDoctor}
 					onCloseChat={closeChat}
 					selectedDoctor={selectedDoctor}
 				/>

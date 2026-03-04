@@ -1,8 +1,17 @@
-import { useRef, forwardRef, useImperativeHandle, useActionState } from "react";
+import {
+	useRef,
+	forwardRef,
+	useImperativeHandle,
+	useActionState,
+	useContext,
+} from "react";
+import { AuthContext } from "@/app/context/AuthContext";
 import styles from "./AuthForm.module.css";
 
 const AuthForm = forwardRef(function AuthForm(props, ref) {
 	const dialog = useRef();
+
+	const authCtx = useContext(AuthContext);
 
 	useImperativeHandle(ref, () => ({
 		showModal: () => dialog.current?.showModal(),
@@ -53,10 +62,12 @@ const AuthForm = forwardRef(function AuthForm(props, ref) {
 			}
 
 			if (data.user) {
-				localStorage.setItem("userName", data.user.name || "User");
-				if (data.token) localStorage.setItem("authToken", data.token);
-				localStorage.setItem("userToken", data.user._id);
-				window.dispatchEvent(new Event("userNameChange"));
+				authCtx.handleLogin({
+					user: data.user.name,
+					token: data.token,
+					isDoctor: data.user.role === "doctor",
+				});
+
 				dialog.current?.close();
 			}
 
