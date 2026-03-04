@@ -11,6 +11,12 @@ export default function RenderChat() {
 	const { isDoctor } = useContext(AuthContext);
 	const [messageInput, setMessageInput] = useState("");
 
+	const messagesEndRef = useRef(null);
+
+	const scrollToBottom = () => {
+		messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+	};
+
 	useEffect(() => {
 		scrollToBottom();
 	}, [messages]);
@@ -76,7 +82,7 @@ export default function RenderChat() {
 						);
 					})
 				)}
-				<div />
+				<div ref={messagesEndRef} />
 			</main>
 
 			<footer className={styles.inputBar}>

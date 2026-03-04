@@ -15,10 +15,10 @@ import { ChatContext } from "@/app/context/ChatContext";
 
 export default function ContactCard() {
 	const { openChat, chatItems, isLoading, isOpen } = useContext(ChatContext);
+	const { token, isDoctor } = useContext(AuthContext);
 
 	const [currentPage, setCurrentPage] = useState(1);
 
-	const { token } = useContext(AuthContext);
 	const isLoggedIn = !!token;
 
 	const [startPositionX, setStartPositionX] = useState(0);
@@ -72,7 +72,11 @@ export default function ContactCard() {
 	return (
 		<section className={`${styles.contact} ${styles.card}`}>
 			<div className={styles.contactHeader}>
-				<h2>Skontaktuj się z lekarzem</h2>
+				{isDoctor ? (
+					<h2>Skontaktuj się z pacjentem</h2>
+				) : (
+					<h2>Skontaktuj się z lekarzem</h2>
+				)}
 
 				<div className={styles.arrows}>
 					<button
@@ -90,15 +94,17 @@ export default function ContactCard() {
 				</div>
 			</div>
 			<div className={styles.categories}>
-				<ul className={`${styles.categoriesList} ${styles.desktopOnly}`}>
-					{specialities.map((spec) => (
-						<li key={spec}>
-							<button onClick={() => handleSpecialityChange(spec)}>
-								{spec}
-							</button>
-						</li>
-					))}
-				</ul>
+				{!isDoctor && (
+					<ul className={`${styles.categoriesList} ${styles.desktopOnly}`}>
+						{specialities.map((spec) => (
+							<li key={spec}>
+								<button onClick={() => handleSpecialityChange(spec)}>
+									{spec}
+								</button>
+							</li>
+						))}
+					</ul>
+				)}
 
 				<select
 					className={`${styles.mobileOnly}`}
