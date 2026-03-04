@@ -1,28 +1,32 @@
+"use client";
 import styles from "./MessagesMenu.module.css";
 import { X } from "lucide-react";
+import { useContext, useState, useRef, useEffect } from "react";
+import { ChatContext } from "@/app/context/ChatContext";
+import { AuthContext } from "@/app/context/AuthContext";
 
-export default function RenderChat({
-	activeContact,
-	setActiveContact,
-	isDoctor,
-	onCloseChat,
-	isLoading,
-	messages,
-	messageInput,
-	setMessageInput,
-	handleSend,
-}) {
+export default function RenderChat() {
+	const { closeChat, activeContact, isLoading, messages, sendMessage } =
+		useContext(ChatContext);
+	const { isDoctor } = useContext(AuthContext);
+	const [messageInput, setMessageInput] = useState("");
+
+	useEffect(() => {
+		scrollToBottom();
+	}, [messages]);
+
+	const handleSend = async () => {
+		if (!messageInput.trim()) return;
+		const text = messageInput;
+		setMessageInput("");
+		await sendMessage(text);
+	};
+
 	return (
 		<>
 			<header className={styles.header}>
 				<h3 className={styles.title}>Wiadomości</h3>
-				<button
-					className={styles.back}
-					onClick={() => {
-						setActiveContact(null);
-						onCloseChat();
-					}}
-				>
+				<button className={styles.back} onClick={closeChat}>
 					<X size={20} />
 				</button>
 			</header>
@@ -72,6 +76,7 @@ export default function RenderChat({
 						);
 					})
 				)}
+				<div />
 			</main>
 
 			<footer className={styles.inputBar}>
@@ -81,6 +86,7 @@ export default function RenderChat({
 					className={styles.input}
 					value={messageInput}
 					onChange={(e) => setMessageInput(e.target.value)}
+					onKeyDown={(e) => e.key === "Enter" && handleSend()}
 				/>
 				<button className={styles.sendBtn} onClick={handleSend}>
 					Wyślij

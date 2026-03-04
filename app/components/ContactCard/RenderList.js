@@ -1,34 +1,28 @@
+"use client";
 import styles from "./MessagesMenu.module.css";
 import { X } from "lucide-react";
 import Image from "next/image";
+import { ChatContext } from "@/app/context/ChatContext";
+import { useContext } from "react";
 
-export default function RenderList({
-	items,
-	setActiveContact,
-	onCloseChat,
-	handleOpen,
-}) {
+export default function RenderList() {
+	const { chatItems, closeChat, openChat } = useContext(ChatContext);
+
 	return (
 		<>
 			<header className={styles.header}>
 				<h3 className={styles.title}>Wiadomości</h3>
-				<button
-					className={styles.close}
-					onClick={() => {
-						setActiveContact(null);
-						onCloseChat();
-					}}
-				>
+				<button className={styles.close} onClick={closeChat}>
 					<X size={20} />
 				</button>
 			</header>
 
 			<div className={styles.list}>
-				{items.map((item) => (
+				{chatItems.map((item) => (
 					<div
 						key={item._id}
 						className={styles.item}
-						onClick={() => handleOpen(item)}
+						onClick={() => openChat(item)}
 					>
 						<div className={styles.avatar}>
 							<Image

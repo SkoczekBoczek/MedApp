@@ -1,24 +1,24 @@
 "use client";
 
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import Image from "next/image";
 import styles from "./ContactCard.module.css";
 import MessagesMenu from "./MessagesMenu";
-import { AuthContext } from "@/app/context/AuthContext";
 import {
 	ArrowLeft,
 	ArrowRight,
 	MessageCircle,
 	MessageSquareHeart,
 } from "lucide-react";
+import { AuthContext } from "@/app/context/AuthContext";
+import { ChatContext } from "@/app/context/ChatContext";
 
 export default function ContactCard() {
-	const [doctors, setDoctors] = useState([]);
-	const [chatListItems, setChatListItems] = useState([]);
-	const [loading, setLoading] = useState(true);
+	const { openChat, chatItems, isLoading, isOpen } = useContext(ChatContext);
+
 	const [currentPage, setCurrentPage] = useState(1);
 
-	const { token, isDoctor } = useContext(AuthContext);
+	const { token } = useContext(AuthContext);
 	const isLoggedIn = !!token;
 
 	const [startPositionX, setStartPositionX] = useState(0);
@@ -38,59 +38,6 @@ export default function ContactCard() {
 		}
 	}
 
-	useEffect(() => {
-		if (!token) {
-			setIsChatOpen(false);
-			setSelectedDoctor(null);
-		}
-	}, [token]);
-
-	useEffect(() => {
-		const fetchData = () => {
-			if (!token) {
-				return;
-			}
-
-			if (isDoctor) {
-				fetch("/api/conversations", {
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
-				})
-					.then((res) => res.json())
-					.then((data) => {
-						setChatListItems(data.items || []);
-						setLoading(false);
-					})
-					.catch((err) => {
-						console.error("Error fetching conversations", err);
-						setLoading(false);
-					});
-			} else {
-				fetch("/api/doctors")
-					.then((res) => res.json())
-					.then((data) => {
-						if (Array.isArray(data)) {
-							setDoctors(data);
-							setChatListItems(data);
-						} else {
-							setChatListItems([]);
-							setDoctors([]);
-						}
-						setLoading(false);
-					})
-					.catch((err) => {
-						console.error("Error fetching data", err);
-						setLoading(false);
-					});
-			}
-		};
-
-		fetchData();
-		const interval = setInterval(fetchData, 5000);
-		return () => clearInterval(interval);
-	}, [token, isDoctor]);
-
 	const specialities = [
 		"Wszyscy",
 		"Kardiolog",
@@ -108,8 +55,8 @@ export default function ContactCard() {
 
 	const filteredDoctors =
 		selectedSpeciality === "Wszyscy"
-			? doctors
-			: doctors.filter((doctor) => doctor.speciality === selectedSpeciality);
+			? chatItems
+			: chatItems.filter((doctor) => doctor.speciality === selectedSpeciality);
 
 	const doctorsPerPage = 3;
 
@@ -121,16 +68,6 @@ export default function ContactCard() {
 	);
 
 	const totalPages = Math.ceil(filteredDoctors.length / doctorsPerPage);
-
-	const [isChatOpen, setIsChatOpen] = useState(false);
-	const [selectedDoctor, setSelectedDoctor] = useState(null);
-
-	function openChat() {
-		setIsChatOpen(true);
-	}
-	function closeChat() {
-		setIsChatOpen(false);
-	}
 
 	return (
 		<section className={`${styles.contact} ${styles.card}`}>
@@ -180,14 +117,14 @@ export default function ContactCard() {
 				onTouchStart={handleTouchStart}
 				onTouchEnd={handleTouchEnd}
 			>
-				{loading ? (
+				{isLoading ? (
 					<div>Ładowanie...</div>
 				) : (
 					currentDoctors.map((doctor) => (
 						<div className={styles.doctorCard} key={doctor._id}>
 							<div className={styles.doctorImg}>
 								<Image
-									src={doctor.image}
+									src={doctor.image || "https://placehold.co/80x80?text=User"}
 									alt={doctor.name}
 									width={80}
 									height={80}
@@ -199,8 +136,7 @@ export default function ContactCard() {
 								<button
 									className={styles.messageBtn}
 									onClick={() => {
-										openChat();
-										setSelectedDoctor(doctor);
+										openChat(doctor);
 									}}
 								>
 									<MessageCircle /> Wiadomość
@@ -224,19 +160,12 @@ export default function ContactCard() {
 					);
 				})}
 			</div>
-			{isChatOpen && (
-				<MessagesMenu
-					items={chatListItems}
-					onCloseChat={closeChat}
-					selectedDoctor={selectedDoctor}
-				/>
-			)}
-			{!isChatOpen && isLoggedIn && (
+			{isOpen && <MessagesMenu />}
+			{!isOpen && isLoggedIn && (
 				<button
 					className={styles.floatingClose}
 					onClick={() => {
-						setSelectedDoctor(null);
-						setIsChatOpen(true);
+						openChat(null);
 					}}
 				>
 					<MessageSquareHeart className={styles.chatIcon} size={20} />

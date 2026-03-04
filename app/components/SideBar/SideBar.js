@@ -17,38 +17,17 @@ import MedicationsModal from "../MedicationsSection/MedicationsList";
 import SettingsModal from "../WelcomeCard/SettingsModal";
 import AuthForm from "../AuthModal/AuthForm";
 import { AuthContext } from "@/app/context/AuthContext";
+import { ChatContext } from "@/app/context/ChatContext";
 
 export default function SideBar() {
 	const [menuActive, setMenuActive] = useState(false);
-	const [showMessages, setShowMessages] = useState(false);
 	const [showSettings, setShowSettings] = useState(false);
-	const [chatItems, setChatItems] = useState([]);
+
 	const medicationsModalRef = useRef();
 	const authDialogRef = useRef();
 
 	const authCtx = useContext(AuthContext);
-
-	useEffect(() => {
-		setChatItems([]);
-	}, [authCtx.user]);
-
-	useEffect(() => {
-		if (showMessages && chatItems.length === 0) {
-			if (authCtx.isDoctor) {
-				fetch("/api/conversations", {
-					headers: {
-						Authorization: `Bearer ${authCtx.token}`,
-					},
-				})
-					.then((res) => res.json())
-					.then((data) => setChatItems(data.items || []));
-			} else {
-				fetch("/api/doctors")
-					.then((res) => res.json())
-					.then((data) => setChatItems(data));
-			}
-		}
-	}, [showMessages, authCtx.isDoctor, authCtx.token]);
+	const { isOpen, openChat, closeChat } = useContext(ChatContext);
 
 	const saveSettings = (newName) => {
 		authCtx.handleLogin({
@@ -86,7 +65,7 @@ export default function SideBar() {
 					href="#"
 					onClick={(e) => {
 						e.preventDefault();
-						setShowMessages(() => !showMessages);
+						isOpen ? closeChat() : openChat(null);
 					}}
 				>
 					<MessageCircle size={18} /> Wiadomość
@@ -108,7 +87,7 @@ export default function SideBar() {
 						href="#"
 						onClick={(e) => {
 							authCtx.handleLogout(e);
-							setShowMessages(false);
+							closeChat();
 						}}
 					>
 						<LogOut size={18} /> Wyloguj się
@@ -125,14 +104,7 @@ export default function SideBar() {
 					</Link>
 				)}
 			</nav>
-			{showMessages && (
-				<MessagesMenu
-					items={chatItems}
-					isDoctor={authCtx.isDoctor}
-					onCloseChat={() => setShowMessages(false)}
-					selectedDoctor={null}
-				/>
-			)}
+			{isOpen && <MessagesMenu />}
 			{showSettings && (
 				<SettingsModal
 					onClose={() => setShowSettings(false)}
