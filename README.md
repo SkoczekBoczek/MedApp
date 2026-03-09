@@ -8,6 +8,12 @@ MedApp is a healthcare management system designed to help patients organize thei
 
 ## Features
 
+### Authentication
+
+- **User Registration**: Secure account creation for new users
+- **User Login**: Secure login system with JWT tokens
+- **Session Management**: Persistent user sessions using JWT tokens and local storage
+
 ### User Management
 
 - **Settings Modal**: Change user name and preferences
@@ -75,11 +81,14 @@ npm run build
 npm start
 ```
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 app/
 ├── api/                          # Backend API routes
+│   ├── auth/                     # Authentication API
+│   │   ├── login/                # Login endpoint
+│   │   └── register/             # Registration endpoint
 │   ├── conversations/            # Messaging API
 │   ├── doctors/                  # Doctor data API
 │   ├── drugs/                    # Medication database API
@@ -87,12 +96,17 @@ app/
 │   └── plan/                     # Medication schedule API
 │
 ├── components/                   # Reusable React components
+│   ├── AuthModal/                # Authentication forms
 │   ├── SideBar/                  # Navigation sidebar
 │   ├── WelcomeCard/              # Welcome dashboard & settings
 │   ├── CalendarCard/             # Calendar & event management
 │   ├── ContactCard/              # Doctor directory & messaging
 │   ├── MedicationsSection/       # Medication management
 │   └── AlertPopup/               # Alert notifications
+│
+├── context/                      # React Context providers
+│   ├── AuthContext.js            # Authentication state
+│   └── ChatContext.js            # Chat and messaging state
 │
 ├── styles/                       # Global styling
 │   ├── main.css                  # Main styles
@@ -101,6 +115,11 @@ app/
 ├── layout.js                     # Root layout component
 ├── page.js                       # Home page
 └── globals.css                   # Global CSS
+
+lib/                              # Utility libraries
+├── auth.js                       # Authentication utilities
+├── authMiddleware.js             # Authentication middleware
+└── mongodb.js                    # Database connection
 ```
 
 ## Technologies Used
@@ -118,8 +137,17 @@ app/
 
 - **Node.js**
 - **MongoDB**
+- **JWT**
 
 ## Key Components
+
+### AuthModal
+
+Authentication component featuring:
+
+- Login and registration forms
+- JWT token handling
+- User session management
 
 ### SideBar
 
@@ -157,11 +185,15 @@ Doctor communication system:
 
 ## State Management
 
-The application uses:
+The application uses React Context API for global state management:
 
-- React hooks (useState, useEffect) for component state
+- **AuthContext**: Manages user authentication state and session data
+- **ChatContext**: Handles messaging and conversation state
+
+Additionally:
+
+- React hooks (useState, useEffect) for component-level state
 - localStorage for persistent user data
-- Context through prop passing
 - Event listeners for cross-component synchronization
 
 ## Responsive Design
