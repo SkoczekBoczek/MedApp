@@ -9,6 +9,7 @@ export const ChatContext = createContext({
 	activeContact: null,
 	chatItems: [],
 	isLoading: false,
+	isListLoading: true,
 	openChat: () => {},
 	closeChat: () => {},
 	sendMessage: () => {},
@@ -20,12 +21,14 @@ export default function ChatContextProvider({ children }) {
 	const [activeContact, setActiveContact] = useState(null);
 	const [chatItems, setChatItems] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
+	const [isListLoading, setIsListLoading] = useState(true);
 
 	const { token, isDoctor } = useContext(AuthContext);
 
 	useEffect(() => {
 		if (!token) {
 			setChatItems([]);
+			setIsListLoading(false);
 			return;
 		}
 
@@ -38,12 +41,14 @@ export default function ChatContextProvider({ children }) {
 				})
 					.then((res) => res.json())
 					.then((data) => setChatItems(data.items || []))
-					.catch((err) => console.error("Error fetching conversations:", err));
+					.catch((err) => console.error("Error fetching conversations:", err))
+					.finally(() => setIsListLoading(false));
 			} else {
 				fetch("/api/doctors")
 					.then((res) => res.json())
 					.then((data) => setChatItems(data))
-					.catch((err) => console.error("Error fetching doctors:", err));
+					.catch((err) => console.error("Error fetching doctors:", err))
+					.finally(() => setIsListLoading(false));
 			}
 		};
 
@@ -126,6 +131,7 @@ export default function ChatContextProvider({ children }) {
 		activeContact,
 		chatItems,
 		isLoading,
+		isListLoading,
 		openChat,
 		closeChat,
 		sendMessage,

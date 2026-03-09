@@ -29,6 +29,17 @@
 	font-weight: 600;
 }
 
+.error {
+	list-style: none;
+	margin: 1rem 0 0;
+	padding: 0.75rem;
+	background-color: #fdecea;
+	border-radius: 8px;
+	color: #d32f2f;
+	text-align: center;
+	font-size: 0.9rem;
+}
+
 .control {
 	margin-bottom: 1.2rem;
 }
@@ -81,15 +92,32 @@
 	background-color: var(--color-primary-hover);
 }
 
-.error {
-	list-style: none;
-	margin: 1rem 0 0;
-	padding: 0.75rem;
-	background-color: #fdecea;
-	border-radius: 8px;
-	color: #d32f2f;
-	text-align: center;
+.control p {
+	margin-bottom: 0.5rem;
 	font-size: 0.9rem;
+	font-weight: 500;
+	color: #555;
+}
+
+.radioContainer {
+	display: flex;
+	gap: 2rem;
+}
+
+.radioOption {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.radioOption input[type="radio"] {
+	width: auto;
+	accent-color: var(--color-primary);
+}
+
+.radioOption label {
+	margin-bottom: 0;
+	font-weight: normal;
 }
 
 @keyframes slideIn {
@@ -119,4 +147,18 @@
 .switchBtn:hover {
 	color: var(--color-primary);
 	text-decoration: underline;
+}
+
+.success {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	padding: 2rem 0;
+	color: #2e7d32;
+}
+
+.success h2 {
+	color: #333;
 }

@@ -16,6 +16,7 @@ import MessagesMenu from "../ContactCard/MessagesMenu";
 import MedicationsModal from "../MedicationsSection/MedicationsList";
 import SettingsModal from "../WelcomeCard/SettingsModal";
 import AuthForm from "../AuthModal/AuthForm";
+import RegisterForm from "../AuthModal/RegisterForm";
 import { AuthContext } from "@/app/context/AuthContext";
 import { ChatContext } from "@/app/context/ChatContext";
 
@@ -25,6 +26,7 @@ export default function SideBar() {
 
 	const medicationsModalRef = useRef();
 	const authDialogRef = useRef();
+	const registerDialogRef = useRef();
 
 	const authCtx = useContext(AuthContext);
 	const { isOpen, openChat, closeChat } = useContext(ChatContext);
@@ -38,6 +40,15 @@ export default function SideBar() {
 
 		setShowSettings(false);
 	};
+
+	function handleShowLogin() {
+		authDialogRef.current.showModal();
+		registerDialogRef.current.close();
+	}
+	function handleShowRegister() {
+		registerDialogRef.current.showModal();
+		authDialogRef.current.close();
+	}
 
 	return (
 		<aside className={styles.sidebar}>
@@ -113,7 +124,8 @@ export default function SideBar() {
 				/>
 			)}
 			<MedicationsModal ref={medicationsModalRef} onAddMedication={() => {}} />
-			<AuthForm ref={authDialogRef} />
+			<AuthForm ref={authDialogRef} onShowRegister={handleShowRegister} />
+			<RegisterForm ref={registerDialogRef} onShowLogin={handleShowLogin} />
 		</aside>
 	);
 }

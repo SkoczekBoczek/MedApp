@@ -10,11 +10,15 @@ import styles from "./AuthForm.module.css";
 
 const AuthForm = forwardRef(function AuthForm(props, ref) {
 	const dialog = useRef();
+	const formRef = useRef();
 
 	const authCtx = useContext(AuthContext);
 
 	useImperativeHandle(ref, () => ({
-		showModal: () => dialog.current?.showModal(),
+		showModal: () => {
+			formRef.current?.reset();
+			dialog.current?.showModal();
+		},
 		close: () => dialog.current?.close(),
 	}));
 
@@ -86,7 +90,7 @@ const AuthForm = forwardRef(function AuthForm(props, ref) {
 
 	return (
 		<dialog ref={dialog} className={styles.modal}>
-			<form className={styles.form} action={formAction}>
+			<form ref={formRef} className={styles.form} action={formAction}>
 				<h2>Zaloguj się</h2>
 				<div className={styles.control}>
 					<label htmlFor="email">Email</label>
@@ -102,8 +106,18 @@ const AuthForm = forwardRef(function AuthForm(props, ref) {
 					<input type="password" id="password" name="password" />
 				</div>
 				<div className={styles.actions}>
-					<button disabled={isPending}>
+					<button type="submit" disabled={isPending}>
 						{isPending ? "Logowanie..." : "Zaloguj się"}
+					</button>
+				</div>
+				<div className={styles.actions}>
+					Nie masz konta?{" "}
+					<button
+						type="button"
+						className={styles.switchBtn}
+						onClick={props.onShowRegister}
+					>
+						Zarejestruj się
 					</button>
 				</div>
 				{formState.error && (

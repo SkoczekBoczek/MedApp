@@ -14,7 +14,8 @@ import { AuthContext } from "@/app/context/AuthContext";
 import { ChatContext } from "@/app/context/ChatContext";
 
 export default function ContactCard() {
-	const { openChat, chatItems, isLoading, isOpen } = useContext(ChatContext);
+	const { openChat, chatItems, isListLoading, isOpen } =
+		useContext(ChatContext);
 	const { token, isDoctor } = useContext(AuthContext);
 
 	const [currentPage, setCurrentPage] = useState(1);
@@ -123,7 +124,7 @@ export default function ContactCard() {
 				onTouchStart={handleTouchStart}
 				onTouchEnd={handleTouchEnd}
 			>
-				{isLoading ? (
+				{isListLoading ? (
 					<div>Ładowanie...</div>
 				) : (
 					currentDoctors.map((doctor) => (
