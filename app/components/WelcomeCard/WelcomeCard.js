@@ -81,9 +81,9 @@ export default function WelcomeCard() {
 				<button onClick={openSettings}>
 					<Settings />
 				</button>
-				<button>
+				{/* <button>
 					<Bell />
-				</button>
+				</button> */}
 			</div>
 			{isSettingsOpen && (
 				<SettingsModal

@@ -4,7 +4,7 @@ import { useState } from "react";
 import styles from "./SettingsModal.module.css";
 
 export default function SettingsModal({ onClose, onSave, initialName }) {
-	const [tempName, setTempName] = useState(initialName);
+	const [tempName, setTempName] = useState(initialName || "");
 
 	return (
 		<div className={styles.overlay}>

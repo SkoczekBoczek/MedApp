@@ -32,7 +32,7 @@
 .calendar :global(.rbc-toolbar .rbc-btn-group:first-child) {
 	display: flex;
 	margin-right: auto;
-	width: 270px; /* Prawdopodobnie bedzie trzeba zmienic */
+	width: 270px;
 }
 
 .calendar :global(.rbc-toolbar .rbc-btn-group:first-child button) {
@@ -54,7 +54,7 @@
 
 .calendar :global(.rbc-toolbar-label) {
 	margin-left: auto;
-	font-size: 1.1rem;
+	font-size: 0.99rem;
 	font-weight: 600;
 	text-align: right;
 	text-transform: capitalize;

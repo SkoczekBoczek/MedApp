@@ -26,11 +26,10 @@ export default function RenderList() {
 					>
 						<div className={styles.avatar}>
 							<Image
-								className={styles.doctorImg}
 								src={item.image || "https://placehold.co/80x80?text=User"}
 								alt={item.name}
-								width={80}
-								height={80}
+								width={45}
+								height={45}
 								unoptimized
 							/>
 						</div>

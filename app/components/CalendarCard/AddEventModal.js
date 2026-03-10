@@ -66,10 +66,19 @@ const AddEventModal = forwardRef(function MedicationsModal(
 				Authorization: `Bearer ${token}`,
 			},
 			body: JSON.stringify(newEvent),
-		}).then(() => {
-			setEvents((prev) => [...prev, { ...newEvent }]);
-			handleClose();
-		});
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				if (data._id) {
+					setEvents((prev) => [...prev, { ...newEvent, _id: data._id }]);
+					handleClose();
+				} else {
+					setAlert({
+						message: "Failed to add event",
+						type: "error",
+					});
+				}
+			});
 	}
 
 	return createPortal(

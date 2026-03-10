@@ -53,10 +53,13 @@ export async function POST(req) {
 		}
 
 		newEvent.userId = userId;
-		await db.collection("events").insertOne(newEvent);
+		const result = await db.collection("events").insertOne(newEvent);
 
 		return new Response(
-			JSON.stringify({ message: "Event added successfully" }),
+			JSON.stringify({
+				message: "Event added successfully",
+				_id: result.insertedId,
+			}),
 			{
 				status: 200,
 				headers: { "Content-Type": "application/json" },

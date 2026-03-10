@@ -79,94 +79,113 @@ export default function ContactCard() {
 					<h2>Skontaktuj się z lekarzem</h2>
 				)}
 
-				<div className={styles.arrows}>
-					<button
-						onClick={() => currentPage > 1 && setCurrentPage(currentPage - 1)}
-					>
-						<ArrowLeft />
-					</button>
-					<button
-						onClick={() =>
-							currentPage < totalPages && setCurrentPage(currentPage + 1)
-						}
-					>
-						<ArrowRight />
-					</button>
+				{isLoggedIn && totalPages > 1 && (
+					<div className={styles.arrows}>
+						<button
+							onClick={() => currentPage > 1 && setCurrentPage(currentPage - 1)}
+						>
+							<ArrowLeft />
+						</button>
+						<button
+							onClick={() =>
+								currentPage < totalPages && setCurrentPage(currentPage + 1)
+							}
+						>
+							<ArrowRight />
+						</button>
+					</div>
+				)}
+			</div>
+			{!isLoggedIn ? (
+				<div className={styles.loggedOutInfo}>
+					<p>
+						Zaloguj się, aby zobaczyć listę dostępnych lekarzy i móc się z nimi
+						skontaktować.
+					</p>
 				</div>
-			</div>
-			<div className={styles.categories}>
-				{!isDoctor && (
-					<ul className={`${styles.categoriesList} ${styles.desktopOnly}`}>
-						{specialities.map((spec) => (
-							<li key={spec}>
-								<button onClick={() => handleSpecialityChange(spec)}>
+			) : (
+				<>
+					<div className={styles.categories}>
+						{!isDoctor && (
+							<ul className={`${styles.categoriesList} ${styles.desktopOnly}`}>
+								{specialities.map((spec) => (
+									<li key={spec}>
+										<button onClick={() => handleSpecialityChange(spec)}>
+											{spec}
+										</button>
+									</li>
+								))}
+							</ul>
+						)}
+
+						<select
+							className={`${styles.mobileOnly}`}
+							value={selectedSpeciality}
+							onChange={(e) => handleSpecialityChange(e.target.value)}
+						>
+							{specialities.map((spec) => (
+								<option key={spec} value={spec}>
 									{spec}
-								</button>
-							</li>
-						))}
-					</ul>
-				)}
+								</option>
+							))}
+						</select>
+					</div>
+					<div
+						className={styles.contactInfo}
+						onTouchStart={handleTouchStart}
+						onTouchEnd={handleTouchEnd}
+					>
+						{isListLoading ? (
+							<div>Ładowanie...</div>
+						) : (
+							currentDoctors.map((doctor) => (
+								<div className={styles.doctorCard} key={doctor._id}>
+									<div className={styles.doctorImg}>
+										<Image
+											src={
+												doctor.image || "https://placehold.co/80x80?text=User"
+											}
+											alt={doctor.name}
+											width={80}
+											height={80}
+										/>
+									</div>
+									<div className={styles.doctorInfo}>
+										<p className={styles.doctorName}>{doctor.name}</p>
+										<p className={styles.doctorSpeciality}>
+											{doctor.speciality}
+										</p>
+										<button
+											className={styles.messageBtn}
+											onClick={() => {
+												openChat(doctor);
+											}}
+										>
+											<MessageCircle /> Wiadomość
+										</button>
+									</div>
+								</div>
+							))
+						)}
+					</div>
 
-				<select
-					className={`${styles.mobileOnly}`}
-					value={selectedSpeciality}
-					onChange={(e) => handleSpecialityChange(e.target.value)}
-				>
-					{specialities.map((spec) => (
-						<option key={spec} value={spec}>
-							{spec}
-						</option>
-					))}
-				</select>
-			</div>
-			<div
-				className={styles.contactInfo}
-				onTouchStart={handleTouchStart}
-				onTouchEnd={handleTouchEnd}
-			>
-				{isListLoading ? (
-					<div>Ładowanie...</div>
-				) : (
-					currentDoctors.map((doctor) => (
-						<div className={styles.doctorCard} key={doctor._id}>
-							<div className={styles.doctorImg}>
-								<Image
-									src={doctor.image || "https://placehold.co/80x80?text=User"}
-									alt={doctor.name}
-									width={80}
-									height={80}
-								/>
-							</div>
-							<div className={styles.doctorInfo}>
-								<p className={styles.doctorName}>{doctor.name}</p>
-								<p className={styles.doctorSpeciality}>{doctor.speciality}</p>
-								<button
-									className={styles.messageBtn}
-									onClick={() => {
-										openChat(doctor);
-									}}
-								>
-									<MessageCircle /> Wiadomość
-								</button>
-							</div>
+					{totalPages > 1 && (
+						<div className={styles.paginationDots}>
+							{Array.from({ length: totalPages }).map((_, i) => {
+								return (
+									<span
+										key={i}
+										onClick={() => setCurrentPage(i + 1)}
+										className={`${styles.dot} ${
+											i + 1 === currentPage ? styles.activeDot : ""
+										}`}
+									/>
+								);
+							})}
 						</div>
-					))
-				)}
-			</div>
-
-			<div className={styles.paginationDots}>
-				{Array.from({ length: totalPages }).map((_, i) => {
-					return (
-						<span
-							key={i}
-							onClick={() => setCurrentPage(i + 1)}
-							className={`${styles.dot} ${
-								i + 1 === currentPage ? styles.activeDot : ""
-							}`}
-						/>
-					);
-				})}
-			</div>
+					)}
+				</>
+			)}
 			{isOpen && <MessagesMenu />}
 			{!isOpen && isLoggedIn && (
 				<button

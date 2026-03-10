@@ -39,9 +39,7 @@ export default function RenderChat() {
 
 			{activeContact && (
 				<div className={styles.chatDoctorHeader}>
-					<div className={styles.doctorName}>
-						{isDoctor ? activeContact.name : `dr ${activeContact.name}`}
-					</div>
+					<div className={styles.doctorName}>{activeContact.name}</div>
 				</div>
 			)}
 			<main className={styles.chatWindow}>

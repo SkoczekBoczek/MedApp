@@ -17,14 +17,14 @@ export default function MessagesMenu() {
 				{activeContact ? <RenderChat /> : <RenderList />}
 
 				<div className={styles.tabs}>
-					<div className={styles.tab}>Start</div>
+					{/* <div className={styles.tab}>Start</div> */}
 					<div
 						className={`${styles.tab} ${styles.active}`}
 						onClick={() => openChat(null)}
 					>
 						Wiadomości
 					</div>
-					<div className={styles.tab}>Pomoc</div>
+					{/* <div className={styles.tab}>Pomoc</div> */}
 				</div>
 			</div>
 

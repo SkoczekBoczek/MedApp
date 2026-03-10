@@ -72,15 +72,17 @@ export default function SideBar() {
 				>
 					<User size={18} /> Profil
 				</Link>
-				<Link
-					href="#"
-					onClick={(e) => {
-						e.preventDefault();
-						isOpen ? closeChat() : openChat(null);
-					}}
-				>
-					<MessageCircle size={18} /> Wiadomość
-				</Link>
+				{authCtx.user && (
+					<Link
+						href="#"
+						onClick={(e) => {
+							e.preventDefault();
+							isOpen ? closeChat() : openChat(null);
+						}}
+					>
+						<MessageCircle size={18} /> Wiadomość
+					</Link>
+				)}
 				{/* <Link href="#">
 					<Calendar size={18} /> Kalendarz
 				</Link> */}
