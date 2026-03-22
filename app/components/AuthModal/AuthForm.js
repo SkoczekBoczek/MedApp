@@ -6,6 +6,7 @@ import {
 	useContext,
 } from "react";
 import { AuthContext } from "@/app/context/AuthContext";
+import { X } from "lucide-react";
 import styles from "./AuthForm.module.css";
 
 const AuthForm = forwardRef(function AuthForm(props, ref) {
@@ -29,10 +30,10 @@ const AuthForm = forwardRef(function AuthForm(props, ref) {
 		let error = [];
 
 		if (!email || !email.includes("@") || email.trim() === "") {
-			error.push("Please provide a valid email");
+			error.push("Proszę podać poprawny email");
 		}
 		if (!password || password.trim() === "") {
-			error.push("Please provide a valid password");
+			error.push("Proszę podać hasło");
 		}
 
 		const enteredValue = {
@@ -90,6 +91,13 @@ const AuthForm = forwardRef(function AuthForm(props, ref) {
 
 	return (
 		<dialog ref={dialog} className={styles.modal}>
+			<button
+				type="button"
+				className={styles.closeBtn}
+				onClick={() => dialog.current?.close()}
+			>
+				<X size={24} color="#555" />
+			</button>
 			<form ref={formRef} className={styles.form} action={formAction}>
 				<h2>Zaloguj się</h2>
 				<div className={styles.control}>

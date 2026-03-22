@@ -68,6 +68,7 @@ export default function SideBar() {
 					onClick={(e) => {
 						e.preventDefault();
 						setShowSettings(true);
+						setMenuActive(false);
 					}}
 				>
 					<User size={18} /> Profil
@@ -78,6 +79,7 @@ export default function SideBar() {
 						onClick={(e) => {
 							e.preventDefault();
 							isOpen ? closeChat() : openChat(null);
+							setMenuActive(false);
 						}}
 					>
 						<MessageCircle size={18} /> Wiadomość
@@ -91,6 +93,7 @@ export default function SideBar() {
 					onClick={(e) => {
 						e.preventDefault();
 						medicationsModalRef.current?.open("Poniedziałek");
+						setMenuActive(false);
 					}}
 				>
 					<Pill size={18} /> Leki
@@ -101,6 +104,7 @@ export default function SideBar() {
 						onClick={(e) => {
 							authCtx.handleLogout(e);
 							closeChat();
+							setMenuActive(false);
 						}}
 					>
 						<LogOut size={18} /> Wyloguj się
@@ -111,6 +115,7 @@ export default function SideBar() {
 						onClick={(e) => {
 							e.preventDefault();
 							authDialogRef.current?.showModal();
+							setMenuActive(false);
 						}}
 					>
 						<LogIn size={18} /> Zaloguj się

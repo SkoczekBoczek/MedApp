@@ -6,6 +6,7 @@ import {
 	useState,
 	useEffect,
 } from "react";
+import { X } from "lucide-react";
 
 import styles from "./RegisterForm.module.css";
 
@@ -102,6 +103,13 @@ const RegisterForm = forwardRef(function RegisterForm(props, ref) {
 
 	return (
 		<dialog ref={dialog} className={styles.modal}>
+			<button
+				type="button"
+				onClick={() => dialog.current?.close()}
+				className={styles.closeBtn}
+			>
+				<X size={24} color="#555" />
+			</button>
 			{isSuccess ? (
 				<div className={styles.success}>
 					<h2>Rejestracja zakończona sukcesem!</h2>

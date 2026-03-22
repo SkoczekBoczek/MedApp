@@ -13,13 +13,19 @@ export default function RenderChat() {
 
 	const messagesEndRef = useRef(null);
 
-	const scrollToBottom = () => {
-		messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+	const scrollToBottom = (behavior = "smooth") => {
+		messagesEndRef.current?.scrollIntoView({ behavior });
 	};
 
 	useEffect(() => {
 		scrollToBottom();
 	}, [messages]);
+
+	const handleInputFocus = () => {
+		setTimeout(() => {
+			scrollToBottom("auto");
+		}, 300);
+	};
 
 	const handleSend = async () => {
 		if (!messageInput.trim()) return;
@@ -91,6 +97,9 @@ export default function RenderChat() {
 					value={messageInput}
 					onChange={(e) => setMessageInput(e.target.value)}
 					onKeyDown={(e) => e.key === "Enter" && handleSend()}
+					onFocus={handleInputFocus}
+					// Wymuszenie 16px zapobiega automatycznemu zoomowi na iOS Safari, który potrafi zamrozić interfejs
+					style={{ fontSize: "16px" }}
 				/>
 				<button className={styles.sendBtn} onClick={handleSend}>
 					Wyślij

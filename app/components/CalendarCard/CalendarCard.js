@@ -108,6 +108,7 @@ export default function CalendarCard() {
 				style={{ height: 600 }}
 				onSelectEvent={handleDeleteEvent}
 				onSelectSlot={handleSelectSlot}
+				longPressThreshold={90}
 			/>
 			<div className={styles.upcoming}>
 				<h3>Najbliższe wydarzenia:</h3>

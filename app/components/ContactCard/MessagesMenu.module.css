@@ -286,6 +286,6 @@
 
 @media (max-width: 768px) {
 	.shell {
-		height: 470px;
+		height: calc(100dvh - 15rem);
 	}
 }
