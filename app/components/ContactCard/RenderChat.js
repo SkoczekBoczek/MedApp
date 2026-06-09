@@ -98,7 +98,6 @@ export default function RenderChat() {
 					onChange={(e) => setMessageInput(e.target.value)}
 					onKeyDown={(e) => e.key === "Enter" && handleSend()}
 					onFocus={handleInputFocus}
-					// Wymuszenie 16px zapobiega automatycznemu zoomowi na iOS Safari, który potrafi zamrozić interfejs
 					style={{ fontSize: "16px" }}
 				/>
 				<button className={styles.sendBtn} onClick={handleSend}>

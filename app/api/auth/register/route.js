@@ -1,4 +1,5 @@
 import { connectToDatabase } from "@/lib/mongodb";
+import bcrypt from "bcryptjs";
 
 export async function POST(request) {
 	try {
@@ -29,9 +30,11 @@ export async function POST(request) {
 			});
 		}
 
+		const hashedPassword = await bcrypt.hash(password, 10);
+
 		const result = await db.collection("users").insertOne({
 			email,
-			password,
+			password: hashedPassword,
 			role: "patient",
 			name,
 		});

@@ -1,5 +1,6 @@
 import { connectToDatabase } from "@/lib/mongodb";
 import { signToken } from "@/lib/auth";
+import bcrypt from "bcryptjs";
 
 export async function POST(request) {
 	try {
@@ -29,7 +30,8 @@ export async function POST(request) {
 			);
 		}
 
-		if (user.password !== password) {
+		const isPasswordCorrect = await bcrypt.compare(password, user.password);
+		if (!isPasswordCorrect) {
 			return new Response(
 				JSON.stringify({ error: "Incorrect email or password" }),
 				{
