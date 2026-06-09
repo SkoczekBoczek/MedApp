@@ -44,6 +44,7 @@ export async function POST(request) {
 			headers: { "Content-Type": "application/json" },
 		});
 	} catch (error) {
+		console.error("Register API Error:", error);
 		return new Response(JSON.stringify({ error: "Internal Server Error" }), {
 			status: 500,
 			headers: { "Content-Type": "application/json" },
