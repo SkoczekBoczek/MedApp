@@ -18,17 +18,19 @@ export default function AuthContextProvider({ children }) {
 	useEffect(() => {
 		const storedUser = localStorage.getItem("userName");
 		const storedToken = localStorage.getItem("authToken");
+		const storedIsDoctor = localStorage.getItem("isDoctor");
 
 		if (storedToken && storedUser) {
 			setToken(storedToken);
 			setUser(storedUser);
+			setIsDoctor(storedIsDoctor === "true");
 		}
 	}, []);
 
 	function handleLogin(data) {
 		const newUser = data.user;
 		const newToken = data.token;
-		const newIsDoctor = data.isDoctor;
+		const newIsDoctor = Boolean(data.isDoctor);
 
 		setUser(newUser);
 		setToken(newToken);
@@ -36,7 +38,7 @@ export default function AuthContextProvider({ children }) {
 
 		localStorage.setItem("userName", newUser);
 		localStorage.setItem("authToken", newToken);
-		localStorage.setItem("isDoctor", newIsDoctor);
+		localStorage.setItem("isDoctor", String(newIsDoctor));
 
 		window.dispatchEvent(new Event("userNameChange"));
 	}
@@ -50,6 +52,7 @@ export default function AuthContextProvider({ children }) {
 
 		localStorage.removeItem("userName");
 		localStorage.removeItem("authToken");
+		localStorage.removeItem("isDoctor");
 
 		window.dispatchEvent(new Event("userNameChange"));
 	}
