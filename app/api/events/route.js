@@ -78,7 +78,7 @@ export async function DELETE(req) {
 		const userId = getUserIdFromRequest(req);
 		if (!userId) {
 			return new Response(JSON.stringify({ error: "Unauthorized" }), {
-				status: 1,
+				status: 401,
 				headers: { "Content-Type": "application/json" },
 			});
 		}

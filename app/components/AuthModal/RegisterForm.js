@@ -97,7 +97,7 @@ const RegisterForm = forwardRef(function RegisterForm(props, ref) {
 			const timer = setTimeout(() => {
 				props.onShowLogin();
 			}, 3000);
-			return () => setTimeout(timer);
+			return () => clearTimeout(timer);
 		}
 	}, [isSuccess]);
 

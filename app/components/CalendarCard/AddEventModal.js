@@ -10,11 +10,11 @@ const AddEventModal = forwardRef(function MedicationsModal(
 	{ isOpen, slotInfo, onClose, setEvents, deleteEvent, eventInfo },
 	ref,
 ) {
-	if (!isOpen) return;
-
 	const [time, setTime] = useState("");
 	const [title, setTitle] = useState("");
 	const [alert, setAlert] = useState({ message: "", type: "" });
+
+	if (!isOpen) return null;
 
 	function handleClose() {
 		setTitle("");
