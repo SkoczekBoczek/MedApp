@@ -1,5 +1,7 @@
 # MedApp - Healthcare Management Dashboard
 
+[![Tests](https://github.com/SkoczekBoczek/MedApp/actions/workflows/test.yml/badge.svg)](https://github.com/SkoczekBoczek/MedApp/actions/workflows/test.yml)
+
 A full-stack medical management application built with Next.js and React, providing a comprehensive platform for patients to manage their healthcare information, appointments, medications, and communications with doctors.
 
 ## Project Overview
@@ -48,7 +50,7 @@ MedApp is a healthcare management system designed to help patients organize thei
 
 ### Prerequisites
 
-- Node.js 18+
+- Node.js 22+
 - npm or yarn
 
 ### Installation
@@ -80,6 +82,24 @@ npm run dev
 npm run build
 npm start
 ```
+
+## Testing
+
+The project includes unit and integration tests powered by **Vitest**, **React Testing Library**, and **jsdom**, executed automatically on every push and pull request via GitHub Actions.
+
+```bash
+# Run all tests once
+npm test
+
+# Run tests in watch mode
+npm run test:watch
+```
+
+**Covered modules:**
+
+- `AuthForm` – client-side validation (`useActionState`), API/network error handling, role-based login via `AuthContext`, and `<dialog>` imperative controls
+- `MedicationsSection` – weekly plan synchronization (`/api/plan`), adding medications with chronological sorting, duplicate prevention, taken toggle, and deletion
+- `ContactCard` – unauthenticated/loading states, speciality filtering, pagination (buttons & touch gestures), doctor vs patient views, and `ChatContext` integration
 
 ## Project Structure
 
@@ -138,6 +158,12 @@ lib/                              # Utility libraries
 - **Node.js**
 - **MongoDB**
 - **JWT**
+
+### Testing & CI
+
+- **Vitest** & **jsdom**
+- **React Testing Library** & **@testing-library/user-event**
+- **GitHub Actions** - Automated test runs on push & pull requests
 
 ## Key Components
 
