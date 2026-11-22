@@ -8,6 +8,13 @@ A full-stack medical management application built with Next.js and React, provid
 
 MedApp is a healthcare management system designed to help patients organize their medical life efficiently. It combines an intuitive frontend interface with robust backend APIs to deliver a seamless healthcare management experience.
 
+## Demo Accounts
+
+You can test the application using pre-configured accounts (or register a new one):
+
+- **Patient Role:** `pacjent@medapp.pl` / `Pacjent123!`
+- **Doctor Role:** `lekarz@medapp.pl` / `Lekarz123!`
+
 ## Features
 
 ### Authentication
@@ -98,15 +105,9 @@ npm run test:watch
 **Covered modules:**
 
 - `AuthForm` – client-side validation (`useActionState`), API/network error handling, role-based login via `AuthContext`, and `<dialog>` imperative controls
+- `AuthContext` – session persistence across reloads (including `isDoctor` role restoration) and `localStorage` cleanup on logout
 - `MedicationsSection` – weekly plan synchronization (`/api/plan`), adding medications with chronological sorting, duplicate prevention, taken toggle, and deletion
 - `ContactCard` – unauthenticated/loading states, speciality filtering, pagination (buttons & touch gestures), doctor vs patient views, and `ChatContext` integration
-
-## Demo Accounts
-
-You can test the application using pre-configured accounts (or register a new one):
-
-- **Patient Role:** `pacjent@medapp.pl` / `Pacjent123!`
-- **Doctor Role:** `lekarz@medapp.pl` / `Lekarz123!`
 
 ## Project Structure
 

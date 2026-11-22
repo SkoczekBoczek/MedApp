@@ -25,3 +25,7 @@ dist-ssr
 *.sln
 *.sw?
 .env
+
+# Local helper scripts
+hashPassword.js
+
